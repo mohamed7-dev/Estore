@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estore Sign In</title>
+    <!-- import font awesome icons  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <!-- import google fonts  -->
+    <!-- import google fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet"> 
+    <!-- link external style sheets  -->
+    <link rel="stylesheet" href="./css/signinup.css">
+</head>
+<body>
+    <section class="container">
+        <div class="form-mode">
+            <!-- login mode  -->
+            <main class="form login">
+                <div class="title">
+                    <span>login</span>
+                    <i class="fa-solid fa-moon"></i>
+                </div>
+                <form action="#">
+                    <div class="input-field">
+                        <input type="text" placeholder="enter your email" id="signin-email" required>
+                        <i class="fa-solid fa-envelope"></i>                    
+                    </div>
+                    <span class="error-msg" id="email-err"><em>!</em> email is incorrect</span>
+                    <div class="input-field">
+                        <input type="password" placeholder="enter your password" id="signin-passwd" required>
+                        <i class="fa-solid fa-unlock-keyhole lock-passwd"></i>
+                        <i class="fa-solid fa-eye-slash visibility"></i>
+                    </div>
+                    <span class="error-msg" id="passwd-err"><em>!</em> password is incorrect</span>
+                    <div class="forget-password">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="checkbox">
+                            <label for="checkbox">remember me</label>
+                        </div>
+                        <a href="#">forget password?</a>
+                    </div>
+                    <div class="input-field">
+                        <input type="button" value="sign in" id="signin">
+                    </div>
+                </form>
+
+                <div class="not-member">
+                    <span>
+                        not a member? <a href="#" class="signup-link">sign-up now</a>
+                    </span>
+                </div>
+            </main>
+
+            <!-- signup mode  -->
+            <main class="form signup">
+                <div class="title">
+                    <span>registration</span>
+                </div>
+                <form action="#">
+                    <div class="input-field">
+                        <input type="text" placeholder="enter your name" id="signup-username" required>
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <span class="error-msg" id="signup-username-err"><em>!</em> user name is not permitted</span>
+                    
+                    
+                    <div class="input-field">
+                        <input type="text" placeholder="enter your email" id="signup-email" required>
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <span class="error-msg" id="signup-email-err"><em>!</em> email is not permitted</span>
+                    
+                    
+                    <div class="input-field">
+                        <input type="password" placeholder="enter your password" id="signup-passwd" required>
+                        <i class="fa-solid fa-unlock-keyhole"></i>
+                    </div>
+                    <span class="error-msg" id="signup-passwd-err"><em>!</em> password is must start with uppercase letter and contains at least 8 chracters and numbers</span>
+                    
+                    
+                    <div class="input-field">
+                        <input type="password" placeholder="confirm your password" id="signup-passwd-confirm" required>
+                        <i class="fa-solid fa-unlock-keyhole lock-passwd"></i>
+                        <i class="fa-solid fa-eye-slash visibility"></i>
+                    </div>
+                    <span class="error-msg" id="signup-passwdconfirm-err"><em>!</em> password must match</span>
+                    
+                    
+                    <div class="forget-password">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="checkbox1">
+                            <label for="checkbox1">remember me</label>
+                        </div>
+                        <a href="#">forget password?</a>
+                    </div>
+                    <div class="input-field">
+                        <input type="button" value="sign up" id="signup">
+                    </div>
+                </form>
+
+                <div class="not-member">
+                    <span>
+                        have an account? <a href="#" class="login-link">sign-in now</a>
+                    </span>
+                </div>
+            </main>
+        </div>
+    </section>
+    <script src="./js/signinup.js"></script>
+</body>
+</html>

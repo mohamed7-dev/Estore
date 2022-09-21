@@ -1,0 +1,7 @@
+1- markup the sign in and sign up pages  (done)
+2- style sign in up     (done)
+3- make the js script of the sign in and up (done)
+
+
+4-markup index and style
+5-main.js

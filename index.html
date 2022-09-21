@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estore</title>
+    <!-- import font awesome icons  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <!-- import google fonts  -->
+    <!-- import google fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet"> 
+    <!-- link external style sheets  -->
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/reponsive.css">
+</head>
+<body>
+    <!-- start header horizontal  -->
+    <header>
+            <section class="header">
+                <div class="container">
+                    <div class="header-left">
+                        <a href="index.html"><span>E</span>store</a>
+                    </div>
+                    <div class="header-fill">
+                        <div class="search-left">
+                            <select name="" id="cat-select" class="cat-select-menu">
+                                <option value="All">All</option>
+                                <option value="electronics">electronics</option>
+                                <option value="books">books</option>
+                                <option value="clothes">clothes</option>
+                            </select>
+                        </div>
+
+                        <div class="search-fill">
+                            <input type="text" id="search">
+                        </div>
+
+                        <div class="search-right">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <div class="select-lang">
+                            <div class="selected-lang">language<i class="fa-solid fa-caret-down"></i></div>   
+                            <ul class="select-content">
+                                <li class="select-item"><a href="#">English En</a></li>
+                                <li class="select-item"><a href="#">Arabic Ar</a></li>
+                            </ul>   
+                        </div>
+                        <div class="user-account">
+                            <div class="show-user-info">
+                                hello, mohamed
+                                <i class="fa-regular fa-circle-user"></i>
+                            </div>
+                            <div class="user-settings">
+                                <ul class="settings">
+                                    <li><a href="#">settings</a></li>
+                                    <li><a href="#">sign out</a></li>
+                                </ul>
+                                <hr>
+                                <ul class="activity">
+                                    <li><a href="#">your favourites</a></li>
+                                    <li><a href="#">your cart</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="cart">
+                            <div class="cart-icon">
+                                <span>cart</span>
+                                <i class="fa-solid fa-cart-shopping"></i>
+                            </div>
+                            <ul class="cart-content">
+                                <li class="cart-item">item 1</li>
+                                <li class="cart-item">item 1</li>
+                                <li class="cart-item">item 1</li>
+                                <li class="cart-item">item 1</li>
+                                <button class="view-all-products" id="cart-button">view all products</button>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="navbar">
+                <div class="container">
+                    <ul class="nav-cat-menu">
+                        <li class="cat-item"><a href="#">item1</a></li>
+                        <li class="cat-item"><a href="#">item2</a></li>
+                        <li class="cat-item"><a href="#">item3</a></li>
+                        <li class="cat-item"><a href="#">item3</a></li>
+                        <li class="cat-item"><a href="#">item3</a></li>
+                        <li class="cat-item"><a href="#">item3</a></li>
+                        <li class="cat-item"><a href="#">item3</a></li>
+                        <li class="cat-item"><a href="#">item3</a></li>
+                        <li class="cat-item"><a href="#">item3</a></li>
+                        <li class="cat-item"><a href="#">item3</a></li>
+                        <li class="cat-item"><a href="#">item3</a></li>
+                        <li class="cat-item"><a href="#">item3</a></li>
+                        <li class="cat-item"><a href="#">item3</a></li>
+                        <li class="cat-item"><a href="#">item3</a></li>
+                        <li class="cat-item"><a href="#">item3</a></li>
+                        <li class="cat-item"><a href="#">item3</a></li>
+                        <li class="cat-item"><a href="#">item3</a></li>
+                        <li class="cat-item"><a href="#">item3</a></li>
+                        <li class="cat-item"><a href="#">item3</a></li>
+                    </ul>
+                </div>
+            </section>
+    </header>
+    <!-- end header horizontal -->
+    <section class="mobile-vertical">
+        <div class="vert-search" id="vert-search">
+            <div class="logo">
+                <i class="fa-solid fa-bars" id="vert-bar-icon"></i>
+                <a href="index.html"><span>E</span>store</a>
+            </div>
+            <div class="search-bar">
+                <div class="search-fill">
+                    <input type="text" id="search">
+                </div>
+
+                <div class="search-right">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
+        </div>
+        <header class="vert-header" id="mobile-vertical-header">
+            <div class="vert-hello">
+                <div class="vert-avatar">
+                    <a href="#">hello, mohamed <i class="fa-regular fa-circle-user"></i></a>
+                </div>
+                <div class="vert-close" id="close-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+            <div class="vert-categories">
+                <ul class="vert-cat-menu">
+                    <li class="vert-cat-item"><a href="#">item1</a></li>
+                    <li class="vert-cat-item"><a href="#">item1</a></li>
+                    <li class="vert-cat-item"><a href="#">item1</a></li>
+                    <li class="vert-cat-item"><a href="#">item1</a></li>
+                    <li class="vert-cat-item"><a href="#">item1</a></li>
+                    <li class="vert-cat-item"><a href="#">item1</a></li>
+                    <li class="vert-cat-item"><a href="#">item1</a></li>
+                    <li class="vert-cat-item"><a href="#">item1</a></li>
+                    <li class="vert-cat-item"><a href="#">item1</a></li>
+                    <li class="vert-cat-item"><a href="#">item1</a></li>
+                    <li class="vert-cat-item"><a href="#">item1</a></li>
+                    <li class="vert-cat-item"><a href="#">item1</a></li>
+                    <li class="vert-cat-item"><a href="#">item1</a></li>
+                </ul>
+            </div>
+            <div class="vert-settings">
+                <ul class="vert-settings-menu">
+                    <li class="vert-settings-item"><a href="#">your account</a></li>
+                    <li class="vert-settings-item"><a href="#">english</a></li>
+                    <li class="vert-settings-item"><a href="#">arabic</a></li>
+                    <li class="vert-settings-item"><a href="#">sign out</a></li>
+                </ul>
+            </div>
+
+        </header>
+    </section>
+    <script src="./js/main.js"></script>
+</body>
+</html>
