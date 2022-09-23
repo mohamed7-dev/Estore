@@ -1,0 +1,30 @@
+[
+    {
+        "id":1,
+        "title":"laptop",
+        "category":"tech",
+        "price":"1000$",
+        "image":"images/laptop.jpg"
+    },
+    {
+        "id":2,
+        "title":"mobile phone",
+        "category":"tech",
+        "price":"300$",
+        "image":"images/mobile.jpg"
+    },
+    {
+        "id":3,
+        "title":"T-shirt",
+        "category":"clothes",
+        "price":"50$",
+        "image":"images/t-shirt.jpg"
+    },
+    {
+        "id":4,
+        "title":"chair",
+        "category":"furniture",
+        "price":"30$",
+        "image":"images/chair.jpg"
+    }
+]

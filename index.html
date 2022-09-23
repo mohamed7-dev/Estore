@@ -1,114 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estore</title>
     <!-- import font awesome icons  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <!-- import google fonts  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> <!-- import google fonts  -->
     <!-- import google fonts  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <!-- link external style sheets  -->
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/reponsive.css">
 </head>
+
 <body>
     <!-- start header horizontal  -->
     <header>
-            <section class="header">
-                <div class="container">
-                    <div class="header-left">
-                        <a href="index.html"><span>E</span>store</a>
-                    </div>
-                    <div class="header-fill">
-                        <div class="search-left">
+        <section class="header">
+            <div class="container">
+                <div class="header-left">
+                    <a href="index.html"><span>E</span>store</a>
+                </div>
+                <div class="header-fill">
+                    <!-- <div class="search-left">
                             <select name="" id="cat-select" class="cat-select-menu">
                                 <option value="All">All</option>
                                 <option value="electronics">electronics</option>
                                 <option value="books">books</option>
                                 <option value="clothes">clothes</option>
                             </select>
-                        </div>
-
-                        <div class="search-fill">
-                            <input type="text" id="search">
-                        </div>
-
-                        <div class="search-right">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </div>
+                        </div> -->
+                    <div class="search-fill">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="search" placeholder="search for your product among 150 products">
                     </div>
-                    <div class="header-right">
-                        <div class="select-lang">
-                            <div class="selected-lang">language<i class="fa-solid fa-caret-down"></i></div>   
-                            <ul class="select-content">
-                                <li class="select-item"><a href="#">English En</a></li>
-                                <li class="select-item"><a href="#">Arabic Ar</a></li>
-                            </ul>   
+
+                    <div class="search-right">
+                        <button class="search-btn">search</button>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="select-lang">
+                        <div class="selected-lang">language<i class="fa-solid fa-caret-down"></i></div>
+                        <ul class="select-content">
+                            <li class="select-item"><a href="#">English En</a></li>
+                            <li class="select-item"><a href="#">Arabic Ar</a></li>
+                        </ul>
+                    </div>
+                    <!-- if user signed in  -->
+                    <div class="user-account signed">
+                        <div class="show-user-info">
+                            hello,
+                            <span id="signed-user-name"></span>
+                            <i class="fa-regular fa-circle-user"></i>
                         </div>
-                        <div class="user-account">
-                            <div class="show-user-info">
-                                hello, mohamed
-                                <i class="fa-regular fa-circle-user"></i>
-                            </div>
-                            <div class="user-settings">
-                                <ul class="settings">
-                                    <li><a href="#">settings</a></li>
-                                    <li><a href="#">sign out</a></li>
-                                </ul>
-                                <hr>
-                                <ul class="activity">
-                                    <li><a href="#">your favourites</a></li>
-                                    <li><a href="#">your cart</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="cart">
-                            <div class="cart-icon">
-                                <span>cart</span>
-                                <i class="fa-solid fa-cart-shopping"></i>
-                            </div>
-                            <ul class="cart-content">
-                                <li class="cart-item">item 1</li>
-                                <li class="cart-item">item 1</li>
-                                <li class="cart-item">item 1</li>
-                                <li class="cart-item">item 1</li>
-                                <button class="view-all-products" id="cart-button">view all products</button>
+                        <div class="user-settings">
+                            <ul class="settings">
+                                <li><a href="#">settings</a></li>
+                                <li><a href="#" id="signout">sign out</a></li>
+                            </ul>
+                            <hr>
+                            <ul class="activity">
+                                <li><a href="#">your favourites</a></li>
+                                <li><a href="#">your cart</a></li>
                             </ul>
                         </div>
                     </div>
+                    <!-- if user is not signed in  -->
+                    <div class="user-account not-signed">
+                        <div class="show-user-info">
+                            hello, new user
+                            <i class="fa-regular fa-circle-user"></i>
+                        </div>
+                        <div class="user-settings">
+                            <ul class="settings">
+                                <li><a href="signinup.html">sign-in</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cart">
+                        <div class="cart-icon">
+                            <span>cart</span>
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="badge">0</span>
+                        </div>
+                        <ul class="cart-content">
+                            <button class="view-all-products" id="viewAll-cart-button">
+                                <a href="cart.html">view all products</a>
+                            </button>
+                        </ul>
+                    </div>
                 </div>
-            </section>
-            <section class="navbar">
-                <div class="container">
-                    <ul class="nav-cat-menu">
-                        <li class="cat-item"><a href="#">item1</a></li>
-                        <li class="cat-item"><a href="#">item2</a></li>
-                        <li class="cat-item"><a href="#">item3</a></li>
-                        <li class="cat-item"><a href="#">item3</a></li>
-                        <li class="cat-item"><a href="#">item3</a></li>
-                        <li class="cat-item"><a href="#">item3</a></li>
-                        <li class="cat-item"><a href="#">item3</a></li>
-                        <li class="cat-item"><a href="#">item3</a></li>
-                        <li class="cat-item"><a href="#">item3</a></li>
-                        <li class="cat-item"><a href="#">item3</a></li>
-                        <li class="cat-item"><a href="#">item3</a></li>
-                        <li class="cat-item"><a href="#">item3</a></li>
-                        <li class="cat-item"><a href="#">item3</a></li>
-                        <li class="cat-item"><a href="#">item3</a></li>
-                        <li class="cat-item"><a href="#">item3</a></li>
-                        <li class="cat-item"><a href="#">item3</a></li>
-                        <li class="cat-item"><a href="#">item3</a></li>
-                        <li class="cat-item"><a href="#">item3</a></li>
-                        <li class="cat-item"><a href="#">item3</a></li>
-                    </ul>
-                </div>
-            </section>
+            </div>
+        </section>
+        <section class="navbar">
+            <div class="overlay"></div>
+            <div class="container">
+                <ul class="nav-address-menu">
+                    <li class="nav-address-item shipping">
+                        <div class="shipping-header">
+                            <i class="fa-solid fa-truck"></i>
+                            <span>how do you want to pickup your order?</span>
+                            <i class="fa-solid fa-caret-down"></i>
+                            |
+                        </div>
+                        <div class="shipping-mode-picking">
+                            <ul class="shipping-mode-details">
+                                <li class="shipping-icons">
+                                    <div class="shipping-way">
+                                        <i class="fa-solid fa-truck-moving"></i>
+                                        <span>shipping</span>
+                                    </div>
+                                    <div class="shipping-way">
+                                        <i class="fa-solid fa-car-side"></i>
+                                        <span>pickup</span>
+                                    </div>
+                                    <div class="shipping-way">
+                                        <i class="fa-solid fa-truck-ramp-box"></i>
+                                        <span>delivery</span>
+                                    </div>
+                                </li>
+                                <li class="add-address">
+                                    <div class="add-address-details">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>choose your address</span>
+                                    </div>
+                                    <button class="address-btn">add address</button>
+                                </li>
+                                <li class="show-choosed-info">
+                                    <div class="choosed-address">
+                                        <i class="fa-solid fa-house-user"></i>
+                                        <span>cairo, egypt</span>
+                                    </div>
+                                    <div class="choosed-shipping">
+                                        <span>instore pickup</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-address-item">
+                        <span><i class="fa-solid fa-location-dot"></i>loaction</span>
+                    </li>
+                    <li class="nav-address-item">
+                        <span><i class="fa-solid fa-house-user"></i>address</span>
+                    </li>
+                </ul>
+                <ul class="nav-cat-menu">
+                    <li class="cat-item"><a href="#">clothes</a></li>
+                    <li class="cat-item"><a href="#">furniture</a></li>
+                    <li class="cat-item"><a href="#">tech</a></li>
+                    <li class="cat-item"><a href="#">grocery</a></li>
+                    <li class="cat-item"><a href="#">top list</a></li>
+                </ul>
+            </div>
+        </section>
     </header>
     <!-- end header horizontal -->
+
+    <!-- start vertical header on mobile devices  -->
     <section class="mobile-vertical">
         <div class="vert-search" id="vert-search">
             <div class="logo">
@@ -162,6 +219,24 @@
 
         </header>
     </section>
+    <!-- end vertical header on mobile devices  -->
+
+    <!-- start main section -->
+    <section class="main-wrapper">
+        <div class="overlay"></div>
+        <div class="main-section-container">
+            <header class="recently-added">
+                <h2>recently added products</h2>
+                <button class="learn-more">learn more</button>
+            </header>
+            <section class="products-wrapper">
+                <div class="products-container"></div>
+            </section>
+        </div>
+    </section>
+    <!-- end main section -->
+
     <script src="./js/main.js"></script>
 </body>
+
 </html>

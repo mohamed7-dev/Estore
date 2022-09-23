@@ -1,4 +1,4 @@
-//get elements
+//get elements  to control show and hide of password 
 let showHide = document.querySelectorAll(".visibility");
 let passwd = document.querySelectorAll(`.input-field input[type ="password"]`);
 let text = document.querySelectorAll(`.input-field input[type ="text"]`);
@@ -78,7 +78,7 @@ signupBtn.addEventListener("click" , () => {
     }    
     signuphandleErrors(signupObj);
 
-    if(!(signupObj.username == "false" && signupObj.email == "false" && signupObj.password == "false" && signupObj.passwordMatch() == "false")){
+    if(signupObj.username != "false" && signupObj.email != "false" && signupObj.password != "false" && signupObj.passwordMatch() != "false"){
         signupArray.push(signupObj);
         window.localStorage.setItem("signupUser" ,JSON.stringify(signupArray));
         //call function to go to sign in mode
@@ -145,16 +145,24 @@ function signupHndleFocus(){
 
 //function to handle error of login form
 function loginhandleErrors(){
-    signupArray.forEach(element => {
-        if(element.email !== signinEmail.value){
-            emailError.classList.add("show-error");
-            signinEmail.addEventListener("focus" , handleFocus);
-        }
-        if (element.password !== signinPasswd.value){
-            passwdError.classList.add("show-error");
-            signinPasswd.addEventListener("focus" , handleFocus);
-        }
-    });
+    if(signupArray.length > 0){
+        signupArray.forEach(element => {
+            if(element.email !== signinEmail.value){
+                emailError.classList.add("show-error");
+                signinEmail.addEventListener("focus" , handleFocus);
+            }
+            if (element.password !== signinPasswd.value){
+                passwdError.classList.add("show-error");
+                signinPasswd.addEventListener("focus" , handleFocus);
+            }
+        });
+    }else{
+        emailError.classList.add("show-error");
+        signinEmail.addEventListener("focus" , handleFocus);
+        passwdError.classList.add("show-error");
+        signinPasswd.addEventListener("focus" , handleFocus);
+    }
+
 }
 
 //function to handle focus after error
