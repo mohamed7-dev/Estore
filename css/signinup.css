@@ -17,18 +17,6 @@
     --btn-hover-bkg:rgba(37, 120, 253, 0.801);
     --btn-color:rgb(255,255,255);
 }
-body.dark-mode{
-    --body-bkg:rgb(20, 20, 25);
-    --main-color:rgb(37, 119, 253);
-    --form-bkg-color:rgb(28, 28, 33);
-    --main-radius:10px;
-    --input-bkg:rgb(28, 28, 33);
-    --border-color:rgb(116, 119, 127);
-    --text-color:rgb(116, 119, 127);
-    --btn-hover-bkg:rgba(37, 120, 253, 0.801);
-    --btn-color:rgb(199, 196, 196);
-}
-
 
 
 body{
