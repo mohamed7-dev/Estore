@@ -6,20 +6,22 @@ let cartHeader = document.querySelector(".cart-icon");
 let headerRTSection =Array.from(document.querySelectorAll(".container .header-right > div"));
 let mainWrapperOverlay = document.querySelector(".main-wrapper .overlay");
 let navbarOverlay = document.querySelector(".navbar .overlay");
+
 function dropdownToggle (){
     if(this.parentElement.classList.contains("active")){
         this.parentElement.classList.remove("active");
         mainWrapperOverlay.classList.remove("active");
         navbarOverlay.classList.remove("active");
-        this.style.cssText = "background-color:transparent ; border-radius:0px; color:var(--text-color)";
+        this.classList.remove("active");
     }else{
         headerRTSection.forEach((div) => {
             div.classList.remove("active");
+            div.children[0].classList.remove("active");
         })
         this.parentElement.classList.add("active");
         mainWrapperOverlay.classList.add("active");
         navbarOverlay.classList.add("active");
-        this.style.cssText = "background-color:var(--main-color); border-radius:15px;color:#fff";
+        this.classList.add("active");
     }
 }
 

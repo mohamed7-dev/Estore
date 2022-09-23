@@ -180,6 +180,14 @@ a span{
     padding:10px 5px;
 }
 
+.selected-lang.active,
+.show-user-info.active,
+.cart-icon.active{
+    background-color:var(--main-color); 
+    border-radius:15px;
+    color:#fff;
+}
+
 /* .selected-lang:hover,
 show-user-info:hover,
 .cart-icon:hover{
