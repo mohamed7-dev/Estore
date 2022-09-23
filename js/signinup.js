@@ -172,17 +172,4 @@ function handleFocus(){
 }
 
 
-//get elements to toggle dark mode
-let icon = document.querySelector(".title i");
-icon.addEventListener("click" , () => {
-    if(!document.body.classList.contains("dark-mode")){
-        document.body.classList.add("dark-mode");
-        icon.classList.replace("fa-moon" , "fa-sun");
-    }else{
-        document.body.classList.remove("dark-mode");
-        icon.classList.replace("fa-sun" , "fa-moon");
-    }
-})
-
-
 
