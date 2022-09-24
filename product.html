@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estore</title>
+    <title>Estore product details</title>
     <!-- import font awesome icons  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
@@ -16,8 +17,7 @@
         rel="stylesheet">
     <!-- link external style sheets  -->
     <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/home.css">
-    <link rel="stylesheet" href="./css/reponsive.css">
+    <link rel="stylesheet" href="./css/product.css">
 </head>
 
 <body>
@@ -30,20 +30,20 @@
                 </div>
                 <div class="header-fill">
                     <!-- <div class="search-left">
-                            <select name="" id="cat-select" class="cat-select-menu">
-                                <option value="All">All</option>
-                                <option value="electronics">electronics</option>
-                                <option value="books">books</option>
-                                <option value="clothes">clothes</option>
-                            </select>
-                        </div> -->
+                                <select name="" id="cat-select" class="cat-select-menu">
+                                    <option value="All">All</option>
+                                    <option value="electronics">electronics</option>
+                                    <option value="books">books</option>
+                                    <option value="clothes">clothes</option>
+                                </select>
+                            </div> -->
                     <div class="search-fill">
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <input type="text" id="search" placeholder="search for your product among 150 products">
                     </div>
 
                     <div class="search-right">
-                        <button class="search-btn" id="search-btn">search</button>
+                        <button class="search-btn">search</button>
                     </div>
                 </div>
                 <div class="header-right">
@@ -224,20 +224,12 @@
     <!-- start main section -->
     <section class="main-wrapper">
         <div class="overlay"></div>
-        <div class="main-section-container">
-            <header class="recently-added">
-                <h2>recently added products</h2>
-                <button class="learn-more">learn more</button>
-            </header>
-            <section class="products-wrapper">
-                <div class="products-container"></div>
-            </section>
-        </div>
+        <div class="main-section-container"></div>
     </section>
     <!-- end main section -->
 
-    <script src="./js/global.js"></script>
-    <script src="./js/main.js"></script>
+    <script src="js/global.js"></script>
+    <script src="./js/product.js"></script>
 </body>
 
 </html>

@@ -255,6 +255,29 @@ show-user-info:hover,
     right:0;
     left: unset;
     transform: translateX(0);
+    gap:10px;
+}
+
+.cart-content .cart-item{
+    width:100%;
+    height:100px;
+    margin-bottom: 10px;
+}
+
+.cart-item > div{
+    display: inline-block;
+    width:70%;
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: keep-all;
+    text-overflow: ellipsis;
+}
+
+.cart-item img{
+    height:100%;
+    width:30%;
+    object-fit: contain;
+    display: inline-block;
 }
 
 .select-item a,
@@ -497,176 +520,3 @@ li a:hover{
     text-decoration: underline;
 }
 
-:root{
-    --main-section-bkg:rgb(239, 241, 245);
-    --common-margin:30px;
-    --minor-margin:10px;
-}
-section.main-wrapper{
-    width:100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    background-color: var(--main-section-bkg);
-    position: relative;
-    z-index: 1;
-}
-
-.navbar .overlay,
-.main-wrapper .overlay{
-    opacity: 0;
-    pointer-events: none;
-    user-select: none;
-    position: absolute;
-    top:0;
-    bottom:0;
-    right:0;
-    left:0;
-    z-index: 200;
-    background-color: rgba(0, 0, 0, 0.644);
-    transition: 0.2s ease;
-}
-
-.overlay.active{
-    opacity: 1;
-    pointer-events: auto;
-    user-select: auto;
-}
-
-.main-wrapper::before{
-    content: "";
-    position: absolute;
-    top:0;
-    left:0;
-    z-index: -1;
-    width:50%;
-    height: 500px;
-    background-color: var(--main-color);
-    clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
-}
-
-.main-wrapper::after{
-    content: "";
-    position: absolute;
-    bottom:0;
-    right:0;
-    z-index: -1;
-    width:50%;
-    height: 500px;
-    background-color: var(--main-color);
-    clip-path: polygon(0% 100%, 100% 0%, 100% 100%);
-}
-
-.main-wrapper .main-section-container{
-    width:80%;
-    display: flex;
-    flex-direction: column;
-    margin-top: var(--common-margin);
-}
-
-.main-section-container .recently-added{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--minor-margin);
-} 
-
-.recently-added h2{
-    color:var(--text-color);
-    font-size: 1.5rem;
-    text-transform: capitalize;    
-}
-
-.recently-added button.learn-more{
-    border:1px solid #777;
-    outline:0;
-    padding:10px;
-    background-color: transparent;
-    color:var(--text-color);
-    text-transform: capitalize;
-    font-weight: 500;
-    cursor: pointer;
-}
-
-
-.products-wrapper .products-container {
-    width:100%;
-    border-radius: 10px;
-    display: grid;
-    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); 
-    justify-content: space-between;
-    gap:20px;
-    padding:10px 0px;
-}
-
-.products-container .product-card{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap:10px;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #fff;
-}
-
-.product-card .image-container{
-    width: 100%;
-    height:250px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* border-radius: 50%; */
-}
-
-.image-container img{
-    width:120px;
-}
-
-.image-container i{
-    position: absolute;
-    top:5px;
-    right:5px;
-    color:var(--secondary-color);
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 1.2rem;
-}
-.product-card .describtion{
-    width:100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.describtion .product{
-    color:var(--text-color);
-    font-weight: bold;
-    text-transform: capitalize;
-}
-
-.describtion .p-category{
-    color:#777;
-    font-weight: 400;
-}
-.describtion .p-price{
-    color:var(--secondary-color);
-    font-weight: 600;
-    font-size: 1rem;
-}
-
-.describtion .add-to-cart{
-    width: 50%;
-    border:none;
-    outline:0;
-    background-color: var(--main-color);
-    padding:5px;
-    color:#fff;
-    text-transform: capitalize;
-    font-weight: 500;
-    cursor: pointer;
-    border-radius: 5px;
-}
