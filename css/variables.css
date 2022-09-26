@@ -1,0 +1,13 @@
+:root{
+    --main-color:rgb(37, 119, 253);
+    --dropdown-hover-color:rgba(26, 22, 22, 0.986);
+    --header-text-color:rgb(255, 255, 255);
+    --text-color:rgb(16, 25, 41);
+    --icon-head-color:rgb(40, 40, 40);
+    --secondary-color:rgb(255, 194, 32);
+    --dropdown-border-radius:0 0 10px 10px;
+    --border-color:rgb(210, 212, 216);
+    --main-section-bkg:rgb(239, 241, 245);
+    --common-margin:30px;
+    --minor-margin:10px;
+}

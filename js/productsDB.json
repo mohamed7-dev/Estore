@@ -10,7 +10,8 @@
             "thumb-2": "images/laptop-thumb-2.jpg",
             "thumb-3": "images/laptop-thumb-3.jpg"
         },
-        "describtion":" HP Victus 16-d0023dx Gaming Laptop Latest Model - 11th Intel Core i5-11400H 6-Cores, 8GB RAM, 256GB SSD, NVIDIA RTX 3050 4GB GDDR6 Graphics, 16.1 FHD 1920x1080 IPS, Backlit Keyboard, Windows 11, Blue "
+        "describtion":" HP Victus 16-d0023dx Gaming Laptop Latest Model - 11th Intel Core i5-11400H 6-Cores, 8GB RAM, 256GB SSD, NVIDIA RTX 3050 4GB GDDR6 Graphics, 16.1 FHD 1920x1080 IPS, Backlit Keyboard, Windows 11, Blue ",
+        "quantity":1
     },
     {
         "id": 2,
@@ -23,7 +24,8 @@
             "thumb-2": "images/mobile-thumb-2.jpg",
             "thumb-3": "images/mobile-thumb-3.jpg"
         },
-        "describtion": "Brand XiaomiColor GreenOperating System Type AndroidStorage Capacity 32 GBNumber Of SIM Dual SIMRear Camera Resolution 13 megapixelsMobile Phone Type SmartphoneCellular Network Technology 4G LTEChipset manufacturer MediaTekDisplay Size Inch nullModel Number 9A Battery Capacity in mAh 5000 6000 milliampere_hourFast Charge 0Memory RAM 2 GBAre batteries needed to power the product or is this product a battery 1Is this a Dangerous Good or a Hazardous Material Substance or Waste that is regulated for transportation storage andor disposal 0External Product ID Type EAN13"
+        "describtion": "Brand XiaomiColor GreenOperating System Type AndroidStorage Capacity 32 GBNumber Of SIM Dual SIMRear Camera Resolution 13 megapixelsMobile Phone Type SmartphoneCellular Network Technology 4G LTEChipset manufacturer MediaTekDisplay Size Inch nullModel Number 9A Battery Capacity in mAh 5000 6000 milliampere_hourFast Charge 0Memory RAM 2 GBAre batteries needed to power the product or is this product a battery 1Is this a Dangerous Good or a Hazardous Material Substance or Waste that is regulated for transportation storage andor disposal 0External Product ID Type EAN13",
+        "quantity":1
     },
     {
         "id": 3,
@@ -34,7 +36,8 @@
         "thumbs": {
             "thumb-1": "images/t-shirt-thumb.jpg"
         },
-        "describtion":" T-Shirt made of the best fabrics and sewn to international standards to give you the most comfortable wear "
+        "describtion":" T-Shirt made of the best fabrics and sewn to international standards to give you the most comfortable wear ",
+        "quantity":1
     },
     {
         "id": 4,
@@ -45,6 +48,7 @@
         "thumbs": {
             "thumb-1": "images/chair-thumb.jpg"
         },
-        "describtion":"Riga is one of the newest companies in the manufacture of wood, but it comes with a high taste that differs from others in its consistency with modern decorations and suits the tastes of most people. There is no doubt that it will leave a good impression on all its customers in order to provide you with a large catalog that gives you the opportunity to choose more and more appropriate to the system your home. Decorate your living space with stylish décor as well as smart storage. Thanks to the elegant design of this TV bench, it blends perfectly with the overall tone of your décor. All table surfaces are finished in a brilliant white finish that complements the rest of the furniture. The top surface of the table is spacious enough to hold coffee cups and small plates. The 4 built-in storage units are designed to hold some decor, magazines, and more to keep them close at hand. Moreover, the table is made of high-quality wood, which makes it strong and resistant to daily wear and tear."
+        "describtion":"Riga is one of the newest companies in the manufacture of wood, but it comes with a high taste that differs from others in its consistency with modern decorations and suits the tastes of most people. There is no doubt that it will leave a good impression on all its customers in order to provide you with a large catalog that gives you the opportunity to choose more and more appropriate to the system your home. Decorate your living space with stylish décor as well as smart storage. Thanks to the elegant design of this TV bench, it blends perfectly with the overall tone of your décor. All table surfaces are finished in a brilliant white finish that complements the rest of the furniture. The top surface of the table is spacious enough to hold coffee cups and small plates. The 4 built-in storage units are designed to hold some decor, magazines, and more to keep them close at hand. Moreover, the table is made of high-quality wood, which makes it strong and resistant to daily wear and tear.",
+        "quantity":1
     }
 ]

@@ -80,42 +80,88 @@ signoutBtn.addEventListener("click" , () => {
 
 
 // get elements to add to cart
-let cartContent = document.querySelector(".cart-content"); 
+let CartItemsArray = localStorage.getItem("cart")? JSON.parse(localStorage.getItem("cart")) : []; 
+let cartItemsContainer = document.querySelector(".cart-content .items-container"); 
 let numberBadge = document.querySelector(".badge");
+let resultsFromLS = JSON.parse(window.localStorage.getItem("productDB"));
+console.log(CartItemsArray)
 
 //add to cart globally
-let CartItemsArray= localStorage.getItem("cart")? JSON.parse(localStorage.getItem("cart")) : []; 
 if(CartItemsArray){
     CartItemsArray.map((item) => {
-        let cartItem = document.createElement("li");
-        cartItem.className = "cart-item";
-        let divInCart = document.createElement("div");
-        divInCart.appendChild(document.createTextNode(`${item.title}`));
-        cartItem.appendChild(divInCart);
-        let imgInCart = document.createElement("img");
-        imgInCart.src = `${item.image}`;
-        cartItem.appendChild(imgInCart);
-        cartContent.prepend (cartItem);
+        cartItemsContainer.innerHTML += `
+        <li class="cart-item">
+            <span class="item-title">${item.title}</span>
+            <span class="item-qty">${item.quantity}</span>
+        </li>
+        `
     })
+
     numberBadge.innerHTML = CartItemsArray.length;
 }
 
 //function to check if the user is existen in the data base or not and based on that add to cart or not 
 function userAddToCartAbility (id){
-    let resultsFromLS = JSON.parse(window.localStorage.getItem("productDB")); 
+    let resultsFromLS = JSON.parse(window.localStorage.getItem("productDB"));
+    let CartItemsArray = localStorage.getItem("cart")? JSON.parse(localStorage.getItem("cart")) : []; 
+    let cartItemsContainer = document.querySelector(".cart-content .items-container"); 
+    let numberBadge = document.querySelector(".badge");
+
     if(localStorage.getItem("signupUser")){
-        let filtered = resultsFromLS.find((element) => element.id === id);
-        CartItemsArray.push(filtered);
+        let filtered = resultsFromLS.find(element => element.id == id);
+        let isRepeatedItem = CartItemsArray.some(item => item.id == filtered.id); //returns true if repeated
+        
+        if(isRepeatedItem){
+            
+            CartItemsArray.map((item) => {
+                if(item.id === filtered.id){
+                    item.quantity += 1;
+                }else{
+                    return item;
+                }
+            })
+
+        }else{
+            CartItemsArray.push(filtered);
+        }
+        
+        cartItemsContainer.innerHTML = "";
+        CartItemsArray.forEach((item) => {
+            cartItemsContainer.innerHTML += `
+                <li class="cart-item">
+                <span class="item-title">${item.title}</span>
+                <span class="item-qty">${item.quantity}</span>
+                </li>
+            `
+        })
+        //add item to local storage
         window.localStorage.setItem("cart" , JSON.stringify(CartItemsArray));
-        
-        
-        let cartItem = document.createElement("li");
-        cartItem.className = "cart-item";
-        cartItem.appendChild(document.createTextNode(`${filtered.title}`));
-        cartContent.prepend (cartItem);
+
         //get all items in the cart to add number to the badge
         let ElementsInsideCart = document.querySelectorAll(".cart-content li");
         numberBadge.innerHTML = ElementsInsideCart.length;
+
+    }else{
+        window.location = "signinup.html"
+    }
+}
+
+//function to add to favourite
+let favItemsArray = localStorage.getItem("fav")? JSON.parse(localStorage.getItem("fav")) : [];
+function userAddToFavouriteAbility (id){
+    if(localStorage.getItem("signupUser")){
+        let filtered = resultsFromLS.find(element => element.id == id);     
+        filtered.like = true;   
+        favItemsArray.push(filtered);
+        //add item to local storage
+        window.localStorage.setItem("fav" , JSON.stringify(favItemsArray));
+        resultsFromLS.map((item) => {
+            if(item.id === filtered.id){
+                item.like = true;
+            }
+        })
+        localStorage.setItem("productDB" , JSON.stringify(resultsFromLS))
+        displayProducts(resultsFromLS)
     }else{
         window.location = "signinup.html"
     }

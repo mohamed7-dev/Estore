@@ -5,15 +5,6 @@ let cartEmpty = document.querySelector(".cart-empty");
 let mainSectionContainer = document.querySelector(".main-section-container");
 let itemsCount = document.querySelector(".items-count span");
 
-function HandleCartmenu(){
-    cartMenuInHeader.style.display = "none";
-    cartHeader.onclick = function () {
-        mainWrapperOverlay.classList.remove("active");
-        window.location = "cart.html"
-    }
-}
-HandleCartmenu();
-
 function displayProductsInCart(cartProducts = []){
     let products = JSON.parse(localStorage.getItem("cart")) || cartProducts;
     headerBadge.innerHTML = products.length;
@@ -22,7 +13,7 @@ function displayProductsInCart(cartProducts = []){
     handleEmptyCart();
 
     productsContainer.innerHTML = "";
-    products.map((product , index , array) => {
+    products.map((product) => {
         productsContainer.innerHTML += `
         <div class="product-card">
             <div class="image-container">
@@ -32,6 +23,7 @@ function displayProductsInCart(cartProducts = []){
                 <div class="describtion-product-info">
                     <span class="product p-name">${product.title}</span>
                     <span class="product p-category">${product.category}</span>
+                    <span class="product p-quantity">qunatity: ${product.quantity}</span>
                     <button class="add-to-cart" onclick="removeFromCart(${product.id})">remove from cart</button>
                 </div>
                 <div class="describtion-product-price">

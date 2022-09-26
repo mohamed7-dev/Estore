@@ -30,13 +30,20 @@ function displayProductDetails(product){
     </div>
     <div class="right-side">
         <div class="product-fav">
-            <span>${product.category}</span>
-            <i class="fa-regular fa-star"></i>
+            <span class="p-cat">${product.category}</span>
+            <i class="fa-regular fa-heart" onclick="userAddToFavouriteAbility(${product.id})"></i>
         </div>
         <div class="product-title">
-            <span>${product.title}</span>
-            <span>reviews</span>
-            <span>${product.price}</span>
+            <span class="p-title">${product.title}</span>
+            <span class="p-review">
+                Reviews
+               <i class="fa-regular fa-star"></i>
+               <i class="fa-regular fa-star"></i>
+               <i class="fa-regular fa-star"></i>
+               <i class="fa-regular fa-star"></i>
+               <i class="fa-regular fa-star"></i>
+            </span>
+            <span class="p-price">${product.price}</span>
             <button onclick="userAddToCartAbility(${product.id})">add to cart</button>
         </div>
     </div>
@@ -86,5 +93,4 @@ function handleImageSrc(product){
             console.log(e);
         })
     })
-
 }

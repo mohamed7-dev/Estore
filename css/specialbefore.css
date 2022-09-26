@@ -1,0 +1,23 @@
+.main-wrapper::before{
+    content: "";
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: -1;
+    width:50%;
+    height: 500px;
+    background-color: var(--main-color);
+    clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
+}
+
+.main-wrapper::after{
+    content: "";
+    position: absolute;
+    bottom:0;
+    right:0;
+    z-index: -1;
+    width:50%;
+    height: 500px;
+    background-color: var(--main-color);
+    clip-path: polygon(0% 100%, 100% 0%, 100% 100%);
+}

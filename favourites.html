@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estore</title>
+    <title>Estore favourite items</title>
     <!-- import font awesome icons  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" /> <!-- import google fonts  -->
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" /> 
     <!-- import google fonts  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,10 +18,9 @@
     <link rel="stylesheet" href="./css/variables.css">
     <link rel="stylesheet" href="./css/specialbefore.css">
     <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/favourite.css">
     <link rel="stylesheet" href="./css/reponsive.css">
 </head>
-
 <body>
     <!-- start header horizontal  -->
     <header>
@@ -37,7 +36,7 @@
                     </div>
 
                     <div class="search-right">
-                        <button class="search-btn" id="search-btn">search</button>
+                        <button class="search-btn">search</button>
                     </div>
                 </div>
                 <div class="header-right">
@@ -60,10 +59,8 @@
                                 <li><a href="#">settings</a></li>
                                 <li><a href="#" id="signout">sign out</a></li>
                             </ul>
-                            <hr>
                             <ul class="activity">
                                 <li><a href="favourites.html">your favourites</a></li>
-                                <li><a href="#">your cart</a></li>
                             </ul>
                         </div>
                     </div>
@@ -219,20 +216,33 @@
     <!-- start main section -->
     <section class="main-wrapper">
         <div class="overlay"></div>
+        <div class="fav-empty">
+            <div class="start-shopping">
+                <i class="fa-solid fa-heart-circle-xmark"></i>                
+                <div>
+                    <span>time to start shopping!</span>
+                    <a href="index.html">start shopping</a>
+                </div>
+            </div>
+        </div>
+
         <div class="main-section-container">
             <header class="recently-added">
-                <h2>recently added products</h2>
-                <button class="learn-more">learn more</button>
+                <h2>favourite items</h2>
             </header>
             <section class="products-wrapper">
-                <div class="products-container"></div>
+                <div class="products-container">
+                    <div class="price">
+                        <div class="items-count">
+                        </div>
+                    </div>
+                    <div class="cart-items-container"></div>
+                </div>
             </section>
         </div>
     </section>
     <!-- end main section -->
-
     <script src="./js/global.js"></script>
-    <script src="./js/main.js"></script>
+    <script src="./js/favourite.js"></script>
 </body>
-
 </html>

@@ -1,43 +1,20 @@
-.navbar{
+section.navbar{
     border-bottom: 1px solid var(--border-color);
 }
-.main-wrapper{
-    width:100%;
+
+section.main-wrapper{
+    background-color: #fff;
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    z-index: 1;
-    padding-top:20px;
-}
-
-.navbar .overlay,
-.main-wrapper .overlay{
-    opacity: 0;
-    pointer-events: none;
-    user-select: none;
-    position: absolute;
-    top:0;
-    bottom:0;
-    right:0;
-    left:0;
-    z-index: 200;
-    background-color: rgba(0, 0, 0, 0.644);
-    transition: 0.2s ease;
-}
-
-.overlay.active{
-    opacity: 1;
-    pointer-events: auto;
-    user-select: auto;
 }
 
 .main-wrapper .main-section-container{
     width:80%;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     gap:20px;
     padding:20px;
+    margin-top: 20px;
 }
 
 .left-side{
@@ -48,10 +25,11 @@
 
 .left-side .image-container{
     width:100%;
-    max-height:500px;
-    height:100%;
+    height:400px;
     display: flex;
+    object-fit: contain;
 }
+
 .image-container .thumb-container{
     display: flex;
     flex-direction: column;
@@ -89,6 +67,7 @@
     border-radius: 10px;
     overflow: hidden;
     background-color: #fff;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .product-details .accordion-header{
@@ -128,10 +107,10 @@
     width:30%;
     display: flex;
     flex-direction: column;
-    gap:20px;
+    gap:30px;
     background-color: #fff;
     border-radius: 10px;
-    padding:10px;
+    padding:25px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
@@ -140,16 +119,38 @@
     justify-content: space-between;
 }
 
+.product-fav .p-cat{
+    color:#777;
+    font-weight: 600;
+}
+
+.product-fav i{
+    color:var(--secondary-color);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
 .right-side .product-title{
     display: flex;
     flex-direction: column;
-    gap:10px;
+    gap:15px;
     color:var(--text-color);
+}
+
+.product-title .p-price{
+    color:var(--secondary-color);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.product-title .p-review{
+    color:var(--secondary-color);
+    font-size: 1rem;
+    cursor: pointer;
 }
 
 .product-title button{
     width: 50%;
-    margin: auto;
     border:none;
     outline:0;
     background-color: var(--main-color);
@@ -159,4 +160,5 @@
     font-weight: 500;
     cursor: pointer;
     border-radius: 5px;
+    margin-top: 20px;
 }

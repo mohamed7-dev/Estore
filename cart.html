@@ -15,6 +15,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <!-- link external style sheets  -->
+    <link rel="stylesheet" href="./css/variables.css">
+    <link rel="stylesheet" href="./css/specialbefore.css">
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/cart.css">
     <link rel="stylesheet" href="./css/reponsive.css">
@@ -28,14 +30,6 @@
                     <a href="index.html"><span>E</span>store</a>
                 </div>
                 <div class="header-fill">
-                    <!-- <div class="search-left">
-                            <select name="" id="cat-select" class="cat-select-menu">
-                                <option value="All">All</option>
-                                <option value="electronics">electronics</option>
-                                <option value="books">books</option>
-                                <option value="clothes">clothes</option>
-                            </select>
-                        </div> -->
                     <div class="search-fill">
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <input type="text" id="search" placeholder="search for your product among 150 products">
@@ -66,7 +60,7 @@
                                 <li><a href="#" id="signout">sign out</a></li>
                             </ul>
                             <ul class="activity">
-                                <li><a href="#">your favourites</a></li>
+                                <li><a href="favourites.html">your favourites</a></li>
                             </ul>
                         </div>
                     </div>
@@ -92,9 +86,72 @@
                             <button class="view-all-products" id="viewAll-cart-button">
                                 <a href="cart.html">view all products</a>
                             </button>
+                            <div class="items-container"></div>
                         </ul>
                     </div>
                 </div>
+            </div>
+        </section>
+        <section class="navbar">
+            <div class="overlay"></div>
+            <div class="container">
+                <ul class="nav-address-menu">
+                    <li class="nav-address-item shipping">
+                        <div class="shipping-header">
+                            <i class="fa-solid fa-truck"></i>
+                            <span>how do you want to pickup your order?</span>
+                            <i class="fa-solid fa-caret-down"></i>
+                            |
+                        </div>
+                        <div class="shipping-mode-picking">
+                            <ul class="shipping-mode-details">
+                                <li class="shipping-icons">
+                                    <div class="shipping-way">
+                                        <i class="fa-solid fa-truck-moving"></i>
+                                        <span>shipping</span>
+                                    </div>
+                                    <div class="shipping-way">
+                                        <i class="fa-solid fa-car-side"></i>
+                                        <span>pickup</span>
+                                    </div>
+                                    <div class="shipping-way">
+                                        <i class="fa-solid fa-truck-ramp-box"></i>
+                                        <span>delivery</span>
+                                    </div>
+                                </li>
+                                <li class="add-address">
+                                    <div class="add-address-details">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>choose your address</span>
+                                    </div>
+                                    <button class="address-btn">add address</button>
+                                </li>
+                                <li class="show-choosed-info">
+                                    <div class="choosed-address">
+                                        <i class="fa-solid fa-house-user"></i>
+                                        <span>cairo, egypt</span>
+                                    </div>
+                                    <div class="choosed-shipping">
+                                        <span>instore pickup</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-address-item">
+                        <span><i class="fa-solid fa-location-dot"></i>loaction</span>
+                    </li>
+                    <li class="nav-address-item">
+                        <span><i class="fa-solid fa-house-user"></i>address</span>
+                    </li>
+                </ul>
+                <ul class="nav-cat-menu">
+                    <li class="cat-item"><a href="#">clothes</a></li>
+                    <li class="cat-item"><a href="#">furniture</a></li>
+                    <li class="cat-item"><a href="#">tech</a></li>
+                    <li class="cat-item"><a href="#">grocery</a></li>
+                    <li class="cat-item"><a href="#">top list</a></li>
+                </ul>
             </div>
         </section>
     </header>

@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <!-- link external style sheets  -->
+    <link rel="stylesheet" href="./css/variables.css">
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/product.css">
 </head>
@@ -29,14 +30,6 @@
                     <a href="index.html"><span>E</span>store</a>
                 </div>
                 <div class="header-fill">
-                    <!-- <div class="search-left">
-                                <select name="" id="cat-select" class="cat-select-menu">
-                                    <option value="All">All</option>
-                                    <option value="electronics">electronics</option>
-                                    <option value="books">books</option>
-                                    <option value="clothes">clothes</option>
-                                </select>
-                            </div> -->
                     <div class="search-fill">
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <input type="text" id="search" placeholder="search for your product among 150 products">
@@ -68,8 +61,8 @@
                             </ul>
                             <hr>
                             <ul class="activity">
-                                <li><a href="#">your favourites</a></li>
-                                <li><a href="#">your cart</a></li>
+                                <li><a href="favourites.html">your favourites</a></li>
+                                <li><a href="cart.html">your cart</a></li>
                             </ul>
                         </div>
                     </div>
@@ -92,6 +85,7 @@
                             <span class="badge">0</span>
                         </div>
                         <ul class="cart-content">
+                            <div class="items-container"></div>
                             <button class="view-all-products" id="viewAll-cart-button">
                                 <a href="cart.html">view all products</a>
                             </button>
