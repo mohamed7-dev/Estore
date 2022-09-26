@@ -2,7 +2,7 @@
 function previewProduct(){
     let LSproductsDB = JSON.parse(localStorage.getItem("productDB"));
     let LSProductID = JSON.parse(localStorage.getItem("productID"));
-    let clickedItem = LSproductsDB.filter((item) => item.id == LSProductID);
+    let clickedItem = LSproductsDB.find((item) => item.id == LSProductID);
     displayProductDetails(clickedItem);
 }
 
@@ -14,7 +14,7 @@ function displayProductDetails(product){
     <div class="left-side">
         <div class="image-container">
             <div class="thumb-container"></div>
-            <img src="${product[0].image}" alt="">
+            <img src="${product.image}" alt="">
         </div>
         <div class="product-describtion">
             <h2>about this product</h2>
@@ -23,17 +23,17 @@ function displayProductDetails(product){
                     <span>product details</span>
                     <i class="fa-solid fa-plus"></i>
                 </div>
-                <p class="desc">${product[0].describtion}</p>
+                <p class="desc">${product.describtion}</p>
             </div> 
         </div>
     </div>
     <div class="right-side">
         <div class="product-fav">
-            <span class="p-cat">${product[0].category}</span>
-            <i class="fa-regular fa-heart" style="font-weight:${product[0].like == true? "bold" : "normal"}" onclick="AddToFavourite(${product})"></i>
+            <span class="p-cat">${product.category}</span>
+            <i class="fa-regular fa-heart fav-icon" style="font-weight:${product.like == true? "bold" : "normal"}" onclick="AddToFavourite(${product.id})"></i>
         </div>
         <div class="product-title">
-            <span class="p-title">${product[0].title}</span>
+            <span class="p-title">${product.title}</span>
             <span class="p-review">
                 Reviews
                 <i class="fa-regular fa-star"></i>
@@ -42,13 +42,15 @@ function displayProductDetails(product){
                 <i class="fa-regular fa-star"></i>
                 <i class="fa-regular fa-star"></i>
             </span>
-            <span class="p-price">${product[0].price}</span>
-            <button onclick="userAddToCartAbility(${product[0].id})">add to cart</button>
+            <span class="p-price">${product.price}</span>
+            <button onclick="userAddToCartAbility(${product.id})">add to cart</button>
         </div>
     </div>
     `
-    console.log(product)
     handleThumbnails(product);
+    // favIcon.onclick = function () {
+    //     AddToFavourite(product);
+    // }
 }
 
 //accordion
@@ -70,10 +72,10 @@ accordionHeader.addEventListener("click",() => {
 
 
 function handleThumbnails(product) {
-    let thumbs = product[0].thumbs;
+    let thumbs = product.thumbs;
     let thumbsLength = Object.keys(thumbs).length;
     let thumbsContainer = document.querySelector(".thumb-container");
-    thumbsContainer.innerHTML = `<img src="${product[0].image}" alt="">`;
+    thumbsContainer.innerHTML = `<img src="${product.image}" alt="">`;
     for(item in thumbs){
         thumbsContainer.innerHTML += `
             <img src="${thumbs[item]}">
@@ -92,12 +94,14 @@ function handleImageSrc(product){
     })
 }
 
-function AddToFavourite(product){
+function AddToFavourite(id){
     if(localStorage.getItem("signupUser")){
-        let isRepeatedItem = favItemsArray.some(item => item.id == product.id); //returns true if repeated
+        let filtered = resultsFromLS.find(element => element.id == id);
+        let isRepeatedItem = favItemsArray.some(item => item.id == filtered.id); //returns true if repeated
+        console.log(isRepeatedItem)
         if(isRepeatedItem){   
             favItemsArray.map((item , index , arr) => {
-                if(item.id == product.id){
+                if(item.id == filtered.id){
                     arr.splice(index , 1);
             }else{
                 return item;
@@ -105,25 +109,25 @@ function AddToFavourite(product){
             });
 
         }else{
-            product.like = true;
-            favItemsArray.push(product);
+            filtered.like = true;
+            favItemsArray.push(filtered);
         }
         //add item to local storage
         window.localStorage.setItem("fav" , JSON.stringify(favItemsArray));
-        resultsFromLS.map((item) => {
-            if(isRepeatedItem){
-                if(item.id == product.id){
-                    delete item.like;
-                }else{
-                    return item;
-                }
-            }else{
-                product.like = true;
-            }
 
-        })
-        localStorage.setItem("productDB" , JSON.stringify(resultsFromLS))
-        displayProductDetails(product)
+            if(isRepeatedItem){
+                resultsFromLS.map((item) => {
+                    if(item.id == filtered.id){
+                        delete item.like;
+                    }else{
+                        return item;
+                    }
+                })   
+            }else{
+                filtered.like = true;
+            }
+        localStorage.setItem("productDB" , JSON.stringify(resultsFromLS));
+        displayProductDetails(filtered)
     }else{
         window.location = "signinup.html"
     }

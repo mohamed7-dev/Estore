@@ -130,6 +130,10 @@ section.main-wrapper{
     cursor: pointer;
 }
 
+.fav-icon.active{
+    font-weight: bold;
+}
+
 .right-side .product-title{
     display: flex;
     flex-direction: column;
