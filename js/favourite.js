@@ -4,7 +4,7 @@ let mainSectionContainer = document.querySelector(".main-section-container");
 
 function displayFavourites(allFav = []){
     let favItemsFromLS = JSON.parse(localStorage.getItem("fav")) || allFav;
-    handleEmptyFav();
+    handleEmptyFav(favItemsFromLS);
     productsContainer.innerHTML = "";
     favItemsFromLS.map((product) => {
         productsContainer.innerHTML += `
@@ -36,17 +36,23 @@ function removeFromFav(id){
         let LSfavItems = JSON.parse(localStorage.getItem("fav"));
         let filteredItems = LSfavItems.filter(item => item.id !== id);
         window.localStorage.setItem("fav" , JSON.stringify(filteredItems));
+        resultsFromLS.map((item) => {
+            if(item.id == id){
+                delete item.like;
+            }else{
+                return item;
+            }
+        })
+        window.localStorage.setItem("productDB" , JSON.stringify(resultsFromLS));
         displayFavourites(filteredItems);
     }
 }
 
 
 //function to handle the visibility of empty cart div when the cart is empty
-function handleEmptyFav(){
-    if(JSON.parse(localStorage.getItem("fav")).length === 0){
+function handleEmptyFav(arr){
+    if(arr.length === 0){
         favEmpty.classList.add("active");
         mainSectionContainer.style.display = "none";
     }
 }
-
-// handleEmptyFav()

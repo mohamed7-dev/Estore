@@ -1,6 +1,6 @@
 let productsContainer = document.querySelector(".products-container .cart-items-container");
 let headerBadge = document.querySelector(".badge")
-let cartMenuInHeader = document.querySelector(".cart-content");
+let cartMenuInHeader = document.querySelector(".cart-content .items-container");
 let cartEmpty = document.querySelector(".cart-empty");
 let mainSectionContainer = document.querySelector(".main-section-container");
 let itemsCount = document.querySelector(".items-count span");
@@ -47,10 +47,11 @@ function handleEmptyCart(){
 
 //function to remove items from cart
 function removeFromCart(id){
-    if(window.localStorage.getItem("cart")){
+    if(CartItemsArray){
         let LSCartItems = JSON.parse(localStorage.getItem("cart"));
         let filteredItems = LSCartItems.filter(item => item.id !== id);
         window.localStorage.setItem("cart" , JSON.stringify(filteredItems));
         displayProductsInCart(filteredItems);
+        handleCartHeader();
     }
 }

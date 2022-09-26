@@ -4,9 +4,14 @@ let url = "./js/productsDB.json";
 async function fetchData(url) {
     let resolved = await fetch(url);
     let data = await resolved.json();
-    window.localStorage.setItem("productDB" , JSON.stringify(data));
-    displayProducts(data);
-    return data;
+    if(localStorage.getItem("productDB")){
+        JSON.parse(localStorage.getItem("productDB"))
+    }else{
+        localStorage.setItem("productDB" , JSON.stringify(data))
+    }
+    let retrieveDataFromLS = JSON.parse(localStorage.getItem("productDB"));
+    displayProducts(retrieveDataFromLS);
+    return retrieveDataFromLS;
 }
 fetchData(url);
 
@@ -17,12 +22,11 @@ function displayProducts(allData = []){
     productsParent.innerHTML = "";
     
     allData.map((item) => {
-        console.log(item.like)
         productsParent.innerHTML += `
         <div class="product-card">
             <div class="image-container" >
                 <img src="${item.image}" alt="" onclick="addProductID(${item.id})">
-                <i class="fa-regular fa-heart" onclick="userAddToFavouriteAbility(${item.id})"></i>
+                <i class="fa-regular fa-heart" style="font-weight:${item.like == true? "bold" : "normal"}" onclick="userAddToFavouriteAbility(${item.id})"></i>
             </div>
             <div class="describtion">
                 <span class="product p-name">${item.title}</span>

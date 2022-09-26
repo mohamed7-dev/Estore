@@ -45,14 +45,7 @@ verticalHeaderCloseBtn.addEventListener("click" , () => {
     verticalHeader.style.left = "-100%";
 })
 
-//toggle the active class on the pickup order header in the home page 
-let pickupOrderHeader = document.querySelector(".shipping .shipping-header");
-let pickupOrderDetails = document.querySelector(".shipping-mode-picking .shipping-mode-details");
 
-pickupOrderHeader.addEventListener("click" , () => {
-    pickupOrderDetails.classList.toggle("active");
-    mainWrapperOverlay.classList.toggle("active");
-})
 
 
 //constrol the user settings menu in the nav of the home page
@@ -84,25 +77,27 @@ let CartItemsArray = localStorage.getItem("cart")? JSON.parse(localStorage.getIt
 let cartItemsContainer = document.querySelector(".cart-content .items-container"); 
 let numberBadge = document.querySelector(".badge");
 let resultsFromLS = JSON.parse(window.localStorage.getItem("productDB"));
-console.log(CartItemsArray)
+
 
 //add to cart globally
-if(CartItemsArray){
-    CartItemsArray.map((item) => {
-        cartItemsContainer.innerHTML += `
-        <li class="cart-item">
-            <span class="item-title">${item.title}</span>
-            <span class="item-qty">${item.quantity}</span>
-        </li>
-        `
-    })
-
-    numberBadge.innerHTML = CartItemsArray.length;
+function handleCartHeader (){
+    if(CartItemsArray){
+        CartItemsArray.map((item) => {
+            cartItemsContainer.innerHTML += `
+            <li class="cart-item">
+                <span class="item-title">${item.title}</span>
+                <span class="item-qty">${item.quantity}</span>
+            </li>
+            `
+        })
+    
+        numberBadge.innerHTML = CartItemsArray.length;
+    }
 }
 
+handleCartHeader();
 //function to check if the user is existen in the data base or not and based on that add to cart or not 
 function userAddToCartAbility (id){
-    let resultsFromLS = JSON.parse(window.localStorage.getItem("productDB"));
     let CartItemsArray = localStorage.getItem("cart")? JSON.parse(localStorage.getItem("cart")) : []; 
     let cartItemsContainer = document.querySelector(".cart-content .items-container"); 
     let numberBadge = document.querySelector(".badge");
@@ -150,15 +145,34 @@ function userAddToCartAbility (id){
 let favItemsArray = localStorage.getItem("fav")? JSON.parse(localStorage.getItem("fav")) : [];
 function userAddToFavouriteAbility (id){
     if(localStorage.getItem("signupUser")){
-        let filtered = resultsFromLS.find(element => element.id == id);     
-        filtered.like = true;   
-        favItemsArray.push(filtered);
+        let filtered = resultsFromLS.find(element => element.id == id);
+        let isRepeatedItem = favItemsArray.some(item => item.id == filtered.id); //returns true if repeated
+        if(isRepeatedItem){   
+            favItemsArray.map((item , index , arr) => {
+                if(item.id == filtered.id){
+                    arr.splice(index , 1);
+            }else{
+                return item;
+            }
+            });
+
+        }else{
+            filtered.like = true;
+            favItemsArray.push(filtered);
+        }
         //add item to local storage
         window.localStorage.setItem("fav" , JSON.stringify(favItemsArray));
         resultsFromLS.map((item) => {
-            if(item.id === filtered.id){
-                item.like = true;
+            if(isRepeatedItem){
+                if(item.id == filtered.id){
+                    delete item.like;
+                }else{
+                    return item;
+                }
+            }else{
+                filtered.like = true;
             }
+
         })
         localStorage.setItem("productDB" , JSON.stringify(resultsFromLS))
         displayProducts(resultsFromLS)
