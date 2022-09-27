@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estore add product</title>
+    <!-- import font awesome icons  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" /> <!-- import google fonts  -->
+    <!-- import google fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- link external style sheets  -->
+    <link rel="stylesheet" href="./css/variables.css">
+    <link rel="stylesheet" href="./css/specialbefore.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/addproduct.css">
+    <link rel="stylesheet" href="./css/reponsive.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-left">
+                <a href="index.html"><span>E</span>store <span>market place</span></a>
+            </div>
+            <div class="header-right">
+                <div class="select-lang">
+                    <div class="selected-lang">language<i class="fa-solid fa-caret-down"></i></div>
+                    <ul class="select-content">
+                        <li class="select-item"><a href="#">English En</a></li>
+                        <li class="select-item"><a href="#">Arabic Ar</a></li>
+                    </ul>
+                </div>
+                <!-- if user signed in  -->
+                <div class="user-account signed">
+                    <div class="show-user-info">
+                        hello,
+                        <span id="signed-user-name"></span>
+                        <i class="fa-regular fa-circle-user"></i>
+                    </div>
+                    <div class="user-settings">
+                        <ul class="settings">
+                            <li><a href="#">settings</a></li>
+                            <li><a href="#" id="signout">sign out</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- if user is not signed in  -->
+                <div class="user-account not-signed">
+                    <div class="show-user-info">
+                        hello, new user
+                        <i class="fa-regular fa-circle-user"></i>
+                    </div>
+                    <div class="user-settings">
+                        <ul class="settings">
+                            <li><a href="signinup.html">sign-in</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="landing">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="describtion">
+                <h2>reach more.. sell better</h2>
+                <p>Offer your products to millions of customers with no setup or monthly fee</p>
+                <button id="get-started">start selling</button>
+            </div>
+        </div>
+    </section>
+    <section class="add-product">
+        <div class="container">
+                <main class="form-container">
+                    <div class="title">
+                        <span>add product</span>
+                    </div>
+                    <form action="#" class="add-product-form">
+                        <div class="input-field">
+                            <input type="text" placeholder="product title" required>
+                            <i class="fa-solid fa-heading"></i>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" placeholder="price" required>
+                            <i class="fa-solid fa-money-bill-1"></i>
+                        </div>
+                        <div class="input-field">
+                            <input type="number" placeholder="quantity" required>
+                            <i class="fa-solid fa-arrow-up-wide-short"></i>
+                        </div>
+                        <div class="input-field">
+                            <input type="file"  id="img" required>
+                            <label for="img">select product image</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="file"  id="thumb" required>
+                            <label for="thumb">select product thumbnails</label>
+                        </div>
+                        <div class="select-menu">
+                            <select name="" id="cat">
+                                <option value="" hidden>select category</option>
+                                <option value="laptop & pc">laptop & pc</option>
+                                <option value="mobiles & accessories">mobiles & accessories</option>
+                                <option value="fashion">fashion</option>
+                                <option value="home furniture">home furniture </option>
+                            </select>
+                        </div>
+                        <div class="text-area">
+                            <textarea name="" id=""  placeholder="product describtion"></textarea>
+                        </div>
+                        <div class="input-field">
+                            <input type="submit" value="add product">
+                        </div>
+                    </form>
+    
+                    <div class="not-member">
+                        <span>
+                            not a member? <a href="signinup.html" class="signup-link">signup now</a>
+                        </span>
+                    </div>
+                </main>
+        </div>
+    </section>
+    <!-- start footer  -->
+    <footer>
+        <div class="container">
+            <div class="footer-navigate">
+                <a href="" class="footer-item">all departments</a>
+                <a href="" class="footer-item">our company</a>
+                <a href="index.html" target="_blank" class="footer-item">go home</a>
+                <a href="signinup.html"  class="footer-item">sign up for email</a>
+                <a href="" class="footer-item">terms of use</a>
+            </div>
+            <div class="water-mark">
+                <span>&COPY; Estore. all rights reserved. </span>
+            </div>
+        </div>
+    </footer>
+    <!-- end footer  -->
+    <script src="./js/addproduct.js"></script>
+</body>
+</html>
