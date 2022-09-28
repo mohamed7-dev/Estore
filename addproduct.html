@@ -16,7 +16,6 @@
         rel="stylesheet">
     <!-- link external style sheets  -->
     <link rel="stylesheet" href="./css/variables.css">
-    <link rel="stylesheet" href="./css/specialbefore.css">
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/addproduct.css">
     <link rel="stylesheet" href="./css/reponsive.css">
@@ -28,6 +27,9 @@
                 <a href="index.html"><span>E</span>store <span>market place</span></a>
             </div>
             <div class="header-right">
+                <div class="personal-products">
+                    <a href="#created-by-you">products created by you</a>
+                </div>
                 <div class="select-lang">
                     <div class="selected-lang">language<i class="fa-solid fa-caret-down"></i></div>
                     <ul class="select-content">
@@ -75,31 +77,31 @@
             </div>
         </div>
     </section>
-    <section class="add-product">
+    <section class="add-product" id="add-product">
         <div class="container">
                 <main class="form-container">
                     <div class="title">
                         <span>add product</span>
                     </div>
-                    <form action="#" class="add-product-form">
+                    <form action="#" id="add-product-form" class="add-product-form">
                         <div class="input-field">
-                            <input type="text" placeholder="product title" required>
+                            <input type="text" placeholder="product title" id="title">
                             <i class="fa-solid fa-heading"></i>
                         </div>
                         <div class="input-field">
-                            <input type="text" placeholder="price" required>
+                            <input type="text" placeholder="price" id="price">
                             <i class="fa-solid fa-money-bill-1"></i>
                         </div>
                         <div class="input-field">
-                            <input type="number" placeholder="quantity" required>
+                            <input type="number" placeholder="quantity" id="qty">
                             <i class="fa-solid fa-arrow-up-wide-short"></i>
                         </div>
                         <div class="input-field">
-                            <input type="file"  id="img" required>
+                            <input type="file"  id="img">
                             <label for="img">select product image</label>
                         </div>
                         <div class="input-field">
-                            <input type="file"  id="thumb" required>
+                            <input type="file"  id="thumb">
                             <label for="thumb">select product thumbnails</label>
                         </div>
                         <div class="select-menu">
@@ -112,10 +114,10 @@
                             </select>
                         </div>
                         <div class="text-area">
-                            <textarea name="" id=""  placeholder="product describtion"></textarea>
+                            <textarea name="" id="desc"  placeholder="product describtion"></textarea>
                         </div>
                         <div class="input-field">
-                            <input type="submit" value="add product">
+                            <input type="submit" id="submit" value="add product">
                         </div>
                     </form>
     
@@ -125,6 +127,33 @@
                         </span>
                     </div>
                 </main>
+        </div>
+    </section>
+    <section class="main-wrapper" id="created-by-you"> 
+        <div class="cart-empty">
+            <div class="start-shopping">
+                <i class="fa-solid fa-cart-plus"></i>
+                <div>
+                    <span>time to start shopping! your cart is empty</span>
+                    <a href="#add-product">start selling</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-section-container">
+            <header class="recently-added">
+                <h2>your products</h2>
+            </header>
+            <section class="products-wrapper">
+                <div class="products-container">
+                    <div class="price">
+                        <div class="items-count">
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="cart-items-container"></div>
+                </div>
+            </section>
         </div>
     </section>
     <!-- start footer  -->

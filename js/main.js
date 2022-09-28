@@ -21,18 +21,18 @@ function displayProducts(allData = []){
     
     productsParent.innerHTML = "";
     
-    allData.map((item) => {
+    allData.map((item , index) => {
         productsParent.innerHTML += `
         <div class="product-card">
             <div class="image-container" >
                 <img src="${item.image}" alt="" onclick="addProductID(${item.id})">
-                <i class="fa-regular fa-heart" style="font-weight:${item.like == true? "bold" : "normal"}" onclick="userAddToFavouriteAbility(${item.id})"></i>
+                <i class="fa-regular fa-heart" style="font-weight:${item.like == true? "bold" : "normal"}" onclick="userAddToFavouriteAbility(${index})"></i>
             </div>
             <div class="describtion">
                 <span class="product p-name">${item.title}</span>
                 <span class="product p-category">${item.category}</span>
                 <span class="product p-price">${item.price}</span>
-                <button class="add-to-cart" onclick="userAddToCartAbility(${item.id})">add to cart</button>
+                <button class="add-to-cart" onclick="userAddToCartAbility(${index})">add to cart</button>
             </div>
         </div> 
         `   

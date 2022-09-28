@@ -97,19 +97,18 @@ function handleCartHeader (){
 
 handleCartHeader();
 //function to check if the user is existen in the data base or not and based on that add to cart or not 
-function userAddToCartAbility (id){
+function userAddToCartAbility (index){
     let CartItemsArray = localStorage.getItem("cart")? JSON.parse(localStorage.getItem("cart")) : []; 
     let cartItemsContainer = document.querySelector(".cart-content .items-container"); 
     let numberBadge = document.querySelector(".badge");
 
     if(localStorage.getItem("signupUser")){
-        let filtered = resultsFromLS.find(element => element.id == id);
-        let isRepeatedItem = CartItemsArray.some(item => item.id == filtered.id); //returns true if repeated
-        
+        let filtered = resultsFromLS.find((item , i , Arr) => Arr.indexOf(item) == index);
+        let isRepeatedItem = CartItemsArray.some((item , i , Arr) => item.title == filtered.title); //returns true if repeated        
         if(isRepeatedItem){
             
-            CartItemsArray.map((item) => {
-                if(item.id === filtered.id){
+            CartItemsArray.map((item, i , Arr) => {
+                if(item.title == filtered.title){
                     item.quantity += 1;
                 }else{
                     return item;
@@ -143,13 +142,13 @@ function userAddToCartAbility (id){
 
 //function to add to favourite
 let favItemsArray = localStorage.getItem("fav")? JSON.parse(localStorage.getItem("fav")) : [];
-function userAddToFavouriteAbility (id){
+function userAddToFavouriteAbility (index){
     if(localStorage.getItem("signupUser")){
-        let filtered = resultsFromLS.find(element => element.id == id);
-        let isRepeatedItem = favItemsArray.some(item => item.id == filtered.id); //returns true if repeated
+        let filtered = resultsFromLS.find((item , i , Arr) => Arr.indexOf(item) == index);
+        let isRepeatedItem = favItemsArray.some((item , i , Arr) => item.title == filtered.title); //returns true if repeated
         if(isRepeatedItem){   
             favItemsArray.map((item , index , arr) => {
-                if(item.id == filtered.id){
+                if(item.title == filtered.title){
                     arr.splice(index , 1);
             }else{
                 return item;
@@ -164,7 +163,7 @@ function userAddToFavouriteAbility (id){
         window.localStorage.setItem("fav" , JSON.stringify(favItemsArray));
         resultsFromLS.map((item) => {
             if(isRepeatedItem){
-                if(item.id == filtered.id){
+                if(item.title == filtered.title){
                     delete item.like;
                 }else{
                     return item;

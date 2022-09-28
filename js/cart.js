@@ -13,7 +13,7 @@ function displayProductsInCart(cartProducts = []){
     handleEmptyCart();
 
     productsContainer.innerHTML = "";
-    products.map((product) => {
+    products.map((product , index , arr) => {
         productsContainer.innerHTML += `
         <div class="product-card">
             <div class="image-container">
@@ -24,7 +24,7 @@ function displayProductsInCart(cartProducts = []){
                     <span class="product p-name">${product.title}</span>
                     <span class="product p-category">${product.category}</span>
                     <span class="product p-quantity">qunatity: ${product.quantity}</span>
-                    <button class="add-to-cart" onclick="removeFromCart(${product.id})">remove from cart</button>
+                    <button class="add-to-cart" onclick="removeFromCart(${index})">remove from cart</button>
                 </div>
                 <div class="describtion-product-price">
                     <span class="product p-price">${product.price}</span>
@@ -46,12 +46,10 @@ function handleEmptyCart(){
 }
 
 //function to remove items from cart
-function removeFromCart(id){
-    if(CartItemsArray){
-        let LSCartItems = JSON.parse(localStorage.getItem("cart"));
-        let filteredItems = LSCartItems.filter(item => item.id !== id);
-        window.localStorage.setItem("cart" , JSON.stringify(filteredItems));
-        displayProductsInCart(filteredItems);
-        handleCartHeader();
-    }
+function removeFromCart(index){
+    let LSCartItems = JSON.parse(localStorage.getItem("cart"));
+    LSCartItems.splice(index , 1);
+    localStorage.setItem("cart" , JSON.stringify(LSCartItems));
+    displayProductsInCart(LSCartItems);
+    handleCartHeader();
 }
