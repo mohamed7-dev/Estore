@@ -13,6 +13,11 @@ function dropdownToggle (){
         mainWrapperOverlay.classList.remove("active");
         navbarOverlay.classList.remove("active");
         this.classList.remove("active");
+        //enable scrolling after removing active
+        function enableScroll() {
+            window.onscroll = function() {};
+        }
+        enableScroll();
     }else{
         headerRTSection.forEach((div) => {
             div.classList.remove("active");
@@ -22,6 +27,8 @@ function dropdownToggle (){
         mainWrapperOverlay.classList.add("active");
         navbarOverlay.classList.add("active");
         this.classList.add("active");
+        //disable scrolling after adding active
+        window.onscroll = () => { window.scroll(0, 0); };
     }
 }
 
@@ -29,7 +36,6 @@ langHeader.addEventListener("click",dropdownToggle);
 signedUserHeader.addEventListener("click",dropdownToggle);
 notSigneduserHeader.addEventListener("click" , dropdownToggle);
 cartHeader.addEventListener("click",dropdownToggle);
-
 
 
 //toggle visibility of the side bar in the small screens
@@ -52,10 +58,12 @@ verticalHeaderCloseBtn.addEventListener("click" , () => {
 let signedUserAccount = document.querySelector(".header-right .signed");
 let notSignedUserAccount = document.querySelector(".header-right .not-signed");
 let homeUserName = document.querySelector("#signed-user-name");
+let userImage = document.querySelector("#user-image");
 
 let dataFromLS = JSON.parse(localStorage.getItem("signupUser"));
 if(dataFromLS){
     homeUserName.innerHTML = dataFromLS[0].username;
+    userImage.src = dataFromLS[0].avatar;
 }else{
     signedUserAccount.style.display = "none";
     notSignedUserAccount.style.display = "flex";
@@ -179,4 +187,5 @@ function userAddToFavouriteAbility (index){
         window.location = "signinup.html"
     }
 }
+
 

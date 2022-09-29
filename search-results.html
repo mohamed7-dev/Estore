@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="search-right">
-                        <button class="search-btn">search</button>
+                        <button class="search-btn" id="search-btn">search</button>
                     </div>
                 </div>
                 <div class="header-right">
@@ -93,6 +93,68 @@
                         </ul>
                     </div>
                 </div>
+            </div>
+        </section>
+        <section class="navbar">
+            <div class="overlay"></div>
+            <div class="container">
+                <ul class="nav-address-menu">
+                    <li class="nav-address-item shipping">
+                        <div class="shipping-header">
+                            <i class="fa-solid fa-truck"></i>
+                            <span>how do you want to pickup your order?</span>
+                            <i class="fa-solid fa-caret-down"></i>
+                            |
+                        </div>
+                        <div class="shipping-mode-picking">
+                            <ul class="shipping-mode-details">
+                                <li class="shipping-icons">
+                                    <div class="shipping-way">
+                                        <i class="fa-solid fa-truck-moving"></i>
+                                        <span>shipping</span>
+                                    </div>
+                                    <div class="shipping-way">
+                                        <i class="fa-solid fa-car-side"></i>
+                                        <span>pickup</span>
+                                    </div>
+                                    <div class="shipping-way">
+                                        <i class="fa-solid fa-truck-ramp-box"></i>
+                                        <span>delivery</span>
+                                    </div>
+                                </li>
+                                <li class="add-address">
+                                    <div class="add-address-details">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>choose your address</span>
+                                    </div>
+                                    <button class="address-btn">add address</button>
+                                </li>
+                                <li class="show-choosed-info">
+                                    <div class="choosed-address">
+                                        <i class="fa-solid fa-house-user"></i>
+                                        <span>cairo, egypt</span>
+                                    </div>
+                                    <div class="choosed-shipping">
+                                        <span>instore pickup</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-address-item">
+                        <span><i class="fa-solid fa-location-dot"></i>loaction</span>
+                    </li>
+                    <li class="nav-address-item">
+                        <span><i class="fa-solid fa-house-user"></i>address</span>
+                    </li>
+                </ul>
+                <ul class="nav-cat-menu">
+                    <li class="cat-item"><a href="#" data-cat="laptop & pc">laptop & pc</a></li>
+                    <li class="cat-item"><a href="#" data-cat="mobiles & accessories">mobiles & accessories</a></li>
+                    <li class="cat-item"><a href="#" data-cat="home furniture">home furniture</a></li>
+                    <li class="cat-item"><a href="#" data-cat="fashion">fashion</a></li>
+                    <li class="cat-item"><a href="#" data-cat="top list">top list</a></li>
+                </ul>
             </div>
         </section>
     </header>
@@ -161,15 +223,15 @@
             <div class="start-shopping">
                 <i class="fa-solid fa-cart-plus"></i>
                 <div>
-                    <span>time to start shopping! your cart is empty</span>
-                    <a href="index.html">start shopping</a>
+                    <span>make sure you search with correct string</span>
+                    <a href="index.html">go home</a>
                 </div>
             </div>
         </div>
 
         <div class="main-section-container">
             <header class="recently-added">
-                <h2>shopping cart</h2>
+                <h2>search results</h2>
             </header>
             <section class="products-wrapper">
                 <div class="products-container">
@@ -177,7 +239,6 @@
                         <div class="items-count">
                             <span></span>
                         </div>
-                        <div class="price-tag">price</div>
                     </div>
                     <div class="cart-items-container"></div>
                 </div>
@@ -203,6 +264,7 @@
     <!-- end footer  -->
     
     <script src="./js/global.js"></script>
-    <script src="./js/cart.js"></script>
+    <script src="./js/search.js"></script>
+    <script src="./js/search-results.js"></script>
 </body>
 </html>

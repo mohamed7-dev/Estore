@@ -1,0 +1,136 @@
+.main-wrapper .main-section-container{
+    width:80%;
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--common-margin);
+}
+
+.main-section-container .settings-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.settings-wrapper form{
+    max-width: 900px;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding:20px;
+}
+
+form .field-container{
+    width:100%;
+    padding: 10px;
+    min-height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:20px;
+    background-color: var(--main-color);
+    border-radius: 10px;
+}
+
+.field-container .input-field{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 50%;
+    position: relative;
+}
+
+.field-container .image-field label{
+    display: flex;
+    align-items: center;
+    gap:10px;
+    flex-direction: row;
+    cursor: pointer;
+}
+
+.image-field img{
+    width:80px;
+    border-radius: 50%;
+}
+
+.image-field img:hover{
+    opacity: 0.8;
+}
+
+.input-field label{
+    color:#fff;
+    font-size: 0.9rem;
+    text-transform: capitalize;
+}
+
+.input-field input{
+    height:60%;
+    padding:0 35px;
+    outline:none;
+    border:1px solid transparent;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background-color: var(--input-bkg);
+    color:var(--text-color);
+    caret-color: var(--secondary-color);
+}
+
+.input-field i{
+    position: absolute;
+    top:80%;
+    transform: translateY(-50%);
+    font-size: 22px;
+    color:#fff;
+}
+
+.input-field input::placeholder{
+    text-transform: capitalize;
+    color:var(--text-color);
+}
+
+.input-field input:is(:focus){
+    border-bottom-color:var(--secondary-color);
+}
+
+.input-field input:is(:focus) ~ i{
+    color:var(--secondary-color);
+}
+
+.input-field:last-child{
+    min-height:70px;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+
+.input-field input[type = "submit"]{
+    width:50%;
+    background-color: var(--secondary-color);
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+input[type = "file"]{
+    display: none;
+}
+
+.field-container button.edit-btn{
+    width:fit-content;
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    background-color: #fff;
+    color:var(--main-color);
+    text-transform: capitalize;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button.edit-btn:hover{
+    background-color: var(--secondary-color);
+    color:var(--text-color);
+}

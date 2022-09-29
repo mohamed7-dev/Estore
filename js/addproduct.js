@@ -91,7 +91,7 @@ function addNewProduct(e){
             id: productsFromLS.length + 1,
             title: pTitle.value,
             category: catValue,
-            price: pPrice.value,
+            price: pPrice.value + "$",
             image: imageValue,
             thumbs: {},
             description:pDescArea.value,
@@ -266,10 +266,12 @@ signoutBtn.addEventListener("click" , () => {
 let signedUserAccount = document.querySelector(".header-right .signed");
 let notSignedUserAccount = document.querySelector(".header-right .not-signed");
 let homeUserName = document.querySelector("#signed-user-name");
+let userImage = document.querySelector("#user-image");
 
 let dataFromLS = JSON.parse(localStorage.getItem("signupUser"));
 if(dataFromLS){
     homeUserName.innerHTML = dataFromLS[0].username;
+    userImage.src = dataFromLS[0].avatar;
 }else{
     signedUserAccount.style.display = "none";
     notSignedUserAccount.style.display = "flex";

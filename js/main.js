@@ -23,7 +23,7 @@ function displayProducts(allData = []){
     
     allData.map((item , index) => {
         productsParent.innerHTML += `
-        <div class="product-card">
+        <div class="product-card swiper-slide">
             <div class="image-container" >
                 <img src="${item.image}" alt="" onclick="addProductID(${item.id})">
                 <i class="fa-regular fa-heart" style="font-weight:${item.like == true? "bold" : "normal"}" onclick="userAddToFavouriteAbility(${index})"></i>
@@ -47,27 +47,36 @@ function addProductID(id){
 }
 
 
-// search for products 
-let searchInput = document.querySelector("#search");
-let searchBtn = document.querySelector("#search-btn");
+var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 4,
+    spaceBetween: 30,
+    slidesPerGroup: 4,
+    loop: true,
+    centerSlide:"true",
+    fade:"true",
+    grabCursor:"true",
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+        dynamicBullets:true,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
 
-    //when press enter and keyup
-searchInput.addEventListener("keyup" , (e) => {
-    if(e.keyCode === 13){
-        searchProducts(e.target.value , JSON.parse(localStorage.getItem("productDB")));
+    breakpoints:{
+        0:{
+            slidesPerView: 1,
+            slidesPerGroup: 1,
+        },
+        650:{
+            slidesPerView: 2,
+            slidesPerGroup: 2,
+        },
+        1300:{
+            slidesPerView: 4,
+            slidesPerGroup: 4,
+        }
     }
-
-    if(e.target.value === ""){
-        displayProducts(JSON.parse(localStorage.getItem("productDB")));
-    }
-})
-    // when clicking search 
-searchBtn.addEventListener("click" , () => {
-    searchProducts(searchInput.value , JSON.parse(localStorage.getItem("productDB")));
-    window.location = "search.html";
-})
-
-function searchProducts(inputValue , array ){
-    let searchResult = array.filter((item) => item.title == inputValue);
-    displayProducts(searchResult)
-}
+});
