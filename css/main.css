@@ -553,11 +553,17 @@ header section.navbar{
     outline:0;
     background-color: var(--secondary-color);
     padding:5px;
-    color:#fff;
     text-transform: capitalize;
     font-weight: 500;
     cursor: pointer;
     border-radius: 5px;
+}
+
+.add-address button.address-btn a{
+    text-decoration: none;
+    color:#fff;
+    width: 100%;
+    display: block;
 }
 
 .shipping-mode-details .show-choosed-info{
@@ -615,8 +621,8 @@ section.main-wrapper{
     width:100%;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
     background-color: var(--main-section-bkg);
     position: relative;
     z-index: 1;

@@ -27,6 +27,13 @@ function matchSearch(data){
     }
 }
 
+
+document.onclick = function (e){
+    if(e.target.className != "search-results"){
+        searchResultsDiv.classList.remove("active");
+    }
+}
+
 function displaySearchItemsInDiv(results){
     searchResultsDiv.innerHTML = "";
     results.map((item) => {

@@ -3,6 +3,7 @@
         "id": 1,
         "title": "HP Victus 16-d0023dx Gaming Laptop Latest Model",
         "category": "laptop & pc",
+        "mainCategory":"electronics",
         "price": "1000$",
         "image": "images/laptop.jpg",
         "thumbs": {
@@ -19,6 +20,7 @@
         "id": 2,
         "title": "Xiaomi Redmi 9A Dual SIM Mobile Phone",
         "category": "mobiles & accessories",
+        "mainCategory":"electronics",
         "price": "300$",
         "image": "images/mobile.jpg",
         "thumbs": {
@@ -33,7 +35,8 @@
     {
         "id": 3,
         "title": "Hero Basic mens Round Neck shirt",
-        "category": "fashion",
+        "category": "men fashion",
+        "mainCategory":"clothes",
         "price": "50$",
         "image": "images/t-shirt.jpg",
         "thumbs": {
@@ -46,7 +49,8 @@
     {
         "id": 4,
         "title": "Racoor Video Gaming Chair, Black and Blue",
-        "category": "home furniture",
+        "category": "office furniture",
+        "mainCategory":"furniture",
         "price": "30$",
         "image": "images/chair.jpg",
         "thumbs": {

@@ -5,8 +5,6 @@ let mainSection = document.querySelector(".main-section-container");
 
 
 
-console.log(searchDataFromLS)
-
 function displaySearchItemsInPage(){
     handleEmptySearch();
     container.innerHTML = "";
@@ -30,6 +28,8 @@ function displaySearchItemsInPage(){
         </div> 
             `
     })
+
+    localStorage.removeItem("search");
 }
 
 displaySearchItemsInPage();

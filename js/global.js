@@ -6,7 +6,6 @@ let cartHeader = document.querySelector(".cart-icon");
 let headerRTSection =Array.from(document.querySelectorAll(".container .header-right > div"));
 let mainWrapperOverlay = document.querySelector(".main-wrapper .overlay");
 let navbarOverlay = document.querySelector(".navbar .overlay");
-
 function dropdownToggle (){
     if(this.parentElement.classList.contains("active")){
         this.parentElement.classList.remove("active");
@@ -31,6 +30,7 @@ function dropdownToggle (){
         window.onscroll = () => { window.scroll(0, 0); };
     }
 }
+
 
 langHeader.addEventListener("click",dropdownToggle);
 signedUserHeader.addEventListener("click",dropdownToggle);

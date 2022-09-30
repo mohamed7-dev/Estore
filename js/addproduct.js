@@ -39,10 +39,12 @@ notSigneduserHeader.addEventListener("click" , dropdownToggle);
 //get elemenst to add product
 let pTitle = document.querySelector("#title");
 let pPrice = document.querySelector("#price");
+let pSeller = document.querySelector("#seller");
 let pQty = document.querySelector("#qty");
 let pImage = document.querySelector("#img");
 let pThumb = document.querySelector("#thumb");
-let pCatSelect = document.querySelector("#cat");
+let pMainCatSelect = document.querySelector("#main-cat");
+let pSubCatSelect = document.querySelector("#sub-cat");
 let pDescArea = document.querySelector("#desc");
 let pSubmit = document.querySelector("#submit");
 let pForm = document.querySelector("#add-product-form");
@@ -50,14 +52,20 @@ let container = document.querySelector(".cart-items-container");
 let cartEmpty = document.querySelector(".cart-empty");
 let itemsCount = document.querySelector(".items-count span");
 let catValue;
+let mainCatValue;
 let imageValue;
 let mode = "add";
 let tmp;
 
 //get cat from select menu
-pCatSelect.addEventListener("change" , getProductCat)
+pSubCatSelect.addEventListener("change" , getProductCat)
 function getProductCat(e){
     catValue = e.target.value;
+}
+
+pMainCatSelect.addEventListener("change" , getMainProductCat)
+function getMainProductCat(e){
+    mainCatValue = e.target.value;
 }
 
 pImage.addEventListener("change" , addImage)
@@ -91,7 +99,9 @@ function addNewProduct(e){
             id: productsFromLS.length + 1,
             title: pTitle.value,
             category: catValue,
+            mainCategory:mainCatValue,
             price: pPrice.value + "$",
+            seller:pSeller.value,
             image: imageValue,
             thumbs: {},
             description:pDescArea.value,
@@ -101,7 +111,7 @@ function addNewProduct(e){
         }
 
         if(mode == "add"){
-            if(pTitle.value != "" && catValue != "" && pPrice.value != "" &&  pDescArea.value != "" && pQty.value != ""){
+            if(pTitle.value != "" && catValue != "" && pPrice.value != "" && pSeller.value!="" && pDescArea.value != "" && pQty.value != ""){
                 cartEmpty.classList.remove("active");
                 container.style.display = "flex";
                 let AllProducts = [...productsFromLS , pObject];
@@ -125,6 +135,7 @@ function addNewProduct(e){
             pObject.id = productsFromLS[tmp].id;
             pObject.image = imageValue || productsFromLS[tmp].image;
             pObject.category = pObject.category != undefined? catValue : productsFromLS[tmp].category;
+            pObject.mainCategory = pObject.mainCategory != undefined? catValue : productsFromLS[tmp].mainCategory;
             productsFromLS[tmp]  = pObject;
             localStorage.setItem("productDB" , JSON.stringify(productsFromLS));
             //reset innerhtml of createbtn
@@ -148,10 +159,12 @@ function addNewProduct(e){
 function clearInputs(){
     pTitle.value = "";
     pPrice.value = "";
+    pSeller.value = "";
     imageValue = "";
     pDescArea.value = "";
     pQty.value = "";
-    pCatSelect.value = "";
+    pSubCatSelect.value = "";
+    pMainCatSelect.value = "";
 }
 
 
@@ -215,9 +228,11 @@ function updateProduct(index){
     console.log(filtered , filtered+index)
     pTitle.value = data[filtered + index].title;
     pPrice.value = data[filtered + index].price;
+    pSeller.value = data[filtered + index].seller;
     pDescArea.value = data[filtered + index].description;
     pQty.value = data[filtered + index].quantity;
-    pCatSelect.value = data[filtered + index].category;
+    pSubCatSelect.value = data[filtered + index].category;
+    pMainCatSelect.value = data[filtered + index].mainCategory;
     pImage.src = data[filtered + index].image;
 
     //change innerhtml of createbtn

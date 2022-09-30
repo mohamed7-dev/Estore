@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estore user settings</title>
+    <title>Estore electronics</title>
     <!-- import font awesome icons  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
@@ -14,11 +14,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
         rel="stylesheet">
+  
     <!-- link external style sheets  -->
     <link rel="stylesheet" href="./css/variables.css">
-    <link rel="stylesheet" href="./css/specialbefore.css">
+    <!-- <link rel="stylesheet" href="./css/specialbefore.css"> -->
+    <link rel="stylesheet" href="./css/cat.css">
     <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/settings.css">
     <link rel="stylesheet" href="./css/reponsive.css">
 </head>
 
@@ -33,9 +34,12 @@
                 <div class="header-fill">
                     <div class="search-fill">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" id="search" placeholder="search for your product among 150 products">
+                        <input type="search" id="search" placeholder="search for your product among 150 products">
                     </div>
-
+                    
+                    <div class="search-results">
+                    </div>
+                    
                     <div class="search-right">
                         <button class="search-btn" id="search-btn">search</button>
                     </div>
@@ -59,7 +63,7 @@
                         </div>
                         <div class="user-settings">
                             <ul class="settings">
-                                <li><a href="#">settings</a></li>
+                                <li><a href="settings.html">settings</a></li>
                                 <li><a href="addproduct.html" target="_blank">sell on Estore</a></li>
                                 <li><a href="#" id="signout">sign out</a></li>
                             </ul>
@@ -152,10 +156,9 @@
                     </li>
                 </ul>
                 <ul class="nav-cat-menu">
-                    <li class="cat-item"><a href="#">clothes</a></li>
-                    <li class="cat-item"><a href="#">furniture</a></li>
-                    <li class="cat-item"><a href="#">tech</a></li>
-                    <li class="cat-item"><a href="#">grocery</a></li>
+                    <li class="cat-item"><a href="electronics-cat.html">electronics</a></li>
+                    <li class="cat-item"><a href="clothes-cat.html">clothes</a></li>
+                    <li class="cat-item"><a href="furniture-cat.html">furniture</a></li>
                     <li class="cat-item"><a href="#">top list</a></li>
                 </ul>
             </div>
@@ -223,110 +226,92 @@
     <section class="main-wrapper">
         <div class="overlay"></div>
         <div class="container">
-            <header class="recently-added">
-                <h2>settings</h2>
-            </header>
-            <section class="settings-wrapper">
-                    <ul class="settings-type">
-                        <li class="settings-item" data-type="personal">personal account information</li>
-                        <li class="settings-item" data-type="address">address information</li>
+            <div class="left-side">
+                <div class="filter category">
+                    <ul>
+                        <li>
+                            category
+                            <ul>
+                                <li>boys</li>
+                                <li>girls</li>
+                                <li>man</li>
+                                <li>women</li>
+                            </ul>
+                        </li>
                     </ul>
-                    <div class="forms-container">
-                        <form class="settings personal" id="settings-form">
-                            <div class="field-container">
-                                <div class="input-field image-field">
-                                    <label for="img">
-                                        <img src="./images/avataaars.png" alt="" id="avatar">
-                                        change profile image
-                                    </label>
-                                    <input type="file" id="img" disabled>
+                </div>
+                <div class="filter seller">
+                    <ul>
+                        <li>
+                            seller
+                            <ul>
+                                <li>E store</li>
+                                <li>cotton-home</li>
+                                <li>ryaan store</li>
+                                <li>naqa</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="filter brand">
+                    <ul>
+                        <li>
+                            brand
+                            <ul>
+                                <li>generic</li>
+                                <li>andora</li>
+                                <li>grinta</li>
+                                <li>cottonil</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="filter price">
+                    <ul>
+                        <li>
+                            price
+                            <ul>
+                                <li>up to 50 $</li>
+                                <li>50 - 100 $</li>
+                                <li>100 - 1000 $</li>
+                                <li>1000 - 2500 $</li>
+                                <li>2500 $ & above</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="right-side">
+                <h2>chothes</h2>
+                <section class="products-wrapper">
+                        <div class="category">
+                            <h3>shop by category</h3>
+                            <section class="box-container">
+                                <div class="box">
+                                    <div class="image-container">
+                                        <img src="./images/boys-cat.jpg" alt="">
+                                    </div>
                                 </div>
-                                <button class="edit-btn">edit</button>
-                            </div>
-                            <div class="field-container">
-                                <div class="input-field">
-                                    <label for="uname">user name</label>
-                                    <input type="text" id="uname" disabled>
-                                    <i class="fa-solid fa-user"></i>
+                                <div class="box">
+                                    <div class="image-container">
+                                        <img src="./images/girls-cat.jpg" alt="">
+                                    </div>
                                 </div>
-                                <button class="edit-btn">edit</button>
-                            </div>
-                            <div class="field-container">
-                                <div class="input-field">
-                                    <label for="passwd">password</label>
-                                    <input type="password" id="passwd" disabled>
-                                    <i class="fa-solid fa-unlock-keyhole lock-passwd"></i>
+                                <div class="box">
+                                    <div class="image-container">
+                                        <img src="./images/men-cat.jpg" alt="">
+                                    </div>
                                 </div>
-                                <button class="edit-btn">edit</button>
-                            </div>
-                            <div class="field-container">
-                                <div class="input-field">
-                                    <label for="email">email</label>
-                                    <input type="email" id="email" disabled>
-                                    <i class="fa-solid fa-envelope"></i>                    
+                                <div class="box">
+                                    <div class="image-container">
+                                        <img src="./images/women-cat.jpg" alt="">
+                                    </div>
                                 </div>
-                                <button class="edit-btn">edit</button>
-                            </div>  
-                            <div class="input-field">
-                                <input type="submit" id="submit-btn" value="submit changes">
-                            </div>
-                        </form>
-                        <form class="settings address" id="settings-form">
-                            <div class="field-container">
-                                <div class="input-field">
-                                    <label for="f-name">
-                                        your first name
-                                    </label>
-                                    <input type="text" id="f-name" disabled>
-                                </div>
-                                <button class="edit-btn">edit</button>
-                            </div>
-                            <div class="field-container">
-                                <div class="input-field">
-                                    <label for="l-name">user last name</label>
-                                    <input type="text" id="l-name" disabled>
-                                    <i class="fa-solid fa-user"></i>
-                                </div>
-                                <button class="edit-btn">edit</button>
-                            </div>
-                            <div class="field-container">
-                                <div class="input-field">
-                                    <label for="street">street address</label>
-                                    <input type="text" id="street" disabled>
-                                    <i class="fa-solid fa-unlock-keyhole lock-passwd"></i>
-                                </div>
-                                <button class="edit-btn">edit</button>
-                            </div>
-                            <div class="field-container">
-                                <div class="input-field">
-                                    <label for="aprt">apartment</label>
-                                    <input type="text" id="aprt" disabled>
-                                    <i class="fa-solid fa-envelope"></i>                    
-                                </div>
-                                <button class="edit-btn">edit</button>
-                            </div> 
-                            <div class="field-container">
-                                <div class="input-field">
-                                    <label for="city">city</label>
-                                    <input type="text" id="city" disabled>
-                                    <i class="fa-solid fa-envelope"></i>                    
-                                </div>
-                                <button class="edit-btn">edit</button>
-                            </div> 
-                            <div class="field-container">
-                                <div class="input-field">
-                                    <label for="phone">phone number</label>
-                                    <input type="text" id="phone" disabled>
-                                    <i class="fa-solid fa-envelope"></i>                    
-                                </div>
-                                <button class="edit-btn">edit</button>
-                            </div>
-                            <div class="input-field">
-                                <input type="submit" id="submit-btn" value="submit changes">
-                            </div>
-                        </form>
-                    </div>
-            </section>
+                            </section>
+                        </div>
+                </section>
+            </div>
+
         </div>
     </section>
     <!-- end main section -->
@@ -347,8 +332,9 @@
         </div>
     </footer>
     <!-- end footer  -->
+    <!-- Swiper JS -->
     <script src="./js/global.js"></script>
     <script src="./js/navbar.js"></script>
-    <script src="./js/settings.js"></script>
+    <script src="./js/search.js"></script>
 </body>
 </html>
