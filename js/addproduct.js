@@ -38,6 +38,7 @@ notSigneduserHeader.addEventListener("click" , dropdownToggle);
 
 //get elemenst to add product
 let pTitle = document.querySelector("#title");
+let pBrand = document.querySelector("#brand");
 let pPrice = document.querySelector("#price");
 let pSeller = document.querySelector("#seller");
 let pQty = document.querySelector("#qty");
@@ -98,6 +99,7 @@ function addNewProduct(e){
         let pObject = {
             id: productsFromLS.length + 1,
             title: pTitle.value,
+            brand: pBrand.value,
             category: catValue,
             mainCategory:mainCatValue,
             price: pPrice.value + "$",
@@ -158,6 +160,7 @@ function addNewProduct(e){
 
 function clearInputs(){
     pTitle.value = "";
+    pBrand.value = "";
     pPrice.value = "";
     pSeller.value = "";
     imageValue = "";
@@ -227,6 +230,7 @@ function updateProduct(index){
 
     console.log(filtered , filtered+index)
     pTitle.value = data[filtered + index].title;
+    pBrand.value = data[filtered + index].Brand;
     pPrice.value = data[filtered + index].price;
     pSeller.value = data[filtered + index].seller;
     pDescArea.value = data[filtered + index].description;

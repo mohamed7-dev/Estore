@@ -104,6 +104,57 @@ function handleCartHeader (){
 }
 
 handleCartHeader();
+
+//handle address in navbar 
+let choosedAddressInfo = document.querySelector(".show-choosed-info");
+let shippingWay = document.querySelectorAll(".shipping-way");
+let locationInNav = document.querySelector(".nav-address-item.location-in-nav");
+let addressInNav = document.querySelector(".nav-address-item.address-in-nav");
+console.log(shippingWay)
+
+function handleShippingWay(){
+    let userInfoFromLS = JSON.parse(localStorage.getItem("signupUser"));
+    shippingWay.forEach((item) => {
+        item.addEventListener("click" , () => {
+            let pickedWay = {
+                userName : userInfoFromLS[0].username,
+                email : userInfoFromLS[0].email,
+                shippingWay : item.dataset.way
+            }
+            userInfoFromLS.splice(2,1,pickedWay);
+            localStorage.setItem("signupUser" , JSON.stringify(userInfoFromLS));
+
+            handleAddressInNav();
+        })
+    })
+}
+
+handleShippingWay();
+
+
+function handleAddressInNav(){
+    let userAuth = JSON.parse(localStorage.getItem("signupUser"));
+    choosedAddressInfo.innerHTML = `
+    <div class="choosed-address">
+        <i class="fa-solid fa-house-user"></i>
+        <span>${userAuth[1].city}<span>
+    </div>
+    <div class="choosed-shipping">
+        <span>${userAuth[2].shippingWay}</span>
+    </div>
+    `
+
+    locationInNav.innerHTML = `
+        <span><i class="fa-solid fa-location-dot"></i>${userAuth[1].city}</span>
+    `
+
+    addressInNav.innerHTML = `
+        <span><i class="fa-solid fa-house-user"></i>${userAuth[1].aprt} , ${userAuth[1].street}</span>
+    `
+}
+
+handleAddressInNav();
+
 //function to check if the user is existen in the data base or not and based on that add to cart or not 
 function userAddToCartAbility (index){
     let CartItemsArray = localStorage.getItem("cart")? JSON.parse(localStorage.getItem("cart")) : []; 
@@ -188,4 +239,16 @@ function userAddToFavouriteAbility (index){
     }
 }
 
+//handle clicking on nav categories links
+let navCategories = document.querySelectorAll(".nav-cat-menu .cat-item");
 
+function handleClickingOnCat(){
+    navCategories.forEach((item) => {
+        item.addEventListener("click" , () => {
+            let clickedCat = item.dataset.cat;
+            localStorage.setItem("clickedCat" , JSON.stringify(clickedCat));
+        })
+    })
+}
+
+handleClickingOnCat()

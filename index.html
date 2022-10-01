@@ -118,15 +118,15 @@
                         <div class="shipping-mode-picking">
                             <ul class="shipping-mode-details">
                                 <li class="shipping-icons">
-                                    <div class="shipping-way">
+                                    <div class="shipping-way" data-way="shipping">
                                         <i class="fa-solid fa-truck-moving"></i>
                                         <span>shipping</span>
                                     </div>
-                                    <div class="shipping-way">
+                                    <div class="shipping-way" data-way="picking">
                                         <i class="fa-solid fa-car-side"></i>
                                         <span>pickup</span>
                                     </div>
-                                    <div class="shipping-way">
+                                    <div class="shipping-way" data-way="delivery">
                                         <i class="fa-solid fa-truck-ramp-box"></i>
                                         <span>delivery</span>
                                     </div>
@@ -139,29 +139,20 @@
                                     <button class="address-btn"><a href="settings.html">add address</a></button>
                                 </li>
                                 <li class="show-choosed-info">
-                                    <div class="choosed-address">
-                                        <i class="fa-solid fa-house-user"></i>
-                                        <span>cairo, egypt</span>
-                                    </div>
-                                    <div class="choosed-shipping">
-                                        <span>instore pickup</span>
-                                    </div>
                                 </li>
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-address-item">
-                        <span><i class="fa-solid fa-location-dot"></i>loaction</span>
+                    <li class="nav-address-item location-in-nav">
                     </li>
-                    <li class="nav-address-item">
-                        <span><i class="fa-solid fa-house-user"></i>address</span>
+                    <li class="nav-address-item address-in-nav">
                     </li>
                 </ul>
                 <ul class="nav-cat-menu">
-                    <li class="cat-item"><a href="electronics-cat.html">electronics</a></li>
-                    <li class="cat-item"><a href="clothes-cat.html">clothes</a></li>
-                    <li class="cat-item"><a href="furniture-cat.html">furniture</a></li>
-                    <li class="cat-item"><a href="#">top list</a></li>
+                    <li class="cat-item" data-cat="electronics"><a href="electronics-cat.html">electronics</a></li>
+                    <li class="cat-item" data-cat="clothes"><a href="clothes-cat.html">clothes</a></li>
+                    <li class="cat-item" data-cat="furniture"><a href="furniture-cat.html">furniture</a></li>
+                    <li class="cat-item" data-cat="toplist"><a href="#">top list</a></li>
                 </ul>
             </div>
         </section>

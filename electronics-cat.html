@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
         rel="stylesheet">
-  
+
     <!-- link external style sheets  -->
     <link rel="stylesheet" href="./css/variables.css">
     <!-- <link rel="stylesheet" href="./css/specialbefore.css"> -->
@@ -148,18 +148,16 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-address-item">
-                        <span><i class="fa-solid fa-location-dot"></i>loaction</span>
+                    <li class="nav-address-item location-in-nav">
                     </li>
-                    <li class="nav-address-item">
-                        <span><i class="fa-solid fa-house-user"></i>address</span>
+                    <li class="nav-address-item address-in-nav">
                     </li>
                 </ul>
                 <ul class="nav-cat-menu">
-                    <li class="cat-item"><a href="electronics-cat.html">electronics</a></li>
-                    <li class="cat-item"><a href="clothes-cat.html">clothes</a></li>
-                    <li class="cat-item"><a href="furniture-cat.html">furniture</a></li>
-                    <li class="cat-item"><a href="#">top list</a></li>
+                    <li class="cat-item" data-cat="electronics"><a href="electronics-cat.html">electronics</a></li>
+                    <li class="cat-item" data-cat="clothes"><a href="clothes-cat.html">clothes</a></li>
+                    <li class="cat-item" data-cat="furniture"><a href="furniture-cat.html">furniture</a></li>
+                    <li class="cat-item" data-cat="toplist"><a href="#">top list</a></li>
                 </ul>
             </div>
         </section>
@@ -231,11 +229,23 @@
                     <ul>
                         <li>
                             category
-                            <ul>
-                                <li>laptop & pc</li>
-                                <li>mobiles & accessories</li>
-                                <li>speakers</li>
-                                <li>TVs</li>
+                            <ul id="sub-category">
+                                <!-- <li>
+                                    <input type="checkbox" id="first-cat">
+                                    <label for="first-cat">laptop & pc</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="second-cat">
+                                    <label for="second-cat">mobiles & accessories</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="third-cat">
+                                    <label for="third-cat">speakers</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="fourth-cat">
+                                    <label for="fourth-cat">TVs</label>
+                                </li> -->
                             </ul>
                         </li>
                     </ul>
@@ -244,11 +254,23 @@
                     <ul>
                         <li>
                             seller
-                            <ul>
-                                <li>E store</li>
-                                <li>top.system</li>
-                                <li>digital store</li>
-                                <li>high.quality</li>
+                            <ul id="seller-filter">
+                                <!-- <li>
+                                    <input type="checkbox" id="first-seller">
+                                    <label for="first-seller">E store</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="second-seller">
+                                    <label for="second-seller">top.system</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="third-seller">
+                                    <label for="third-seller">digital store</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="fourth-seller">
+                                    <label for="fourth-seller">high.quality</label>
+                                </li> -->
                             </ul>
                         </li>
                     </ul>
@@ -257,11 +279,23 @@
                     <ul>
                         <li>
                             brand
-                            <ul>
-                                <li>generic</li>
-                                <li>samsung</li>
-                                <li>apple</li>
-                                <li>hp</li>
+                            <ul id="brand-filter">
+                                <!-- <li>
+                                    <input type="checkbox" id="first-brand">
+                                    <label for="first-brand">generic</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="second-brand">
+                                    <label for="second-brand">samsung</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="third-brand">
+                                    <label for="third-brand">apple</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="fourth-brand">
+                                    <label for="fourth-brand">hp</label>
+                                </li> -->
                             </ul>
                         </li>
                     </ul>
@@ -271,11 +305,26 @@
                         <li>
                             price
                             <ul>
-                                <li>up to 50 $</li>
-                                <li>50 - 100 $</li>
-                                <li>100 - 1000 $</li>
-                                <li>1000 - 2500 $</li>
-                                <li>2500 $ & above</li>
+                                <li>
+                                    <input type="checkbox" id="first-price">
+                                    <label for="first-price">up to 50 $</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="second-price">
+                                    <label for="second-price">50 - 100 $</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="third-price">
+                                    <label for="third-price">100 - 1000 $</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="fourth-price">
+                                    <label for="fourth-price">1000 - 2500 $</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="fifth-price">
+                                    <label for="fifth-price">2500 $ & above</label>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -309,6 +358,8 @@
                                 </div>
                             </section>
                         </div>
+                        <div class="cat-products-container">
+                        </div>
                 </section>
             </div>
 
@@ -336,5 +387,6 @@
     <script src="./js/global.js"></script>
     <script src="./js/navbar.js"></script>
     <script src="./js/search.js"></script>
+    <script src="./js/cat.js"></script>
 </body>
 </html>

@@ -75,3 +75,62 @@ form.addEventListener("submit" , (e) => {
     location.reload();
 } )
 
+
+//switch between settings
+let settingsTypes = document.querySelectorAll(".settings-item");
+let settingsForms = document.querySelectorAll("form.settings");
+
+settingsTypes.forEach((item) => {
+    item.addEventListener("click" , (e) =>{
+        settingsForms.forEach((item) => {
+            item.style.display = "none";
+        })
+        document.querySelector(`.${e.target.dataset.type}`).style.display = "block";
+    })
+})
+
+//get elements to control address form
+let fName = document.querySelector("#f-name");
+let lName = document.querySelector("#l-name");
+let city = document.querySelector("#city");
+let aprt = document.querySelector("#aprt");
+let street = document.querySelector("#street");
+let phone = document.querySelector("#phone");
+let addressForm = document.querySelector("form.address");
+let submitAddressBtn = document.querySelector("#submit-address-btn");
+
+//show address info when reloading 
+function retrieveAddressInfo(){
+    fName.value = user[1].fName;
+    lName.value = user[1].lName;
+    city.value = user[1].city;
+    street.value = user[1].street;
+    aprt.value = user[1].aprt;
+    phone.value = user[1].phone;
+}
+
+retrieveAddressInfo();
+
+//onsubmit change address info in local storage
+addressForm.addEventListener("submit" , (e) => {
+    e.preventDefault();
+    let addressObj = {
+        userName : user[0].username,
+        email : user[0].email,
+        fName : fName.value,
+        lName : lName.value,
+        city : city.value,
+        street : street.value,
+        aprt : aprt.value,
+        phone : phone.value
+    }
+
+    user.push(addressObj);
+    localStorage.setItem("signupUser" , JSON.stringify(user));
+
+    editButtons.forEach((item) => {
+        item.style.cssText = "background-color:#fff; color:var(--main-color)";
+    })
+
+    location.reload();
+} )

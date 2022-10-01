@@ -148,18 +148,16 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-address-item">
-                        <span><i class="fa-solid fa-location-dot"></i>loaction</span>
+                    <li class="nav-address-item location-in-nav">
                     </li>
-                    <li class="nav-address-item">
-                        <span><i class="fa-solid fa-house-user"></i>address</span>
+                    <li class="nav-address-item address-in-nav">
                     </li>
                 </ul>
                 <ul class="nav-cat-menu">
-                    <li class="cat-item"><a href="electronics-cat.html">electronics</a></li>
-                    <li class="cat-item"><a href="clothes-cat.html">clothes</a></li>
-                    <li class="cat-item"><a href="furniture-cat.html">furniture</a></li>
-                    <li class="cat-item"><a href="#">top list</a></li>
+                    <li class="cat-item" data-cat="electronics"><a href="electronics-cat.html">electronics</a></li>
+                    <li class="cat-item" data-cat="clothes"><a href="clothes-cat.html">clothes</a></li>
+                    <li class="cat-item" data-cat="furniture"><a href="furniture-cat.html">furniture</a></li>
+                    <li class="cat-item" data-cat="toplist"><a href="#">top list</a></li>
                 </ul>
             </div>
         </section>
@@ -231,11 +229,11 @@
                     <ul>
                         <li>
                             category
-                            <ul>
-                                <li>boys</li>
+                            <ul id="sub-category">
+                                <!-- <li>boys</li>
                                 <li>girls</li>
                                 <li>man</li>
-                                <li>women</li>
+                                <li>women</li> -->
                             </ul>
                         </li>
                     </ul>
@@ -309,6 +307,8 @@
                                 </div>
                             </section>
                         </div>
+                        <div class="cat-products-container">
+                        </div>
                 </section>
             </div>
 
@@ -336,5 +336,6 @@
     <script src="./js/global.js"></script>
     <script src="./js/navbar.js"></script>
     <script src="./js/search.js"></script>
+    <script src="./js/cat.js"></script>
 </body>
 </html>
