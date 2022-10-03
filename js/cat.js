@@ -21,24 +21,25 @@ function handleFilterCat(){
 handleFilterCat();
 
 function displayCatItems(items) {
-    let parentElement = document.querySelector(".cat-products-container");
+    let parentElement = document.querySelector(".sliding-wrapper .products-container");
     parentElement.innerHTML = "";
-    items.map((item) => {
+    items.map((item , index) => {
         parentElement.innerHTML += `
         <div class="product-card">
-            <div class="image-container" >
+            <div class="image-container" onclick="addProductID(${item.id})">
                 <img src="${item.image}" alt="">
-                <i class="fa-regular fa-heart"></i>
             </div>
-            <div class="describtion">
+            <i class="fa-regular fa-heart" style="font-weight:${item.like == true? "bold" : "normal"}" onclick="userAddToFavouriteAbility(${index})"></i>
+            <div class="describtion" onclick="addProductID(${item.id})">
                 <span class="product p-name">${item.title}</span>
-                <span class="product p-category">${item.category}</span>
-                <span class="product p-price">${item.price}</span>
-                <button class="add-to-cart">add to cart</button>
+                <small class="product p-category">${item.category}</small>
+                <samp class="product p-price">${item.price}</samp>
             </div>
-        </div>
-            
-            `
+            <div class="button">
+                <button class="add-to-cart" onclick="userAddToCartAbility(${index})">add to cart</button>
+            </div>
+        </div> 
+        ` 
     })
 }
 

@@ -9,12 +9,12 @@ function previewProduct(){
 previewProduct();
 
 function displayProductDetails(product){
-    let productParent = document.querySelector(".main-section-container");
+    let productParent = document.querySelector(".main-wrapper .container");
     productParent.innerHTML = `
     <div class="left-side">
         <div class="image-container">
             <div class="thumb-container"></div>
-            <img src="${product.image}" alt="">
+            <img src="${product.image}" alt="" id="mainImage">
         </div>
         <div class="product-describtion">
             <h2>about this product</h2>
@@ -48,9 +48,6 @@ function displayProductDetails(product){
     </div>
     `
     handleThumbnails(product);
-    // favIcon.onclick = function () {
-    //     AddToFavourite(product);
-    // }
 }
 
 //accordion
@@ -85,7 +82,7 @@ function handleThumbnails(product) {
 }
 
 function handleImageSrc(product){
-    let mainImage = document.querySelector(".image-container > img");
+    let mainImage = document.querySelector("#mainImage");
     let thumbsImages = Array.from(document.querySelectorAll(".thumb-container img"));
     thumbsImages.forEach((img) => {
         img.addEventListener("click" , (e) => {

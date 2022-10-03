@@ -16,85 +16,91 @@
         rel="stylesheet">
     <!-- link external style sheets  -->
     <link rel="stylesheet" href="./css/variables.css">
-    <link rel="stylesheet" href="./css/specialbefore.css">
+    <link rel="stylesheet" href="./css/footer-component.css">
     <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/cart.css">
+    <link rel="stylesheet" href="./css/cart&fav.css">
     <link rel="stylesheet" href="./css/reponsive.css">
 </head>
 <body>
     <!-- start header horizontal  -->
-    <header>
-        <section class="header">
-            <div class="container">
-                <div class="header-left">
-                    <a href="index.html"><span>E</span>store</a>
-                </div>
-                <div class="header-fill">
-                    <div class="search-fill">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" id="search" placeholder="search for your product among 150 products">
+    <header class="main-header">
+            <!-- top header  -->
+            <section class="header">
+                <div class="container">
+                    <div class="header-left">
+                        <a href="index.html"><span>E</span>store</a>
                     </div>
-
-                    <div class="search-right">
-                        <button class="search-btn">search</button>
+                    <div class="header-fill">
+                        <div class="search-fill">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="search" id="search" placeholder="search for your product among 150 products">
+                        </div>
+                        
+                        <div class="search-results">
+                        </div>
+                        
+                        <div class="search-right">
+                            <button class="search-btn" id="search-btn">search</button>
+                        </div>
                     </div>
-                </div>
-                <div class="header-right">
-                    <div class="select-lang">
-                        <div class="selected-lang">language<i class="fa-solid fa-caret-down"></i></div>
-                        <ul class="select-content">
-                            <li class="select-item"><a href="#">English En</a></li>
-                            <li class="select-item"><a href="#">Arabic Ar</a></li>
-                        </ul>
-                    </div>
-                    <!-- if user signed in  -->
-                    <div class="user-account signed">
-                        <div class="show-user-info">
-                            hello,
-                            <span id="signed-user-name"></span>
-                            <div class="image-container">
-                                <img src="./images/avataaars.png" alt="" id="user-image">
+                    <div class="header-right">
+                        <div class="select-lang">
+                            <div class="selected-lang">language<i class="fa-solid fa-caret-down"></i></div>
+                            <ul class="select-content">
+                                <li class="select-item"><a href="#">English En</a></li>
+                                <li class="select-item"><a href="#">Arabic Ar</a></li>
+                            </ul>
+                        </div>
+                        <!-- if user signed in  -->
+                        <div class="user-account signed">
+                            <div class="show-user-info">
+                                hello,
+                                <span id="signed-user-name"></span>
+                                <div class="image-container">
+                                    <img src="./images/avataaars.png" alt="" id="user-image">
+                                </div>
+                            </div>
+                            <div class="user-settings">
+                                <ul class="settings">
+                                    <li><a href="settings.html">settings</a></li>
+                                    <li><a href="addproduct.html" target="_blank">sell on Estore</a></li>
+                                    <li><a href="#" id="signout">sign out</a></li>
+                                </ul>
+                                <hr>
+                                <ul class="activity">
+                                    <li><a href="favourites.html">your favourites</a></li>
+                                    <li><a href="cart.html">your cart</a></li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="user-settings">
-                            <ul class="settings">
-                                <li><a href="#">settings</a></li>
-                                <li><a href="addproduct.html" target="_blank">sell on Estore</a></li>
-                                <li><a href="#" id="signout">sign out</a></li>
+                        <!-- if user is not signed in  -->
+                        <div class="user-account not-signed">
+                            <div class="show-user-info">
+                                hello, new user
+                                <i class="fa-regular fa-circle-user"></i>
+                            </div>
+                            <div class="user-settings">
+                                <ul class="settings">
+                                    <li><a href="signinup.html">sign-in</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="cart">
+                            <div class="cart-icon">
+                                <span>cart</span>
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <span class="badge">0</span>
+                            </div>
+                            <ul class="cart-content">
+                                <button class="view-all-products" id="viewAll-cart-button">
+                                    <a href="cart.html">view all products</a>
+                                </button>
+                                <div class="items-container"></div>
                             </ul>
-                            <ul class="activity">
-                                <li><a href="favourites.html">your favourites</a></li>
-                            </ul>
                         </div>
-                    </div>
-                    <!-- if user is not signed in  -->
-                    <div class="user-account not-signed">
-                        <div class="show-user-info">
-                            hello, new user
-                            <i class="fa-regular fa-circle-user"></i>
-                        </div>
-                        <div class="user-settings">
-                            <ul class="settings">
-                                <li><a href="signinup.html">sign-in</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="cart">
-                        <div class="cart-icon">
-                            <span>cart</span>
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            <span class="badge">0</span>
-                        </div>
-                        <ul class="cart-content">
-                            <button class="view-all-products" id="viewAll-cart-button">
-                                <a href="cart.html">view all products</a>
-                            </button>
-                            <div class="items-container"></div>
-                        </ul>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
     </header>
     <!-- end header horizontal -->
 
@@ -157,23 +163,13 @@
     <!-- start main section -->
     <section class="main-wrapper">
         <div class="overlay"></div>
-        <div class="cart-empty">
-            <div class="start-shopping">
-                <i class="fa-solid fa-cart-plus"></i>
-                <div>
-                    <span>time to start shopping! your cart is empty</span>
-                    <a href="index.html">start shopping</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="main-section-container">
-            <header class="recently-added">
+        <div class="container">
+            <header class="header">
                 <h2>shopping cart</h2>
             </header>
             <section class="products-wrapper">
                 <div class="products-container">
-                    <div class="price">
+                    <div class="heading">
                         <div class="items-count">
                             <span></span>
                         </div>
@@ -182,6 +178,15 @@
                     <div class="cart-items-container"></div>
                 </div>
             </section>
+        </div>
+        <div class="empty">
+            <div class="start-shopping">
+                <i class="fa-solid fa-cart-plus"></i>
+                <div>
+                    <span>time to start shopping! your cart is empty</span>
+                    <a href="index.html">start shopping</a>
+                </div>
+            </div>
         </div>
     </section>
     <!-- end main section -->

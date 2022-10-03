@@ -14,18 +14,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
         rel="stylesheet">
-  
+
     <!-- link external style sheets  -->
     <link rel="stylesheet" href="./css/variables.css">
-    <!-- <link rel="stylesheet" href="./css/specialbefore.css"> -->
-    <link rel="stylesheet" href="./css/cat.css">
+    <link rel="stylesheet" href="./css/footer-component.css">
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/slider-component.css">
+    <link rel="stylesheet" href="./css/cat.css">
     <link rel="stylesheet" href="./css/reponsive.css">
 </head>
 
 <body>
     <!-- start header horizontal  -->
-    <header>
+    <header class="main-header"> 
+        <!-- top header  -->
         <section class="header">
             <div class="container">
                 <div class="header-left">
@@ -102,6 +104,8 @@
                 </div>
             </div>
         </section>
+
+        <!-- navbar  -->
         <section class="navbar">
             <div class="overlay"></div>
             <div class="container">
@@ -116,15 +120,15 @@
                         <div class="shipping-mode-picking">
                             <ul class="shipping-mode-details">
                                 <li class="shipping-icons">
-                                    <div class="shipping-way">
+                                    <div class="shipping-way" data-way="shipping">
                                         <i class="fa-solid fa-truck-moving"></i>
                                         <span>shipping</span>
                                     </div>
-                                    <div class="shipping-way">
+                                    <div class="shipping-way" data-way="picking">
                                         <i class="fa-solid fa-car-side"></i>
                                         <span>pickup</span>
                                     </div>
-                                    <div class="shipping-way">
+                                    <div class="shipping-way" data-way="delivery">
                                         <i class="fa-solid fa-truck-ramp-box"></i>
                                         <span>delivery</span>
                                     </div>
@@ -134,16 +138,9 @@
                                         <i class="fa-solid fa-location-dot"></i>
                                         <span>choose your address</span>
                                     </div>
-                                    <button class="address-btn">add address</button>
+                                    <button class="address-btn"><a href="settings.html">add address</a></button>
                                 </li>
                                 <li class="show-choosed-info">
-                                    <div class="choosed-address">
-                                        <i class="fa-solid fa-house-user"></i>
-                                        <span>cairo, egypt</span>
-                                    </div>
-                                    <div class="choosed-shipping">
-                                        <span>instore pickup</span>
-                                    </div>
                                 </li>
                             </ul>
                         </div>
@@ -230,10 +227,6 @@
                         <li>
                             category
                             <ul id="sub-category">
-                                <!-- <li>boys</li>
-                                <li>girls</li>
-                                <li>man</li>
-                                <li>women</li> -->
                             </ul>
                         </li>
                     </ul>
@@ -242,11 +235,7 @@
                     <ul>
                         <li>
                             seller
-                            <ul>
-                                <li>E store</li>
-                                <li>cotton-home</li>
-                                <li>ryaan store</li>
-                                <li>naqa</li>
+                            <ul id="seller-filter">
                             </ul>
                         </li>
                     </ul>
@@ -255,11 +244,7 @@
                     <ul>
                         <li>
                             brand
-                            <ul>
-                                <li>generic</li>
-                                <li>andora</li>
-                                <li>grinta</li>
-                                <li>cottonil</li>
+                            <ul id="brand-filter">
                             </ul>
                         </li>
                     </ul>
@@ -307,7 +292,16 @@
                                 </div>
                             </section>
                         </div>
-                        <div class="cat-products-container">
+                        <div class="main-container">
+                            <header class="header">
+                                <h2>recently added</h2>
+                            </header>
+                            <section class="sliding-wrapper">
+                                <div class="prev-btn" id="prev">&lt;</div>
+                                <div class="next-btn" id="next">&gt;</div>
+                                <div class="products-container">
+                                </div>
+                            </section>
                         </div>
                 </section>
             </div>

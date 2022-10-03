@@ -15,147 +15,149 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     
-    <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="./css/swiper-bundle.min.css">   
     <!-- link external style sheets  -->
     <link rel="stylesheet" href="./css/variables.css">
     <link rel="stylesheet" href="./css/specialbefore.css">
     <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/footer-component.css">
+    <link rel="stylesheet" href="./css/slider-component.css">
     <link rel="stylesheet" href="./css/reponsive.css">
 </head>
 
 <body>
     <!-- start header horizontal  -->
-    <header>
-        <section class="header">
-            <div class="container">
-                <div class="header-left">
-                    <a href="index.html"><span>E</span>store</a>
-                </div>
-                <div class="header-fill">
-                    <div class="search-fill">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="search" id="search" placeholder="search for your product among 150 products">
+    <header class="main-header"> 
+            <!-- top header  -->
+            <section class="header">
+                <div class="container">
+                    <div class="header-left">
+                        <a href="index.html"><span>E</span>store</a>
                     </div>
-                    
-                    <div class="search-results">
+                    <div class="header-fill">
+                        <div class="search-fill">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="search" id="search" placeholder="search for your product among 150 products">
+                        </div>
+                        
+                        <div class="search-results">
+                        </div>
+                        
+                        <div class="search-right">
+                            <button class="search-btn" id="search-btn">search</button>
+                        </div>
                     </div>
-                    
-                    <div class="search-right">
-                        <button class="search-btn" id="search-btn">search</button>
-                    </div>
-                </div>
-                <div class="header-right">
-                    <div class="select-lang">
-                        <div class="selected-lang">language<i class="fa-solid fa-caret-down"></i></div>
-                        <ul class="select-content">
-                            <li class="select-item"><a href="#">English En</a></li>
-                            <li class="select-item"><a href="#">Arabic Ar</a></li>
-                        </ul>
-                    </div>
-                    <!-- if user signed in  -->
-                    <div class="user-account signed">
-                        <div class="show-user-info">
-                            hello,
-                            <span id="signed-user-name"></span>
-                            <div class="image-container">
-                                <img src="./images/avataaars.png" alt="" id="user-image">
+                    <div class="header-right">
+                        <div class="select-lang">
+                            <div class="selected-lang">language<i class="fa-solid fa-caret-down"></i></div>
+                            <ul class="select-content">
+                                <li class="select-item"><a href="#">English En</a></li>
+                                <li class="select-item"><a href="#">Arabic Ar</a></li>
+                            </ul>
+                        </div>
+                        <!-- if user signed in  -->
+                        <div class="user-account signed">
+                            <div class="show-user-info">
+                                hello,
+                                <span id="signed-user-name"></span>
+                                <div class="image-container">
+                                    <img src="./images/avataaars.png" alt="" id="user-image">
+                                </div>
+                            </div>
+                            <div class="user-settings">
+                                <ul class="settings">
+                                    <li><a href="settings.html">settings</a></li>
+                                    <li><a href="addproduct.html" target="_blank">sell on Estore</a></li>
+                                    <li><a href="#" id="signout">sign out</a></li>
+                                </ul>
+                                <hr>
+                                <ul class="activity">
+                                    <li><a href="favourites.html">your favourites</a></li>
+                                    <li><a href="cart.html">your cart</a></li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="user-settings">
-                            <ul class="settings">
-                                <li><a href="settings.html">settings</a></li>
-                                <li><a href="addproduct.html" target="_blank">sell on Estore</a></li>
-                                <li><a href="#" id="signout">sign out</a></li>
+                        <!-- if user is not signed in  -->
+                        <div class="user-account not-signed">
+                            <div class="show-user-info">
+                                hello, new user
+                                <i class="fa-regular fa-circle-user"></i>
+                            </div>
+                            <div class="user-settings">
+                                <ul class="settings">
+                                    <li><a href="signinup.html">sign-in</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="cart">
+                            <div class="cart-icon">
+                                <span>cart</span>
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <span class="badge">0</span>
+                            </div>
+                            <ul class="cart-content">
+                                <button class="view-all-products" id="viewAll-cart-button">
+                                    <a href="cart.html">view all products</a>
+                                </button>
+                                <div class="items-container"></div>
                             </ul>
-                            <hr>
-                            <ul class="activity">
-                                <li><a href="favourites.html">your favourites</a></li>
-                                <li><a href="cart.html">your cart</a></li>
-                            </ul>
                         </div>
-                    </div>
-                    <!-- if user is not signed in  -->
-                    <div class="user-account not-signed">
-                        <div class="show-user-info">
-                            hello, new user
-                            <i class="fa-regular fa-circle-user"></i>
-                        </div>
-                        <div class="user-settings">
-                            <ul class="settings">
-                                <li><a href="signinup.html">sign-in</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="cart">
-                        <div class="cart-icon">
-                            <span>cart</span>
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            <span class="badge">0</span>
-                        </div>
-                        <ul class="cart-content">
-                            <button class="view-all-products" id="viewAll-cart-button">
-                                <a href="cart.html">view all products</a>
-                            </button>
-                            <div class="items-container"></div>
-                        </ul>
                     </div>
                 </div>
-            </div>
-        </section>
-        <section class="navbar">
-            <div class="overlay"></div>
-            <div class="container">
-                <ul class="nav-address-menu">
-                    <li class="nav-address-item shipping">
-                        <div class="shipping-header">
-                            <i class="fa-solid fa-truck"></i>
-                            <span>how do you want to pickup your order?</span>
-                            <i class="fa-solid fa-caret-down"></i>
-                            |
-                        </div>
-                        <div class="shipping-mode-picking">
-                            <ul class="shipping-mode-details">
-                                <li class="shipping-icons">
-                                    <div class="shipping-way" data-way="shipping">
-                                        <i class="fa-solid fa-truck-moving"></i>
-                                        <span>shipping</span>
-                                    </div>
-                                    <div class="shipping-way" data-way="picking">
-                                        <i class="fa-solid fa-car-side"></i>
-                                        <span>pickup</span>
-                                    </div>
-                                    <div class="shipping-way" data-way="delivery">
-                                        <i class="fa-solid fa-truck-ramp-box"></i>
-                                        <span>delivery</span>
-                                    </div>
-                                </li>
-                                <li class="add-address">
-                                    <div class="add-address-details">
-                                        <i class="fa-solid fa-location-dot"></i>
-                                        <span>choose your address</span>
-                                    </div>
-                                    <button class="address-btn"><a href="settings.html">add address</a></button>
-                                </li>
-                                <li class="show-choosed-info">
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-address-item location-in-nav">
-                    </li>
-                    <li class="nav-address-item address-in-nav">
-                    </li>
-                </ul>
-                <ul class="nav-cat-menu">
-                    <li class="cat-item" data-cat="electronics"><a href="electronics-cat.html">electronics</a></li>
-                    <li class="cat-item" data-cat="clothes"><a href="clothes-cat.html">clothes</a></li>
-                    <li class="cat-item" data-cat="furniture"><a href="furniture-cat.html">furniture</a></li>
-                    <li class="cat-item" data-cat="toplist"><a href="#">top list</a></li>
-                </ul>
-            </div>
-        </section>
+            </section>
+
+            <!-- navbar  -->
+            <section class="navbar">
+                <div class="overlay"></div>
+                <div class="container">
+                    <ul class="nav-address-menu">
+                        <li class="nav-address-item shipping">
+                            <div class="shipping-header">
+                                <i class="fa-solid fa-truck"></i>
+                                <span>how do you want to pickup your order?</span>
+                                <i class="fa-solid fa-caret-down"></i>
+                                |
+                            </div>
+                            <div class="shipping-mode-picking">
+                                <ul class="shipping-mode-details">
+                                    <li class="shipping-icons">
+                                        <div class="shipping-way" data-way="shipping">
+                                            <i class="fa-solid fa-truck-moving"></i>
+                                            <span>shipping</span>
+                                        </div>
+                                        <div class="shipping-way" data-way="picking">
+                                            <i class="fa-solid fa-car-side"></i>
+                                            <span>pickup</span>
+                                        </div>
+                                        <div class="shipping-way" data-way="delivery">
+                                            <i class="fa-solid fa-truck-ramp-box"></i>
+                                            <span>delivery</span>
+                                        </div>
+                                    </li>
+                                    <li class="add-address">
+                                        <div class="add-address-details">
+                                            <i class="fa-solid fa-location-dot"></i>
+                                            <span>choose your address</span>
+                                        </div>
+                                        <button class="address-btn"><a href="settings.html">add address</a></button>
+                                    </li>
+                                    <li class="show-choosed-info">
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-address-item location-in-nav">
+                        </li>
+                        <li class="nav-address-item address-in-nav">
+                        </li>
+                    </ul>
+                    <ul class="nav-cat-menu">
+                        <li class="cat-item" data-cat="electronics"><a href="electronics-cat.html">electronics</a></li>
+                        <li class="cat-item" data-cat="clothes"><a href="clothes-cat.html">clothes</a></li>
+                        <li class="cat-item" data-cat="furniture"><a href="furniture-cat.html">furniture</a></li>
+                        <li class="cat-item" data-cat="toplist"><a href="#">top list</a></li>
+                    </ul>
+                </div>
+            </section>
     </header>
     <!-- end header horizontal -->
 
@@ -218,46 +220,37 @@
     <!-- start main section -->
     <section class="main-wrapper">
         <div class="overlay"></div>
-        <div class="main-section-container">
-            <header class="recently-added">
+        <div class="container">
+            <header class="header">
                 <h2>recently added products</h2>
-                <button class="learn-more">learn more</button>
             </header>
-            <section class="products-wrapper recently-added swiper mySwiper">
-                <div class="products-container swiper-wrapper">
+            <section class="products-wrapper">
+                <div class="prev-btn" id="prev">&lt;</div>
+                <div class="next-btn" id="next">&gt;</div>
+                <div class="products-container recently-added">
                 </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination"></div>
-                
             </section>
         </div>
-        <div class="main-section-container">
-            <header class="recently-added">
+        <div class="container">
+            <header class="header">
                 <h2>Electronics</h2>
-                <button class="learn-more">learn more</button>
             </header>
-            <section class="products-wrapper electronics swiper mySwiper">
-                <div class="products-container electronics swiper-wrapper">
+            <section class="products-wrapper">
+                <div class="prev-btn" id="prev">&lt;</div>
+                <div class="next-btn" id="next">&gt;</div>
+                <div class="products-container electronics">
                 </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination"></div>
-                
             </section>
         </div>
-        <div class="main-section-container">
-            <header class="recently-added">
+        <div class="container">
+            <header class="header">
                 <h2>Fashion</h2>
-                <button class="learn-more">learn more</button>
             </header>
-            <section class="products-wrapper clothes swiper mySwiper">
-                <div class="products-container clothes swiper-wrapper">
-                </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination"></div>
-                
+            <section class="products-wrapper">
+                <div class="prev-btn" id="prev">&lt;</div>
+                <div class="next-btn" id="next">&gt;</div>
+                <div class="products-container clothes">
+                </div>                
             </section>
         </div>
     </section>
@@ -279,8 +272,7 @@
         </div>
     </footer>
     <!-- end footer  -->
-    <!-- Swiper JS -->
-    <script src="./js/swiper-bundle.min.js"></script>
+
     <script src="./js/global.js"></script>
     <script src="./js/navbar.js"></script>
     <script src="./js/main.js"></script>

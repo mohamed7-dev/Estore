@@ -16,59 +16,60 @@
         rel="stylesheet">
     <!-- link external style sheets  -->
     <link rel="stylesheet" href="./css/variables.css">
-    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/footer-component.css">
+    <link rel="stylesheet" href="./css/cart&fav.css">
     <link rel="stylesheet" href="./css/addproduct.css">
-    <link rel="stylesheet" href="./css/reponsive.css">
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="header-left">
-                <a href="index.html"><span>E</span>store <span>market place</span></a>
-            </div>
-            <div class="header-right">
-                <div class="personal-products">
-                    <a href="#created-by-you">products created by you</a>
+    <!-- start header horizontal  -->
+    <header class="main-header"> 
+            <div class="container">
+                <div class="header-left">
+                    <a href="index.html"><span>E</span>store <span>marketplace</span></a>
                 </div>
-                <div class="select-lang">
-                    <div class="selected-lang">language<i class="fa-solid fa-caret-down"></i></div>
-                    <ul class="select-content">
-                        <li class="select-item"><a href="#">English En</a></li>
-                        <li class="select-item"><a href="#">Arabic Ar</a></li>
-                    </ul>
-                </div>
-                <!-- if user signed in  -->
-                <div class="user-account signed">
-                    <div class="show-user-info">
-                        hello,
-                        <span id="signed-user-name"></span>
-                        <div class="image-container">
-                            <img src="./images/avataaars.png" alt="" id="user-image">
+                <div class="header-right">
+                    <div class="select-lang">
+                        <div class="selected-lang">language<i class="fa-solid fa-caret-down"></i></div>
+                        <ul class="select-content">
+                            <li class="select-item"><a href="#">English En</a></li>
+                            <li class="select-item"><a href="#">Arabic Ar</a></li>
+                        </ul>
+                    </div>
+                    <!-- if user signed in  -->
+                    <div class="user-account signed">
+                        <div class="show-user-info">
+                            hello,
+                            <span id="signed-user-name"></span>
+                            <div class="image-container">
+                                <img src="./images/avataaars.png" alt="" id="user-image">
+                            </div>
+                        </div>
+                        <div class="user-settings">
+                            <ul class="settings">
+                                <li><a href="settings.html">settings</a></li>
+                                <li><a href="addproduct.html" target="_blank">sell on Estore</a></li>
+                                <li><a href="#" id="signout">sign out</a></li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="user-settings">
-                        <ul class="settings">
-                            <li><a href="#">settings</a></li>
-                            <li><a href="#" id="signout">sign out</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- if user is not signed in  -->
-                <div class="user-account not-signed">
-                    <div class="show-user-info">
-                        hello, new user
-                        <i class="fa-regular fa-circle-user"></i>
-                    </div>
-                    <div class="user-settings">
-                        <ul class="settings">
-                            <li><a href="signinup.html">sign-in</a></li>
-                        </ul>
+                    <!-- if user is not signed in  -->
+                    <div class="user-account not-signed">
+                        <div class="show-user-info">
+                            hello, new user
+                            <i class="fa-regular fa-circle-user"></i>
+                        </div>
+                        <div class="user-settings">
+                            <ul class="settings">
+                                <li><a href="signinup.html">sign-in</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
     </header>
+    <!-- end header horizontal -->
 
+    <!-- start landing  -->
     <section class="landing">
         <div class="overlay"></div>
         <div class="container">
@@ -79,6 +80,9 @@
             </div>
         </div>
     </section>
+    <!-- end landing  -->
+
+    <!-- start form  -->
     <section class="add-product" id="add-product">
         <div class="container">
                 <main class="form-container">
@@ -106,13 +110,16 @@
                             <input type="text" placeholder="seller name" id="seller">
                             <i class="fa-solid fa-user"></i>
                         </div>
-                        <div class="input-field">
+                        <div class="input-field upload-image">
                             <input type="file"  id="img">
                             <label for="img">select product image</label>
+                            <img src="" alt="">
                         </div>
-                        <div class="input-field">
+                        <div class="input-field upload-thumbs">
                             <input type="file"  id="thumb">
                             <label for="thumb">select product thumbnails</label>
+                            <div>
+                            </div>
                         </div>
                         <div class="select-menu">
                             <select name="" id="main-cat">
@@ -124,7 +131,7 @@
                         </div>
                         <div class="select-menu">
                             <select name="" id="sub-cat">
-                                <option value="" hidden>select category</option>
+                                <option value="" hidden>select sub category</option>
                                 <option value="laptop & pc">laptop & pc</option>
                                 <option value="mobiles & accessories">mobiles & accessories</option>
                                 <option value="men fashion">men fashion</option>
@@ -149,24 +156,17 @@
                 </main>
         </div>
     </section>
-    <section class="main-wrapper" id="created-by-you"> 
-        <div class="cart-empty">
-            <div class="start-shopping">
-                <i class="fa-solid fa-cart-plus"></i>
-                <div>
-                    <span>time to start shopping! your cart is empty</span>
-                    <a href="#add-product">start selling</a>
-                </div>
-            </div>
-        </div>
+    <!-- end form  -->
 
-        <div class="main-section-container">
-            <header class="recently-added">
-                <h2>your products</h2>
+    <!-- start show products  -->
+    <section class="main-wrapper" id="created-by-you"> 
+        <div class="container">
+            <header class="header">
+                <h2>products created by you</h2>
             </header>
             <section class="products-wrapper">
                 <div class="products-container">
-                    <div class="price">
+                    <div class="heading">
                         <div class="items-count">
                             <span></span>
                         </div>
@@ -175,7 +175,18 @@
                 </div>
             </section>
         </div>
+        <div class="empty">
+            <div class="start-shopping">
+                <i class="fa-solid fa-cart-plus"></i>
+                <div>
+                    <span>time to start shopping! your cart is empty</span>
+                    <a href="#add-product">start selling</a>
+                </div>
+            </div>
+        </div>
     </section>
+    <!-- end show products  -->
+
     <!-- start footer  -->
     <footer>
         <div class="container">

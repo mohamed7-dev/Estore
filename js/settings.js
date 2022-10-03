@@ -81,11 +81,14 @@ let settingsTypes = document.querySelectorAll(".settings-item");
 let settingsForms = document.querySelectorAll("form.settings");
 
 settingsTypes.forEach((item) => {
+    
     item.addEventListener("click" , (e) =>{
+        settingsTypes.forEach((item) => item.style.cssText = "background-color: var(--secondary-color);");
         settingsForms.forEach((item) => {
             item.style.display = "none";
         })
         document.querySelector(`.${e.target.dataset.type}`).style.display = "block";
+        item.style.cssText = "background-color: #fff;";
     })
 })
 

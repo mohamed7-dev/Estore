@@ -89,8 +89,10 @@ let resultsFromLS = JSON.parse(window.localStorage.getItem("productDB"));
 
 //add to cart globally
 function handleCartHeader (){
-    if(CartItemsArray){
-        CartItemsArray.map((item) => {
+    let Data  = JSON.parse(localStorage.getItem("cart"));
+    if(Data != []){
+        cartItemsContainer.innerHTML = "";
+        Data.map((item) => {
             cartItemsContainer.innerHTML += `
             <li class="cart-item">
                 <span class="item-title">${item.title}</span>
@@ -99,7 +101,7 @@ function handleCartHeader (){
             `
         })
     
-        numberBadge.innerHTML = CartItemsArray.length;
+        numberBadge.innerHTML = Data.length;
     }
 }
 
@@ -158,11 +160,12 @@ handleAddressInNav();
 //function to check if the user is existen in the data base or not and based on that add to cart or not 
 function userAddToCartAbility (index){
     let CartItemsArray = localStorage.getItem("cart")? JSON.parse(localStorage.getItem("cart")) : []; 
+    let Data =JSON.parse(localStorage.getItem("productDB")); 
     let cartItemsContainer = document.querySelector(".cart-content .items-container"); 
     let numberBadge = document.querySelector(".badge");
 
     if(localStorage.getItem("signupUser")){
-        let filtered = resultsFromLS.find((item , i , Arr) => Arr.indexOf(item) == index);
+        let filtered = Data.find((item , i , Arr) => Arr.indexOf(item) == index);
         let isRepeatedItem = CartItemsArray.some((item , i , Arr) => item.title == filtered.title); //returns true if repeated        
         if(isRepeatedItem){
             
@@ -200,10 +203,12 @@ function userAddToCartAbility (index){
 }
 
 //function to add to favourite
-let favItemsArray = localStorage.getItem("fav")? JSON.parse(localStorage.getItem("fav")) : [];
 function userAddToFavouriteAbility (index){
+    let favItemsArray = localStorage.getItem("fav")? JSON.parse(localStorage.getItem("fav")) : [];
+    let Data =JSON.parse(localStorage.getItem("productDB")); 
+
     if(localStorage.getItem("signupUser")){
-        let filtered = resultsFromLS.find((item , i , Arr) => Arr.indexOf(item) == index);
+        let filtered = Data.find((item , i , Arr) => Arr.indexOf(item) == index);
         let isRepeatedItem = favItemsArray.some((item , i , Arr) => item.title == filtered.title); //returns true if repeated
         if(isRepeatedItem){   
             favItemsArray.map((item , index , arr) => {
@@ -220,7 +225,7 @@ function userAddToFavouriteAbility (index){
         }
         //add item to local storage
         window.localStorage.setItem("fav" , JSON.stringify(favItemsArray));
-        resultsFromLS.map((item) => {
+        Data.map((item) => {
             if(isRepeatedItem){
                 if(item.title == filtered.title){
                     delete item.like;
@@ -232,8 +237,8 @@ function userAddToFavouriteAbility (index){
             }
 
         })
-        localStorage.setItem("productDB" , JSON.stringify(resultsFromLS))
-        displayProducts(resultsFromLS)
+        localStorage.setItem("productDB" , JSON.stringify(Data))
+        displayProducts(Data)
     }else{
         window.location = "signinup.html"
     }

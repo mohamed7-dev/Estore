@@ -1,109 +1,32 @@
-header{
+header.main-header{
     min-height: 7vh;
     height: 100%;
 }
-
 section.main-wrapper{
-    width:100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    background-color: var(--main-section-bkg);
-    position: relative;
-    z-index: 1;
-}
-
-.navbar .overlay,
-.main-wrapper .overlay{
-    opacity: 0;
-    pointer-events: none;
-    user-select: none;
-    position: absolute;
-    top:0;
-    bottom:0;
-    right:0;
-    left:0;
-    z-index: 200;
-    background-color: rgba(0, 0, 0, 0.644);
-    transition: 0.2s ease;
-}
-
-.overlay.active{
-    opacity: 1;
-    pointer-events: auto;
-    user-select: auto;
-}
-
-.main-wrapper::before{
-    content: "";
-    position: absolute;
-    top:0;
-    left:0;
-    z-index: -1;
-    width:50%;
-    height: 500px;
-    background-color: var(--main-color);
-    clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
-}
-
-.main-wrapper::after{
-    content: "";
-    position: absolute;
-    bottom:0;
-    right:0;
-    z-index: -1;
-    width:50%;
-    height: 500px;
-    background-color: var(--main-color);
-    clip-path: polygon(0% 100%, 100% 0%, 100% 100%);
-}
-
-.main-wrapper .main-section-container{
-    width:80%;
-    display: flex;
     flex-direction: column;
-    margin-top: var(--common-margin);
+    justify-content: flex-start;
 }
-
-.main-section-container .recently-added{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.main-wrapper .container{
     align-items: center;
-    margin-bottom: var(--minor-margin);
-} 
-
-.recently-added h2{
-    color:var(--text-color);
-    font-size: 1.5rem;
-    text-transform: capitalize;    
 }
-
-.recently-added button.learn-more{
-    border:1px solid #777;
-    outline:0;
-    padding:10px;
-    background-color: transparent;
+.items-count span{
     color:var(--text-color);
+    font-size: 1rem;
     text-transform: capitalize;
-    font-weight: 500;
-    cursor: pointer;
 }
-
-
 .products-wrapper .products-container {
-    width:100%;
+    width: 100%;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     gap:10px;
     padding:10px 0px;
+    position: relative;
+    z-index: 3;
 }
 
-.products-container .price{
-    width:70%;
+.products-container .heading{
     text-align: right;
     color:var(--text-color);
     padding:10px;
@@ -113,7 +36,6 @@ section.main-wrapper{
 }
 
 .products-container .cart-items-container{
-    width:70%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -122,10 +44,12 @@ section.main-wrapper{
 
 .cart-items-container .product-card{
     width: 100%;
-    min-height: 220px;
+    min-height:140px;
+    height: 100%;
+    overflow: hidden;
     display: flex;
-    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     gap:10px;
     padding: 10px;
     border-radius: 10px;
@@ -134,30 +58,36 @@ section.main-wrapper{
     box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }
 
-.product-card .image-container{
-    width: 40%;
-    height:100%;
+.product-card .info-wrapper{
+    width:70%;
+    display: flex;
+    flex-direction: row;
+    gap:20px;
+}
+.info-wrapper .image-container{
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border-radius: 50%; */
 }
 
 .image-container img{
-    width:120px;
+    width:140px;
+    height:140px;
+    object-fit: contain;
 }
 
 
-.product-card .describtion-container{
-    width:100%;
+.info-wrapper .describtion-product-info{
+    width:fit-content;
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
-    justify-content: space-between;
-    gap: 10px;
+    justify-content: center;
+    gap: 15px;
 }
 
-.describtion-container .describtion-product-info{
+.describtion-container {
     color:var(--text-color);
     font-weight: bold;
     text-transform: capitalize;
@@ -173,33 +103,63 @@ section.main-wrapper{
     font-weight: 400;
 }
 
-.describtion-product-info .add-to-cart{
-    width: 60%;
-    border:none;
-    outline:0;
-    background-color: var(--main-color);
-    padding:6px;
-    color:#fff;
-    text-transform: capitalize;
-    font-weight: 500;
-    cursor: pointer;
-    border-radius: 5px;
-}
-.describtion-container .describtion-product-price{
+
+.product-card .describtion-product-price{
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
     width: 30%;
+    min-height:140px;
+    height: 100%;
 }
 
 .describtion-product-price .p-price{
     color:var(--secondary-color);
     font-weight: 600;
     font-size: 1rem;
-
 }
 
-.main-wrapper .cart-empty{
+.describtion-product-price .action-btn{
+    width: fit-content;
+    border:none;
+    outline:0;
+    background-color: var(--main-color);
+    padding:10px;
+    color:#fff;
+    text-transform: capitalize;
+    font-weight: 600;
+    font-size: 0.7rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+@media(max-width:1006px){
+    .main-wrapper .container{
+        width: 95%;
+    }  
+    
+    .cart-items-container .product-card{
+        flex-direction: column;
+        align-items: stretch;
+        width:100%;
+    }
+
+    .product-card .info-wrapper,
+    .product-card .describtion-product-price{
+        width: 100%;
+    }
+
+    .product-card .describtion-product-price{
+        flex-direction: row;
+        justify-content: space-between;
+        min-height: 50px;
+        height:100%;
+    }
+}
+
+/* cart empty  */
+.main-wrapper .empty{
     width:80%;
     min-height:80vh;
     align-self: center;
@@ -209,15 +169,15 @@ section.main-wrapper{
     display: none;
 }
 
-.cart-empty.active{
+.empty.active{
     display: flex;
 }
 
-.cart-empty .items-count{
+.empty .items-count{
     align-self: flex-start;
 }
 
-.cart-empty .start-shopping{
+.empty .start-shopping{
     flex:1;
     display: flex;
     flex-direction: column;

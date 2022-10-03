@@ -1,8 +1,8 @@
 let productsContainer = document.querySelector(".products-container .cart-items-container");
 let headerBadge = document.querySelector(".badge")
 let cartMenuInHeader = document.querySelector(".cart-content .items-container");
-let cartEmpty = document.querySelector(".cart-empty");
-let mainSectionContainer = document.querySelector(".main-section-container");
+let cartEmpty = document.querySelector(".empty");
+let mainSectionContainer = document.querySelector(".main-wrapper .container");
 let itemsCount = document.querySelector(".items-count span");
 
 function displayProductsInCart(cartProducts = []){
@@ -16,19 +16,19 @@ function displayProductsInCart(cartProducts = []){
     products.map((product , index , arr) => {
         productsContainer.innerHTML += `
         <div class="product-card">
-            <div class="image-container">
-                <img src="${product.image}" alt="">
-            </div>
-            <div class="describtion-container">
+            <div class="info-wrapper">
+                <div class="image-container">
+                    <img src="${product.image}" alt="">
+                </div>
                 <div class="describtion-product-info">
                     <span class="product p-name">${product.title}</span>
                     <span class="product p-category">${product.category}</span>
                     <span class="product p-quantity">qunatity: ${product.quantity}</span>
-                    <button class="add-to-cart" onclick="removeFromCart(${index})">remove from cart</button>
-                </div>
-                <div class="describtion-product-price">
-                    <span class="product p-price">${product.price}</span>
-                </div>
+                </div> 
+            </div>           
+            <div class="describtion-product-price">
+                <span class="product p-price">${product.price}</span>
+                <button class="action-btn" onclick="removeFromCart(${index})">remove from cart</button>
             </div>
         </div> 
         `   

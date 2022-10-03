@@ -3,7 +3,7 @@ let formSection = document.querySelector(".add-product");
 
 getStartedButn.addEventListener("click" , () => {
     window.scrollTo({
-        top:915,
+        top:700,
         behavior:"smooth"
     })
 })
@@ -50,11 +50,18 @@ let pDescArea = document.querySelector("#desc");
 let pSubmit = document.querySelector("#submit");
 let pForm = document.querySelector("#add-product-form");
 let container = document.querySelector(".cart-items-container");
-let cartEmpty = document.querySelector(".cart-empty");
+let mainContainer = document.querySelector(".main-wrapper .container");
+let cartEmpty = document.querySelector(".empty");
 let itemsCount = document.querySelector(".items-count span");
+let previewImage = document.querySelector(".upload-image img");
+let label = document.querySelector(".upload-image label");
+let previewThumbs = document.querySelector(".upload-thumbs div");
+let labelOfThumbs = document.querySelector(".upload-thumbs label");
+
 let catValue;
 let mainCatValue;
 let imageValue;
+let thumbsObject = {};
 let mode = "add";
 let tmp;
 
@@ -69,6 +76,7 @@ function getMainProductCat(e){
     mainCatValue = e.target.value;
 }
 
+//get image of the product
 pImage.addEventListener("change" , addImage)
 function addImage(){
     console.log(this.files[0])
@@ -88,11 +96,40 @@ function addImage(){
     imageReader.readAsDataURL(image);
     imageReader.onload = function () {
         imageValue = imageReader.result;
+        label.style.cssText = "opacity:0; pointer-events:none;"
+        previewImage.src = imageValue;
+        previewImage.style.cssText = "opacity:1; pointer-events:auto;"
+    }
+}
+
+//get thumbs of the product
+pThumb.addEventListener("change" , addThumbs)
+let thumbsImages = [];
+function addThumbs(){
+    let image = this.files[0];
+    thumbsImages.push(image);
+    console.log(thumbsImages)
+    thumbsImages.forEach((img,index,Arr) => {
+        let imageReader = new FileReader();
+        imageReader.readAsDataURL(img);
+        imageReader.onload = function () {
+            thumbUrl = imageReader.result;
+            thumbsObject[`thumb-${index + 1}`] = thumbUrl;
+        }
+    })
+
+    previewThumbs.innerHTML = "";
+    for(let item in thumbsObject){
+        previewThumbs.innerHTML += `
+            <img src="${thumbsObject[item]}">
+        `
     }
 }
 
 pForm.addEventListener("submit" , addNewProduct)
 function addNewProduct(e){
+    let thumbsObj = Object.assign({} , thumbsObject );
+    console.log(thumbsObj);
     if(localStorage.getItem("signupUser")){
         let productsFromLS = JSON.parse(localStorage.getItem("productDB"));
         e.preventDefault();
@@ -105,7 +142,7 @@ function addNewProduct(e){
             price: pPrice.value + "$",
             seller:pSeller.value,
             image: imageValue,
-            thumbs: {},
+            thumbs: thumbsObj,
             description:pDescArea.value,
             quantity:1,
             NofPieces:pQty.value,
@@ -115,13 +152,10 @@ function addNewProduct(e){
         if(mode == "add"){
             if(pTitle.value != "" && catValue != "" && pPrice.value != "" && pSeller.value!="" && pDescArea.value != "" && pQty.value != ""){
                 cartEmpty.classList.remove("active");
-                container.style.display = "flex";
+                mainContainer.style.display = "flex";
                 let AllProducts = [...productsFromLS , pObject];
                 localStorage.setItem("productDB" , JSON.stringify(AllProducts));
                 clearInputs()
-                // setTimeout(() => {
-                //     window.location = "index.html";
-                // },500)
 
                 //scroll to bottom
                 scrollTo({
@@ -164,6 +198,10 @@ function clearInputs(){
     pPrice.value = "";
     pSeller.value = "";
     imageValue = "";
+    label.style.cssText = "opacity:1; pointer-events:auto;"
+    previewImage.style.cssText = "opacity:0; pointer-events:none;"
+    previewThumbs.innerHTML = "";
+    thumbsObject = "";
     pDescArea.value = "";
     pQty.value = "";
     pSubCatSelect.value = "";
@@ -188,28 +226,27 @@ function displayMyProducts(products){
     handleEmptyCart(products);
     itemsCount.innerHTML = `your products (${products.length} items)`;
     container.innerHTML = "";
-    products.map((item , index) => {
+    products.map((product , index , arr) => {
         container.innerHTML += `
-    <div class="product-card">
-        <div class="image-container">
-            <img src="${item.image}" alt="">
-        </div>
-        <div class="describtion-container">
-            <div class="describtion-product-info">
-                <span class="product p-name">${item.title}</span>
-                <span class="product p-category">${item.category}</span>
-                <span class="product p-quantity">qunatity: ${item.quantity}</span>
-                <button class="add-to-cart" onclick="deleteProduct(${index})">delete product</button>
-                <button class="add-to-cart" onclick="updateProduct(${index})">edit product</button>
-            </div>
+        <div class="product-card">
+            <div class="info-wrapper">
+                <div class="image-container">
+                    <img src="${product.image}" alt="">
+                </div>
+                <div class="describtion-product-info">
+                    <span class="product p-name">${product.title}</span>
+                    <span class="product p-category">${product.category}</span>
+                    <span class="product p-quantity">qunatity: ${product.quantity}</span>
+                </div> 
+            </div>           
             <div class="describtion-product-price">
-                <span class="product p-price">${item.price}</span>
+                <span class="product p-price">${product.price}</span>
+                <button class="action-btn" onclick="deleteProduct(${index})">delete product</button>
+                <button class="action-btn" onclick="updateProduct(${index})">edit product</button>
             </div>
-        </div>
-    </div> 
-    `  
-    })
-    
+        </div> 
+        ` 
+})
 }
 
 function updateProduct(index){
@@ -230,7 +267,7 @@ function updateProduct(index){
 
     console.log(filtered , filtered+index)
     pTitle.value = data[filtered + index].title;
-    pBrand.value = data[filtered + index].Brand;
+    pBrand.value = data[filtered + index].brand;
     pPrice.value = data[filtered + index].price;
     pSeller.value = data[filtered + index].seller;
     pDescArea.value = data[filtered + index].description;
@@ -238,7 +275,14 @@ function updateProduct(index){
     pSubCatSelect.value = data[filtered + index].category;
     pMainCatSelect.value = data[filtered + index].mainCategory;
     pImage.src = data[filtered + index].image;
-
+    previewImage.style.cssText = "opacity:1; pointer-events:auto;left:30px;";
+    previewImage.src = data[filtered + index].image;
+    let Allthumbs = data[filtered + index].thumbs;
+    for(let item in Allthumbs){
+        previewThumbs.innerHTML += `
+            <img src="${item}">
+        `
+    }
     //change innerhtml of createbtn
     pSubmit.value = "update product";
     //change mode to update 
@@ -268,7 +312,7 @@ function handleEmptyCart(products){
     console.log(products)
     if(products.length == 0){
         cartEmpty.classList.add("active");
-        container.style.display = "none";
+        mainContainer.style.display = "none";
     }
 }
 

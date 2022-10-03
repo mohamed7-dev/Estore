@@ -17,13 +17,15 @@
         rel="stylesheet">
     <!-- link external style sheets  -->
     <link rel="stylesheet" href="./css/variables.css">
+    <link rel="stylesheet" href="./css/footer-component.css">
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/product.css">
 </head>
 
 <body>
     <!-- start header horizontal  -->
-    <header>
+    <header class="main-header"> 
+        <!-- top header  -->
         <section class="header">
             <div class="container">
                 <div class="header-left">
@@ -32,11 +34,14 @@
                 <div class="header-fill">
                     <div class="search-fill">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" id="search" placeholder="search for your product among 150 products">
+                        <input type="search" id="search" placeholder="search for your product among 150 products">
                     </div>
-
+                    
+                    <div class="search-results">
+                    </div>
+                    
                     <div class="search-right">
-                        <button class="search-btn">search</button>
+                        <button class="search-btn" id="search-btn">search</button>
                     </div>
                 </div>
                 <div class="header-right">
@@ -58,7 +63,7 @@
                         </div>
                         <div class="user-settings">
                             <ul class="settings">
-                                <li><a href="#">settings</a></li>
+                                <li><a href="settings.html">settings</a></li>
                                 <li><a href="addproduct.html" target="_blank">sell on Estore</a></li>
                                 <li><a href="#" id="signout">sign out</a></li>
                             </ul>
@@ -88,15 +93,17 @@
                             <span class="badge">0</span>
                         </div>
                         <ul class="cart-content">
-                            <div class="items-container"></div>
                             <button class="view-all-products" id="viewAll-cart-button">
                                 <a href="cart.html">view all products</a>
                             </button>
+                            <div class="items-container"></div>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- navbar  -->
         <section class="navbar">
             <div class="overlay"></div>
             <div class="container">
@@ -111,15 +118,15 @@
                         <div class="shipping-mode-picking">
                             <ul class="shipping-mode-details">
                                 <li class="shipping-icons">
-                                    <div class="shipping-way">
+                                    <div class="shipping-way" data-way="shipping">
                                         <i class="fa-solid fa-truck-moving"></i>
                                         <span>shipping</span>
                                     </div>
-                                    <div class="shipping-way">
+                                    <div class="shipping-way" data-way="picking">
                                         <i class="fa-solid fa-car-side"></i>
                                         <span>pickup</span>
                                     </div>
-                                    <div class="shipping-way">
+                                    <div class="shipping-way" data-way="delivery">
                                         <i class="fa-solid fa-truck-ramp-box"></i>
                                         <span>delivery</span>
                                     </div>
@@ -129,33 +136,23 @@
                                         <i class="fa-solid fa-location-dot"></i>
                                         <span>choose your address</span>
                                     </div>
-                                    <button class="address-btn">add address</button>
+                                    <button class="address-btn"><a href="settings.html">add address</a></button>
                                 </li>
                                 <li class="show-choosed-info">
-                                    <div class="choosed-address">
-                                        <i class="fa-solid fa-house-user"></i>
-                                        <span>cairo, egypt</span>
-                                    </div>
-                                    <div class="choosed-shipping">
-                                        <span>instore pickup</span>
-                                    </div>
                                 </li>
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-address-item">
-                        <span><i class="fa-solid fa-location-dot"></i>loaction</span>
+                    <li class="nav-address-item location-in-nav">
                     </li>
-                    <li class="nav-address-item">
-                        <span><i class="fa-solid fa-house-user"></i>address</span>
+                    <li class="nav-address-item address-in-nav">
                     </li>
                 </ul>
                 <ul class="nav-cat-menu">
-                    <li class="cat-item"><a href="#">clothes</a></li>
-                    <li class="cat-item"><a href="#">furniture</a></li>
-                    <li class="cat-item"><a href="#">tech</a></li>
-                    <li class="cat-item"><a href="#">grocery</a></li>
-                    <li class="cat-item"><a href="#">top list</a></li>
+                    <li class="cat-item" data-cat="electronics"><a href="electronics-cat.html">electronics</a></li>
+                    <li class="cat-item" data-cat="clothes"><a href="clothes-cat.html">clothes</a></li>
+                    <li class="cat-item" data-cat="furniture"><a href="furniture-cat.html">furniture</a></li>
+                    <li class="cat-item" data-cat="toplist"><a href="#">top list</a></li>
                 </ul>
             </div>
         </section>
@@ -221,7 +218,7 @@
     <!-- start main section -->
     <section class="main-wrapper">
         <div class="overlay"></div>
-        <div class="main-section-container"></div>
+        <div class="container"></div>
     </section>
     <!-- end main section -->
         <!-- start footer  -->

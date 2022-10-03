@@ -1,9 +1,8 @@
-.main-wrapper .container{
-    display: flex;
-    flex-direction: column;
-    margin-top: var(--common-margin);
-}
-
+.container .header{
+    margin-bottom: var(--minor-margin-settings);
+    padding:10px;
+    justify-content: center;
+} 
 .container .settings-wrapper{
     width: 100%;
     display: flex;
@@ -13,33 +12,38 @@
 
 .settings-wrapper .settings-type{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap:5px;
+    max-width: 500px;
+    width:100%;
 }
 
 .settings-type li.settings-item{
-    min-width:50px;
-    background-color: #fff;
-    padding:20px;
+    width:fit-content;
+    background-color: var(--secondary-color);
+    padding:15px;
     text-transform: capitalize;
-    color:var(--main-color);
+    color:var(--text-color);
     font-weight: 600;
-    /* border-right: 1px solid var(--secondary-color); */
+    font-size: 0.9rem;
     cursor: pointer;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;    
     transition: 0.3s linear;
+    border-bottom: 1px solid transparent;
 }
 
 .settings-type li.settings-item:hover{
-    margin-bottom: 5px;
+    background-color: #fff;
 }
 
 .settings-wrapper .forms-container{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 20px;
+    max-width: 500px;
+    width:100%;
 }
 
 .settings-wrapper form.address{
@@ -48,8 +52,7 @@
 
 
 .settings-wrapper form{
-    max-width: 100%;
-    width:fit-content;
+    width:100%;
     display: flex;
     flex-direction: column;
     gap:20px;
@@ -57,7 +60,7 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     padding:20px;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;    
 }
 
 form .field-container{
@@ -151,6 +154,7 @@ form .field-container{
     padding: 10px;
     border-radius: 10px;
     cursor: pointer;
+    font-weight: 600;
 }
 
 input[type = "file"]{
