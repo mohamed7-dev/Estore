@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estore electronics</title>
+    <title>Estore clothes</title>
     <!-- import font awesome icons  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
@@ -15,6 +15,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
     <!-- link external style sheets  -->
     <link rel="stylesheet" href="./css/variables.css">
     <link rel="stylesheet" href="./css/footer-component.css">
@@ -25,6 +27,66 @@
 </head>
 
 <body>
+        <!-- start header mobile  -->
+        <header class="header-mobile">
+                    <!-- logo  -->
+        <section class="store-logo">
+            <a href="index.html"><span>E</span>store</a>
+    </section>
+            <!-- top-header -->
+            <section class="top-header">
+                <div class="container">
+                    <i class="fa-solid fa-bars-staggered" id="bars-icon"></i>
+                    <div class="search-input">
+                        <input type="text" id="search-mobile" placeholder="search">
+                        <i class="fa-solid fa-magnifying-glass" id="search-btn-mobile"></i>
+                        <div class="search-results-mobile">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- lower-header -->
+            <section class="lower-header">
+                <div class="container">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div class="address-details">
+                    </div>
+                </div>
+            </section>
+            
+            <section class="side-nav" id="side-nav">
+                <div class="container">
+                    <div class="close-btn" id="close-btn">&times;</div>
+                    <a href="electronics-cat.html">
+                        <div class="cat-box">
+                            <div class="cat-name">electronics</div>
+                            <div class="image-box">
+                                <img src="./images/tech-cat.jpg" alt="">
+                            </div>
+                        </div>
+                    </a>
+    
+                    <a href="clothes-cat.html">
+                        <div class="cat-box">
+                            <div class="cat-name">clothes</div>
+                            <div class="image-box">
+                                <img src="./images/clothes-cat.jpg" alt="">
+                            </div>
+                        </div>
+                    </a>
+    
+                    <a href="furniture-cat.html">
+                        <div class="cat-box">
+                            <div class="cat-name">furniture</div>
+                            <div class="image-box">
+                                <img src="./images/furniture-cat.jpg" alt="">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </header>
+        <!-- end header mobile  -->
     <!-- start header horizontal  -->
     <header class="main-header"> 
         <!-- top header  -->
@@ -114,7 +176,7 @@
                         <div class="shipping-header">
                             <i class="fa-solid fa-truck"></i>
                             <span>how do you want to pickup your order?</span>
-                            <i class="fa-solid fa-caret-down"></i>
+                            <i class="fa-solid fa-angle-down caret-icon"></i>
                             |
                         </div>
                         <div class="shipping-mode-picking">
@@ -161,61 +223,6 @@
     </header>
     <!-- end header horizontal -->
 
-    <!-- start vertical header on mobile devices  -->
-    <section class="mobile-vertical">
-        <div class="vert-search" id="vert-search">
-            <div class="logo">
-                <i class="fa-solid fa-bars" id="vert-bar-icon"></i>
-                <a href="index.html"><span>E</span>store</a>
-            </div>
-            <div class="search-bar">
-                <div class="search-fill">
-                    <input type="text" id="search">
-                </div>
-
-                <div class="search-right">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </div>
-            </div>
-        </div>
-        <header class="vert-header" id="mobile-vertical-header">
-            <div class="vert-hello">
-                <div class="vert-avatar">
-                    <a href="#">hello, mohamed <i class="fa-regular fa-circle-user"></i></a>
-                </div>
-                <div class="vert-close" id="close-btn">
-                    <i class="fa-solid fa-xmark"></i>
-                </div>
-            </div>
-            <div class="vert-categories">
-                <ul class="vert-cat-menu">
-                    <li class="vert-cat-item"><a href="#">item1</a></li>
-                    <li class="vert-cat-item"><a href="#">item1</a></li>
-                    <li class="vert-cat-item"><a href="#">item1</a></li>
-                    <li class="vert-cat-item"><a href="#">item1</a></li>
-                    <li class="vert-cat-item"><a href="#">item1</a></li>
-                    <li class="vert-cat-item"><a href="#">item1</a></li>
-                    <li class="vert-cat-item"><a href="#">item1</a></li>
-                    <li class="vert-cat-item"><a href="#">item1</a></li>
-                    <li class="vert-cat-item"><a href="#">item1</a></li>
-                    <li class="vert-cat-item"><a href="#">item1</a></li>
-                    <li class="vert-cat-item"><a href="#">item1</a></li>
-                    <li class="vert-cat-item"><a href="#">item1</a></li>
-                    <li class="vert-cat-item"><a href="#">item1</a></li>
-                </ul>
-            </div>
-            <div class="vert-settings">
-                <ul class="vert-settings-menu">
-                    <li class="vert-settings-item"><a href="#">your account</a></li>
-                    <li class="vert-settings-item"><a href="#">english</a></li>
-                    <li class="vert-settings-item"><a href="#">arabic</a></li>
-                    <li class="vert-settings-item"><a href="#">sign out</a></li>
-                </ul>
-            </div>
-
-        </header>
-    </section>
-    <!-- end vertical header on mobile devices  -->
 
     <!-- start main section -->
     <section class="main-wrapper">
@@ -225,7 +232,7 @@
                 <div class="filter category">
                     <ul>
                         <li>
-                            category
+                            <span>category</span>
                             <ul id="sub-category">
                             </ul>
                         </li>
@@ -234,7 +241,7 @@
                 <div class="filter seller">
                     <ul>
                         <li>
-                            seller
+                            <span>seller</span> 
                             <ul id="seller-filter">
                             </ul>
                         </li>
@@ -243,7 +250,7 @@
                 <div class="filter brand">
                     <ul>
                         <li>
-                            brand
+                            <span>brand</span>
                             <ul id="brand-filter">
                             </ul>
                         </li>
@@ -252,13 +259,28 @@
                 <div class="filter price">
                     <ul>
                         <li>
-                            price
+                            <span>price</span>
                             <ul>
-                                <li>up to 50 $</li>
-                                <li>50 - 100 $</li>
-                                <li>100 - 1000 $</li>
-                                <li>1000 - 2500 $</li>
-                                <li>2500 $ & above</li>
+                                <li>
+                                    <input class="price-check" type="checkbox" id="first-price">
+                                    <label for="first-price">up to 50 $</label>
+                                </li>
+                                <li>
+                                    <input class="price-check" type="checkbox" id="second-price">
+                                    <label for="second-price">50 - 100 $</label>
+                                </li>
+                                <li>
+                                    <input class="price-check" type="checkbox" id="third-price">
+                                    <label for="third-price">100 - 1000 $</label>
+                                </li>
+                                <li>
+                                    <input class="price-check" type="checkbox" id="fourth-price">
+                                    <label for="fourth-price">1000 - 2500 $</label>
+                                </li>
+                                <li>
+                                    <input class="price-check" type="checkbox" id="fifth-price">
+                                    <label for="fifth-price">2500 $ & above</label>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -266,46 +288,47 @@
             </div>
             <div class="right-side">
                 <h2>chothes</h2>
-                <section class="products-wrapper">
-                        <div class="category">
-                            <h3>shop by category</h3>
-                            <section class="box-container">
-                                <div class="box">
-                                    <div class="image-container">
-                                        <img src="./images/boys-cat.jpg" alt="">
-                                    </div>
-                                </div>
-                                <div class="box">
-                                    <div class="image-container">
-                                        <img src="./images/girls-cat.jpg" alt="">
-                                    </div>
-                                </div>
-                                <div class="box">
-                                    <div class="image-container">
-                                        <img src="./images/men-cat.jpg" alt="">
-                                    </div>
-                                </div>
-                                <div class="box">
-                                    <div class="image-container">
-                                        <img src="./images/women-cat.jpg" alt="">
-                                    </div>
-                                </div>
-                            </section>
+                <section class="category">
+                    <h3>shop by category</h3>
+                    <section class="box-container">
+                        <div class="box">
+                            <div class="image-container">
+                                <img src="./images/boys-cat.jpg" alt="">
+                            </div>
                         </div>
-                        <div class="main-container">
-                            <header class="header">
-                                <h2>recently added</h2>
-                            </header>
-                            <section class="sliding-wrapper">
-                                <div class="prev-btn" id="prev">&lt;</div>
-                                <div class="next-btn" id="next">&gt;</div>
-                                <div class="products-container">
-                                </div>
-                            </section>
+                        <div class="box">
+                            <div class="image-container">
+                                <img src="./images/girls-cat.jpg" alt="">
+                            </div>
                         </div>
+                        <div class="box">
+                            <div class="image-container">
+                                <img src="./images/men-cat.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div class="image-container">
+                                <img src="./images/women-cat.jpg" alt="">
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                
+                <section class="section-area">
+                    <header class="header">
+                        <h2>recently added</h2>
+                    </header>
+                    <section class="products-wrapper cat-page swiper mySwiper">
+                        <div class="products-container swiper-wrapper">
+                        </div>
+                        <!-- Add Pagination -->
+                        <div class="swiper-pagination"></div>
+                        <!-- Add Arrows -->
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div> 
+                    </section>
                 </section>
             </div>
-
         </div>
     </section>
     <!-- end main section -->
@@ -326,10 +349,64 @@
         </div>
     </footer>
     <!-- end footer  -->
+        <!-- start vertical header on mobile devices  -->
+        <section class="mobile-nav">
+            <ul>
+                <li class="active">
+                    <a href="index.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-house"></i>
+                        </span>
+                        <span class="text">Home</span>
+                    </a>
+                </li>
+    
+                <li>
+                    <a href="cart.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </span>
+                        <span class="text">cart</span>
+                    </a>
+                </li>
+    
+                <li>
+                    <a href="favourites.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-heart"></i>
+                        </span>
+                        <span class="text">favourites</span>
+                    </a>
+                </li>
+    
+                <li>
+                    <a href="settings.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-gear"></i>
+                        </span>
+                        <span class="text">settings</span>
+                    </a>
+                </li>
+    
+                <li>
+                    <a href="addproduct.html">
+                        <span class="icon">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </span>
+                        <span class="text">seller</span>
+                    </a>
+                </li>
+    
+                <div class="indicator"></div>
+            </ul>
+        </section>
+        <!-- end vertical header on mobile devices  -->
     <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script src="./js/global.js"></script>
     <script src="./js/navbar.js"></script>
     <script src="./js/cat.js"></script>
+    <script src="./js/swiper.js"></script>
     <script src="./js/search.js"></script>
 </body>
 </html>

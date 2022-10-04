@@ -16,13 +16,14 @@ ul{
     margin: 0 auto;
 }
 /* hide mobile vertical by default  */
-section.mobile-vertical{
-    display: none;
-}
-
 header.header-mobile{
     display: none;
 }
+
+section.mobile-nav{
+    display: none;
+}
+
 
 body{
     min-height: 100vh;
@@ -39,6 +40,7 @@ header.main-header{
     height:100%;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .main-header section.header{
@@ -93,7 +95,7 @@ a span{
     top:110%;
     left: 0;
     background-color: #fff;
-    z-index: 20;
+    z-index: 50;
     border: 2px solid var(--border-color);
     border-radius: 5px;
     padding:10px;
@@ -114,6 +116,7 @@ a span{
     gap: 10px;
     border-bottom: 1px solid var(--border-color);
     padding: 10px;
+    cursor: pointer;
 }
 
 .item .image-container{
@@ -132,6 +135,7 @@ a span{
 .item .desc{
     overflow: hidden;
     display: flex;
+    flex-direction: column;
     gap:20px;
 }
 
@@ -217,7 +221,6 @@ a span{
     min-height: 7vh;
     height:100%;
     position: relative;
-    z-index: 10000;
 }
 
 .header-right .not-signed{
@@ -415,6 +418,7 @@ header.main-header section.navbar{
     min-height:5vh;
     height:100%;
     position: relative;
+    z-index: 25;
 }
 
 .navbar .container{
@@ -606,9 +610,9 @@ section.main-wrapper{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
     background-color: var(--main-section-bkg);
     position: relative;
+    /* z-index: 10; */
 }
 
 .main-wrapper .container{
@@ -616,32 +620,15 @@ section.main-wrapper{
     display: flex;
     flex-direction: column;
     position: relative;
-    margin-top: var(--common-margin);
     margin-bottom: var(--common-margin);
-    position: relative;
 }
 
-.container .header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--minor-margin);
-    padding:5px;
-} 
-
-.header h2{
-    color:var(--text-color);
-    font-size: 1.5rem;
-    text-transform: capitalize;    
-}
-
-.main-wrapper .overlay,
-.navbar .overlay{
+.overlay{
     opacity: 0;
     pointer-events: none;
     user-select: none;
     position: absolute;
+    z-index: 100;
     top:0;
     bottom:0;
     right:0;

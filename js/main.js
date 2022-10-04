@@ -24,15 +24,17 @@ function displayProducts(allData , parent ,mode){
     parent.innerHTML = "";
     allData.map((item , index) => {
         parent.innerHTML += `
-        <div class="product-card ${mode}">
+        <div class="product-card ${mode} swiper-slide">
             <div class="image-container" onclick="addProductID(${item.id})">
                 <img src="${item.image}" alt="">
             </div>
             <i class="fa-regular fa-heart fav-icon-${item.id}" style="font-weight:${item.like == true? "bold" : "normal"}" onclick="userAddToFavouriteAbility(${item.id})"></i>
             <div class="describtion" onclick="addProductID(${item.id})">
-                <span class="product p-name">${item.title}</span>
-                <small class="product p-category">${item.category}</small>
-                <samp class="product p-price">${item.price}</samp>
+                <span class="p-name">${item.title}</span>
+                <div class="cat-price-row">
+                    <small class="p-category">${item.category}</small>
+                    <samp class="p-price">${item.price}</samp>
+                </div>
             </div>
             <div class="button">
                 <button class="add-to-cart" onclick="userAddToCartAbility(${item.id})">add to cart</button>
@@ -40,55 +42,7 @@ function displayProducts(allData , parent ,mode){
         </div> 
         `   
     })
-
-    slider(mode);
 }
-
-//control slider
-function slider(mode){
-    let productCards = document.querySelectorAll(`.${mode}`);
-    let product_page = (productCards.length / 4);
-    let nextBtn = document.querySelector("#next");
-    let prevBtn = document.querySelector("#prev");
-    let moveBy = 25;
-    let l = 0;
-    let maxMove = productCards.length * 25;
-
-    console.log(productCards);
-    let mobileScreen = window.matchMedia("(max-width:768px)");
-    if(mobileScreen.matches){
-        moveBy = 102;
-        maxMove = productCards.length * 100;
-    } 
-
-    function nextMove(){
-        l = l + moveBy;
-        if (productCards.length == 1){l = 0};
-        for(let item of productCards){
-            if(l >= maxMove){l = l - moveBy}
-            item.style.left = "-" + l + "%";
-        }
-    }
-    
-    nextBtn.onclick = () => {nextMove()};
-
-    function prevMove(){
-        l = l - moveBy;
-        if (l <= 1){l = 0};
-        for(let item of productCards){
-            if(product_page > 1)
-            item.style.left = "-" + l + "%";
-        }
-    }
-    prevBtn.onclick = () => {prevMove()};
-}
-
-
-
-
-
-
-
 
 //function to filter cats and sidplay them
 let AllDataFromLS = JSON.parse(localStorage.getItem("productDB"));
@@ -98,7 +52,6 @@ function DisplayElectroCat(){
     })
     let electroParent = document.querySelector(".products-container.electronics");
     let mode = "electro";
-    console.log(filtered)
     displayProducts(filtered , electroParent ,mode); 
 }
 DisplayElectroCat();
@@ -113,6 +66,11 @@ function displayClothesCat(){
     displayProducts(filteredClothes, clothesParent,mode);
 }
 displayClothesCat();
+
+
+
+
+
 
 
 

@@ -1,3 +1,4 @@
+
 let getStartedButn = document.querySelector("#get-started");
 let formSection = document.querySelector(".add-product");
 
@@ -96,7 +97,6 @@ function addImage(){
     imageReader.readAsDataURL(image);
     imageReader.onload = function () {
         imageValue = imageReader.result;
-        label.style.cssText = "opacity:0; pointer-events:none;"
         previewImage.src = imageValue;
         previewImage.style.cssText = "opacity:1; pointer-events:auto;"
     }
@@ -213,7 +213,6 @@ function clearInputs(){
     pPrice.value = "";
     pSeller.value = "";
     imageValue = "";
-    label.style.cssText = "opacity:1; pointer-events:auto;"
     previewImage.style.cssText = "opacity:0; pointer-events:none;"
     previewThumbs.innerHTML = "";
     thumbsObject = "";
@@ -223,7 +222,10 @@ function clearInputs(){
     pMainCatSelect.value = "";
 }
 
-
+window.onload = function (){
+    //clear all inputs after reloading the page
+    clearInputs()
+}
 //add products that created by you to the sell on estore page
 let AllProductsFromLS = JSON.parse(localStorage.getItem("productDB"));
 function getCreatedProducts(allProducts){    
@@ -286,12 +288,6 @@ function updateProduct(id){
     pImage.src = filtered.image;
     previewImage.style.cssText = "opacity:1; pointer-events:auto;left:30px;";
     previewImage.src = filtered.image;
-    let Allthumbs = filtered.thumbs;
-    for(let item in Allthumbs){
-        previewThumbs.innerHTML += `
-            <img src="${item}">
-        `
-    }
     //change innerhtml of createbtn
     pSubmit.value = "update product";
     //change mode to update 
@@ -316,8 +312,7 @@ function deleteProduct(id){
 
 //function to handle the visibility of empty product div when the div is empty
 function handleEmptyCart(products){
-    console.log(products)
-    if(products.length == 0){
+    if(products.length == 0 || []){
         cartEmpty.classList.add("active");
         mainContainer.style.display = "none";
     }

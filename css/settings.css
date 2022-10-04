@@ -2,6 +2,8 @@
     margin-bottom: var(--minor-margin-settings);
     padding:10px;
     justify-content: center;
+    display: flex;
+    
 } 
 .container .settings-wrapper{
     width: 100%;

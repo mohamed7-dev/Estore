@@ -1,6 +1,5 @@
 let clickedCatFromLS = JSON.parse(localStorage.getItem("clickedCat"));
 
-
 function filterCat(){
     let productsFromLS = JSON.parse(localStorage.getItem("productDB"));
     let filtered = productsFromLS.filter((item) => {
@@ -15,25 +14,26 @@ function handleFilterCat(){
     handleFilterByCat(filtered);
     handleFilterByseller(filtered);
     handleFilterByBrand(filtered);
-    console.log(filtered);
 }
 
 handleFilterCat();
 
 function displayCatItems(items) {
-    let parentElement = document.querySelector(".boxes-wrapper .products-container");
+    let parentElement = document.querySelector(".section-area .products-container");
     parentElement.innerHTML = "";
     items.map((item , index) => {
         parentElement.innerHTML += `
-        <div class="product-card">
+        <div class="product-card swiper-slide">
             <div class="image-container" onclick="addProductID(${item.id})">
                 <img src="${item.image}" alt="">
             </div>
             <i class="fa-regular fa-heart fav-icon-${item.id}" style="font-weight:${item.like == true? "bold" : "normal"}" onclick="userAddToFavouriteAbility(${item.id})"></i>
             <div class="describtion" onclick="addProductID(${item.id})">
                 <span class="product p-name">${item.title}</span>
-                <small class="product p-category">${item.category}</small>
-                <samp class="product p-price">${item.price}</samp>
+                <div class="cat-price-row">
+                    <small class="p-category">${item.category}</small>
+                    <samp class="p-price">${item.price}</samp>
+                </div>
             </div>
             <div class="button">
                 <button class="add-to-cart" onclick="userAddToCartAbility(${item.id})">add to cart</button>
@@ -57,6 +57,7 @@ function handleFilterByseller(items){
     let filteredSeller = items.map((item) => {
         return item.seller;
     })
+
     let unique = getUniqueFilters(filteredSeller);
     let id = "seller";
     let sellerFilter = document.querySelector("#seller-filter");
@@ -74,13 +75,11 @@ function handleFilterByBrand(items){
 }
 
 function getUniqueFilters(filtered){
-    console.log(filtered)
     filtered = filtered.filter((item) => {
         return item != undefined;
     })
     let uniqueFilters = [];
     for(let i = 0; i < filtered.length; i++){
-        console.log(filtered.length>1)
         if(filtered.length > 1){
             for(let j = 1 ; j <= filtered.length; j++){
                 if(filtered[i] === filtered[j]){
@@ -101,7 +100,6 @@ function getUniqueFilters(filtered){
 }
 
 function displayFilter(items , parent , id){
-    console.log(items)
     parent.innerHTML = "";
     items.map((item, index, Arr) => {
         parent.innerHTML += `
@@ -113,27 +111,66 @@ function displayFilter(items , parent , id){
     })
 }
 
-let filterItems = Array.from(document.querySelectorAll("li .filter-item"));
+//filter items using filters from db
+// let filterItems = Array.from(document.querySelectorAll("li .filter-item"));
 
-console.log(clickedCatFromLS , filterItems)
-function handleFilter(){
-    filterItems.forEach((item) => {
-            item.addEventListener("change" , (e)=>{
-                let targetText = e.target.nextElementSibling.textContent;
-                filterByClicked(targetText);
-            });
-    })
-}
+// function handleFilter(){
+//     let filterArray=[];
+//     filterItems.forEach((item) => {
+//             item.addEventListener("change" , (e)=>{
+//                 let targetText = e.target.nextElementSibling.textContent;
+//                 let targetcat = e.target.parentElement.parentElement.previousElementSibling.textContent;
+//                 let filterObj = {
+//                     [targetcat]:targetText,
+//                 }
+//                 filterArray.push(filterObj);
+//                 displayCatItems(filterArray);
 
-handleFilter()
+//                 // filterByClicked(filterArray);
+//             });
+//     })
+// }
+// handleFilter()
 
-function filterByClicked(target){
-    let filteredMainCat = filterCat();
-    let checkedItems = filteredMainCat.filter((item) => {
-        console.log(item.category , target)
-        return item.category == target;
-    })
+// function filterByClicked(filters){
+//     let Arr = [];
+//     let filteredMainCat = filterCat();
+//     for(let item of filteredMainCat){
+//         for(let filter  of filters ){
+//             for(let obj in filter){
+//                 let key = obj;
+//                 if(item[`${key}`] == filter[obj]){
+//                     let filtered  = item;
+//                     Arr.push(filtered);
+//                     // console.log(filtered)
+//                     handleReapeat(filtered,Arr);
+//                 }
+//             }
+//         }
+//     }
 
-    displayCatItems(checkedItems)
-    console.log(checkedItems);
-}
+
+// }
+
+// function handleReapeat(Arr){
+//     let uniqueArray = [];
+//     for(let i = 0; i < Arr.length; i++){
+//         if(Arr.length > 1){
+//             for(let j = 1 ; j <= Arr.length; j++){
+//                 if(Arr[i] === Arr[j]){
+//                     continue;
+//                 }else{
+//                     if(uniqueArray.includes(Arr[i])){
+//                         continue;
+//                     }else{
+//                         uniqueArray.push(Arr[i]);
+//                     }
+//                 }
+//             }
+//         }else{
+//             uniqueArray.push(Arr[i]);
+//         }
+//         console.log(uniqueArray);
+//     }
+// }
+

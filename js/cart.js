@@ -2,6 +2,7 @@ let productsContainer = document.querySelector(".products-container .cart-items-
 let headerBadge = document.querySelector(".badge")
 let cartMenuInHeader = document.querySelector(".cart-content .items-container");
 
+
 function displayProductsInCart(cartProducts = []){
     let products = JSON.parse(localStorage.getItem("cart")) || cartProducts;
     headerBadge.innerHTML = products.length;

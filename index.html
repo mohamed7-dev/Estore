@@ -14,7 +14,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
         rel="stylesheet">
-    
+
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
     <!-- link external style sheets  -->
     <link rel="stylesheet" href="./css/variables.css">
     <link rel="stylesheet" href="./css/specialbefore.css">
@@ -22,47 +24,71 @@
     <link rel="stylesheet" href="./css/footer-component.css">
     <link rel="stylesheet" href="./css/slider-component.css">
     <link rel="stylesheet" href="./css/reponsive.css">
-    <link rel="stylesheet" href="./css/swiper-bundle.min.css">
 </head>
 
 <body>
     <!-- start header mobile  -->
     <header class="header-mobile">
+        <!-- logo  -->
+        <section class="store-logo">
+                <a href="index.html"><span>E</span>store</a>
+        </section>
         <!-- top-header -->
         <section class="top-header">
             <div class="container">
                 <i class="fa-solid fa-bars-staggered" id="bars-icon"></i>
                 <div class="search-input">
                     <input type="text" id="search-mobile" placeholder="search">
-                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <i class="fa-solid fa-magnifying-glass" id="search-btn-mobile"></i>
+                    <div class="search-results-mobile">
+                    </div>
                 </div>
             </div>
         </section>
+        <!-- lower-header -->
+        <section class="lower-header">
+            <div class="container">
+                <i class="fa-solid fa-location-dot"></i>
+                <div class="address-details">
+                </div>
+            </div>
+        </section>
+
         <section class="side-nav" id="side-nav">
             <div class="container">
                 <div class="close-btn" id="close-btn">&times;</div>
-                <div class="cat-box">
-                    <div class="cat-name">electronics</div>
-                    <div class="image-box">
-                        <img src="./images/laptop-cat.jpg" alt="">
+                <a href="electronics-cat.html">
+                    <div class="cat-box">
+                        <div class="cat-name">electronics</div>
+                        <div class="image-box">
+                            <img src="./images/tech-cat.jpg" alt="">
+                        </div>
                     </div>
-                </div>
-                <div class="cat-box">
-                    <div class="cat-name">clothes</div>
-                    <div class="image-box">
-                        <img src="./images/boys-cat.jpg" alt="">
+                </a>
+
+                <a href="clothes-cat.html">
+                    <div class="cat-box">
+                        <div class="cat-name">clothes</div>
+                        <div class="image-box">
+                            <img src="./images/clothes-cat.jpg" alt="">
+                        </div>
                     </div>
-                </div>
-                <div class="cat-box">
-                    <div class="cat-name">furniture</div>
-                    <div class="image-box">
-                        <img src="./images/decor-cat.jpg" alt="">
+                </a>
+
+                <a href="furniture-cat.html">
+                    <div class="cat-box">
+                        <div class="cat-name">furniture</div>
+                        <div class="image-box">
+                            <img src="./images/furniture-cat.jpg" alt="">
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </section>
     </header>
     <!-- end header mobile  -->
+
+
     <!-- start header horizontal  -->
     <header class="main-header"> 
             <!-- top header  -->
@@ -203,38 +229,51 @@
     <section class="main-wrapper">
         <div class="overlay"></div>
         <div class="container">
-            <header class="header">
-                <h2>recently added products</h2>
-            </header>
-            <section class="products-wrapper">
-                <div class="prev-btn" id="prev">&lt;</div>
-                <div class="next-btn" id="next">&gt;</div>
-                <div class="products-container recently-added">
-                </div>
-            </section>
-        </div>
-        <div class="container">
-            <header class="header">
-                <h2>Electronics</h2>
-            </header>
-            <section class="products-wrapper">
-                <div class="prev-btn" id="prev">&lt;</div>
-                <div class="next-btn" id="next">&gt;</div>
-                <div class="products-container electronics">
-                </div>
-            </section>
-        </div>
-        <div class="container">
-            <header class="header">
-                <h2>Fashion</h2>
-            </header>
-            <section class="products-wrapper">
-                <div class="prev-btn" id="prev">&lt;</div>
-                <div class="next-btn" id="next">&gt;</div>
-                <div class="products-container clothes">
-                </div>                
-            </section>
-        </div>
+            <div class="section-area">
+                <header class="header">
+                    <h2>recently added products</h2>
+                </header>
+                <section class="products-wrapper swiper mySwiper">
+                    <div class="products-container recently-added swiper-wrapper">
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next swiper-nav-btn"></div>
+                    <div class="swiper-button-prev swiper-nav-btn"></div>   
+                </section>
+            </div> 
+
+            <div class="section-area">
+                <header class="header">
+                    <h2>Electronics</h2>
+                </header>
+                <section class="products-wrapper swiper mySwiper">
+                    <div class="products-container electronics swiper-wrapper">
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next swiper-nav-btn"></div>
+                    <div class="swiper-button-prev swiper-nav-btn"></div>   
+                </section>
+            </div>
+
+            <div class="section-area">
+                <header class="header">
+                    <h2>Fashion</h2>
+                </header>
+                <section class="products-wrapper swiper mySwiper">
+                    <div class="products-container clothes swiper-wrapper">
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next swiper-nav-btn"></div>
+                    <div class="swiper-button-prev swiper-nav-btn"></div>                
+                </section>
+            </div>
+        </div>    
     </section>
     <!-- end main section -->
 
@@ -257,47 +296,63 @@
 
     <!-- start vertical header on mobile devices  -->
     <section class="mobile-nav">
-        <ul class="nav-content">
-            <li class="nav-list">
-                <a href="index.html" class="link-item active">
-                    <i class="fa-solid fa-house active"></i>
-                    <span class="link-text">Home</span>
-                </a>
-            </li>
-            <li class="nav-list">
-                <a href="cart.html" class="link-item">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span class="link-text">cart</span>
-                </a>
-            </li>
-            <li class="nav-list">
-                <a href="favourites.html" class="link-item">
-                    <i class="fa-solid fa-heart"></i>
-                    <span class="link-text">favourites</span>
-                </a>
-            </li>
-            <li class="nav-list">
-                <a href="settings.html" class="link-item">
-                    <i class="fa-solid fa-gear"></i>
-                    <span class="link-text">settings</span>
-                </a>
-            </li>
-            <li class="nav-list">
-                <a href="addproduct.html" class="link-item">
-                    <i class="fa-solid fa-suitcase"></i>
-                    <span class="link-text">seller</span>
+        <ul>
+            <li class="active index" data-target="index">
+                <a href="index.html">
+                    <span class="icon">
+                        <i class="fa-solid fa-house"></i>
+                    </span>
+                    <span class="text">Home</span>
                 </a>
             </li>
 
-            <span class="indicator"></span>
+            <li class="cart" data-target="cart">
+                <a href="cart.html">
+                    <span class="icon">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </span>
+                    <span class="text">cart</span>
+                </a>
+            </li>
+
+            <li class="favourites" data-target="favourites">
+                <a href="favourites.html">
+                    <span class="icon">
+                        <i class="fa-solid fa-heart"></i>
+                    </span>
+                    <span class="text">favourites</span>
+                </a>
+            </li>
+
+            <li class="settings" data-target="settings">
+                <a href="settings.html">
+                    <span class="icon">
+                        <i class="fa-solid fa-gear"></i>
+                    </span>
+                    <span class="text">settings</span>
+                </a>
+            </li>
+
+            <li class="addproduct" data-target="addproduct">
+                <a href="addproduct.html">
+                    <span class="icon">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </span>
+                    <span class="text">seller</span>
+                </a>
+            </li>
+
+            <div class="indicator"></div>
         </ul>
     </section>
     <!-- end vertical header on mobile devices  -->
 
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script src="./js/global.js"></script>
     <script src="./js/navbar.js"></script>
     <script src="./js/main.js"></script>
+    <script src="./js/swiper.js"></script>
     <script src="./js/search.js"></script>
-    <script src="./js/swiper-bundle.min.js"></script>
 </body>
 </html>

@@ -65,7 +65,7 @@ section.main-wrapper{
 .left-side .modal{
     display: none;
     position: fixed;
-    z-index: 100;
+    z-index: 20000;
     padding-top: 100px;
     left: 0;
     top: 0;
