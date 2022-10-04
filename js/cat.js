@@ -21,7 +21,7 @@ function handleFilterCat(){
 handleFilterCat();
 
 function displayCatItems(items) {
-    let parentElement = document.querySelector(".sliding-wrapper .products-container");
+    let parentElement = document.querySelector(".boxes-wrapper .products-container");
     parentElement.innerHTML = "";
     items.map((item , index) => {
         parentElement.innerHTML += `
@@ -29,14 +29,14 @@ function displayCatItems(items) {
             <div class="image-container" onclick="addProductID(${item.id})">
                 <img src="${item.image}" alt="">
             </div>
-            <i class="fa-regular fa-heart" style="font-weight:${item.like == true? "bold" : "normal"}" onclick="userAddToFavouriteAbility(${index})"></i>
+            <i class="fa-regular fa-heart fav-icon-${item.id}" style="font-weight:${item.like == true? "bold" : "normal"}" onclick="userAddToFavouriteAbility(${item.id})"></i>
             <div class="describtion" onclick="addProductID(${item.id})">
                 <span class="product p-name">${item.title}</span>
                 <small class="product p-category">${item.category}</small>
                 <samp class="product p-price">${item.price}</samp>
             </div>
             <div class="button">
-                <button class="add-to-cart" onclick="userAddToCartAbility(${index})">add to cart</button>
+                <button class="add-to-cart" onclick="userAddToCartAbility(${item.id})">add to cart</button>
             </div>
         </div> 
         ` 
@@ -106,8 +106,8 @@ function displayFilter(items , parent , id){
     items.map((item, index, Arr) => {
         parent.innerHTML += `
         <li>
-        <input type="checkbox" class="filter-item" id="${index}-${id}">
-        <label for="${index}-${id}">${item}</label>
+            <input type="checkbox" class="filter-item" id="${index}-${id}">
+            <label for="${index}-${id}">${item}</label>
         </li>
         `
     })

@@ -18,12 +18,14 @@
     <link rel="stylesheet" href="./css/variables.css">
     <link rel="stylesheet" href="./css/specialbefore.css">
     <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/cart.css">
+    <link rel="stylesheet" href="./css/footer-component.css">
+    <link rel="stylesheet" href="./css/cart&fav.css">
     <link rel="stylesheet" href="./css/reponsive.css">
 </head>
 <body>
     <!-- start header horizontal  -->
-    <header>
+    <header class="main-header"> 
+        <!-- top header  -->
         <section class="header">
             <div class="container">
                 <div class="header-left">
@@ -32,9 +34,12 @@
                 <div class="header-fill">
                     <div class="search-fill">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" id="search" placeholder="search for your product among 150 products">
+                        <input type="search" id="search" placeholder="search for your product among 150 products">
                     </div>
-
+                    
+                    <div class="search-results">
+                    </div>
+                    
                     <div class="search-right">
                         <button class="search-btn" id="search-btn">search</button>
                     </div>
@@ -58,12 +63,14 @@
                         </div>
                         <div class="user-settings">
                             <ul class="settings">
-                                <li><a href="#">settings</a></li>
+                                <li><a href="settings.html">settings</a></li>
                                 <li><a href="addproduct.html" target="_blank">sell on Estore</a></li>
                                 <li><a href="#" id="signout">sign out</a></li>
                             </ul>
+                            <hr>
                             <ul class="activity">
                                 <li><a href="favourites.html">your favourites</a></li>
+                                <li><a href="cart.html">your cart</a></li>
                             </ul>
                         </div>
                     </div>
@@ -95,6 +102,8 @@
                 </div>
             </div>
         </section>
+
+        <!-- navbar  -->
         <section class="navbar">
             <div class="overlay"></div>
             <div class="container">
@@ -103,21 +112,21 @@
                         <div class="shipping-header">
                             <i class="fa-solid fa-truck"></i>
                             <span>how do you want to pickup your order?</span>
-                            <i class="fa-solid fa-caret-down"></i>
+                            <i class="fa-solid fa-angle-down caret-icon"></i>
                             |
                         </div>
                         <div class="shipping-mode-picking">
                             <ul class="shipping-mode-details">
                                 <li class="shipping-icons">
-                                    <div class="shipping-way">
+                                    <div class="shipping-way" data-way="shipping">
                                         <i class="fa-solid fa-truck-moving"></i>
                                         <span>shipping</span>
                                     </div>
-                                    <div class="shipping-way">
+                                    <div class="shipping-way" data-way="picking">
                                         <i class="fa-solid fa-car-side"></i>
                                         <span>pickup</span>
                                     </div>
-                                    <div class="shipping-way">
+                                    <div class="shipping-way" data-way="delivery">
                                         <i class="fa-solid fa-truck-ramp-box"></i>
                                         <span>delivery</span>
                                     </div>
@@ -127,33 +136,23 @@
                                         <i class="fa-solid fa-location-dot"></i>
                                         <span>choose your address</span>
                                     </div>
-                                    <button class="address-btn">add address</button>
+                                    <button class="address-btn"><a href="settings.html">add address</a></button>
                                 </li>
                                 <li class="show-choosed-info">
-                                    <div class="choosed-address">
-                                        <i class="fa-solid fa-house-user"></i>
-                                        <span>cairo, egypt</span>
-                                    </div>
-                                    <div class="choosed-shipping">
-                                        <span>instore pickup</span>
-                                    </div>
                                 </li>
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-address-item">
-                        <span><i class="fa-solid fa-location-dot"></i>loaction</span>
+                    <li class="nav-address-item location-in-nav">
                     </li>
-                    <li class="nav-address-item">
-                        <span><i class="fa-solid fa-house-user"></i>address</span>
+                    <li class="nav-address-item address-in-nav">
                     </li>
                 </ul>
                 <ul class="nav-cat-menu">
-                    <li class="cat-item"><a href="#" data-cat="laptop & pc">laptop & pc</a></li>
-                    <li class="cat-item"><a href="#" data-cat="mobiles & accessories">mobiles & accessories</a></li>
-                    <li class="cat-item"><a href="#" data-cat="home furniture">home furniture</a></li>
-                    <li class="cat-item"><a href="#" data-cat="fashion">fashion</a></li>
-                    <li class="cat-item"><a href="#" data-cat="top list">top list</a></li>
+                    <li class="cat-item" data-cat="electronics"><a href="electronics-cat.html">electronics</a></li>
+                    <li class="cat-item" data-cat="clothes"><a href="clothes-cat.html">clothes</a></li>
+                    <li class="cat-item" data-cat="furniture"><a href="furniture-cat.html">furniture</a></li>
+                    <li class="cat-item" data-cat="toplist"><a href="#">top list</a></li>
                 </ul>
             </div>
         </section>
@@ -219,30 +218,36 @@
     <!-- start main section -->
     <section class="main-wrapper">
         <div class="overlay"></div>
-        <div class="cart-empty">
-            <div class="start-shopping">
-                <i class="fa-solid fa-cart-plus"></i>
-                <div>
-                    <span>make sure you search with correct string</span>
-                    <a href="index.html">go home</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="main-section-container">
-            <header class="recently-added">
+        <div class="container">
+            <header class="header">
                 <h2>search results</h2>
             </header>
             <section class="products-wrapper">
                 <div class="products-container">
-                    <div class="price">
+                    <div class="heading">
                         <div class="items-count">
+                            <span>search results</span>
                             <span></span>
                         </div>
                     </div>
                     <div class="cart-items-container"></div>
                 </div>
             </section>
+        </div>
+        <div class="empty">
+            <div class="start-shopping">
+                <img src="./images/empty-search.gif" alt="">
+                <div>
+                    <span>your search string is not correct!!</span>
+                    <button>tips to improve search</button>
+                    <ul class="improve-search">
+                        <li>Make sure that all words are spelled correctly</li>
+                        <li>Try different keywords</li>
+                        <li>Try more general keywords</li>
+                        <li>Try fewer keywords</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </section>
     <!-- end main section -->
@@ -264,6 +269,7 @@
     <!-- end footer  -->
     
     <script src="./js/global.js"></script>
+    <script src="./js/navbar.js"></script>
     <script src="./js/search.js"></script>
     <script src="./js/search-results.js"></script>
 </body>

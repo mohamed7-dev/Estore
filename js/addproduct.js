@@ -128,13 +128,23 @@ function addThumbs(){
 
 pForm.addEventListener("submit" , addNewProduct)
 function addNewProduct(e){
+    //get all products from ls
+    let productsFromLS = JSON.parse(localStorage.getItem("productDB"));
+    //get the highest value of id to add upon
+    let filtered = productsFromLS.map((item , i , Arr) => {
+        return item.id;
+    }).reduce((acc , current) => {
+        return acc > current? acc : current;
+    })
+
+    //get all thumbs in one object
     let thumbsObj = Object.assign({} , thumbsObject );
-    console.log(thumbsObj);
     if(localStorage.getItem("signupUser")){
-        let productsFromLS = JSON.parse(localStorage.getItem("productDB"));
         e.preventDefault();
+        console.log(filtered)
+
         let pObject = {
-            id: productsFromLS.length + 1,
+            id:filtered + 1,
             title: pTitle.value,
             brand: pBrand.value,
             category: catValue,
@@ -143,14 +153,14 @@ function addNewProduct(e){
             seller:pSeller.value,
             image: imageValue,
             thumbs: thumbsObj,
-            description:pDescArea.value,
+            describtion:pDescArea.value,
             quantity:1,
             NofPieces:pQty.value,
             addedByMe:"true"
         }
 
         if(mode == "add"){
-            if(pTitle.value != "" && catValue != "" && pPrice.value != "" && pSeller.value!="" && pDescArea.value != "" && pQty.value != ""){
+            if(pObject.id != undefined && pTitle.value != "" && catValue != "" && pPrice.value != "" && pSeller.value!="" && pDescArea.value != "" && pQty.value != ""){
                 cartEmpty.classList.remove("active");
                 mainContainer.style.display = "flex";
                 let AllProducts = [...productsFromLS , pObject];
@@ -167,13 +177,18 @@ function addNewProduct(e){
                 alert("all fields should be filled correctly");
             }
         }else{
-            console.log(tmp)
-            pObject.id = productsFromLS[tmp].id;
-            pObject.image = imageValue || productsFromLS[tmp].image;
-            pObject.category = pObject.category != undefined? catValue : productsFromLS[tmp].category;
-            pObject.mainCategory = pObject.mainCategory != undefined? catValue : productsFromLS[tmp].mainCategory;
-            productsFromLS[tmp]  = pObject;
-            localStorage.setItem("productDB" , JSON.stringify(productsFromLS));
+            let filtered = productsFromLS.find((item) => item.id == tmp);
+            console.log(tmp , filtered)
+            pObject.id = filtered.id;
+            pObject.image = imageValue || filtered.image;
+            pObject.category = pObject.category != undefined? catValue : filtered.category;
+            pObject.mainCategory = pObject.mainCategory != undefined? catValue : filtered.mainCategory;
+            
+            //add changes to local storage after remove from array
+            let remove = productsFromLS.indexOf(filtered);
+            productsFromLS.splice(remove , 1)
+            let AllProducts = [...productsFromLS , pObject];
+            localStorage.setItem("productDB" , JSON.stringify(AllProducts));
             //reset innerhtml of createbtn
             pSubmit.value = "add product";
             clearInputs();
@@ -241,43 +256,37 @@ function displayMyProducts(products){
             </div>           
             <div class="describtion-product-price">
                 <span class="product p-price">${product.price}</span>
-                <button class="action-btn" onclick="deleteProduct(${index})">delete product</button>
-                <button class="action-btn" onclick="updateProduct(${index})">edit product</button>
+                <button class="action-btn" onclick="deleteProduct(${product.id})">delete product</button>
+                <button class="action-btn" onclick="updateProduct(${product.id})">edit product</button>
             </div>
         </div> 
         ` 
 })
 }
 
-function updateProduct(index){
+function updateProduct(id){
     scrollTo({
         top:900,
         behavior:"smooth"
     })
 
     let data = JSON.parse(localStorage.getItem("productDB"));
-    let filtered = data.filter((item , i , Arr) => {
-        return item.addedByMe == "false";
-    }).map((item, index , Arr) => {
-        return Arr.length;
-    }).find((item,index,Arr) => {
-        return new Set(Arr);
-    })
 
+    let filtered = data.find((item) => item.id == id);
 
-    console.log(filtered , filtered+index)
-    pTitle.value = data[filtered + index].title;
-    pBrand.value = data[filtered + index].brand;
-    pPrice.value = data[filtered + index].price;
-    pSeller.value = data[filtered + index].seller;
-    pDescArea.value = data[filtered + index].description;
-    pQty.value = data[filtered + index].quantity;
-    pSubCatSelect.value = data[filtered + index].category;
-    pMainCatSelect.value = data[filtered + index].mainCategory;
-    pImage.src = data[filtered + index].image;
+    // console.log(filtered , filtered+index)
+    pTitle.value = filtered.title;
+    pBrand.value = filtered.brand;
+    pPrice.value = filtered.price;
+    pSeller.value = filtered.seller;
+    pDescArea.value = filtered.describtion;
+    pQty.value = filtered.quantity;
+    pSubCatSelect.value = filtered.category;
+    pMainCatSelect.value = filtered.mainCategory;
+    pImage.src = filtered.image;
     previewImage.style.cssText = "opacity:1; pointer-events:auto;left:30px;";
-    previewImage.src = data[filtered + index].image;
-    let Allthumbs = data[filtered + index].thumbs;
+    previewImage.src = filtered.image;
+    let Allthumbs = filtered.thumbs;
     for(let item in Allthumbs){
         previewThumbs.innerHTML += `
             <img src="${item}">
@@ -287,22 +296,20 @@ function updateProduct(index){
     pSubmit.value = "update product";
     //change mode to update 
     mode = "update";
-    //make id global
-    tmp = filtered + index;
+    // make id global
+    tmp = id;
 }
 
 //function to delete product
-function deleteProduct(index){
+function deleteProduct(id){
     let data = JSON.parse(localStorage.getItem("productDB"));
-    let filtered = data.filter((item , i , Arr) => {
-        return item.addedByMe == "false";
-    }).map((item, index , Arr) => {
-        return Arr.length;
-    }).find((item,index,Arr) => {
-        return new Set(Arr);
+    let filtered = data.find((item , i , Arr) => {
+        return item.id == id;
     })
 
-    data.splice(filtered + index , 1);
+    let indexOfFiltered = data.indexOf(filtered);
+
+    data.splice(indexOfFiltered , 1);
     localStorage.setItem("productDB" , JSON.stringify(data));
     getCreatedProducts(data);
 }

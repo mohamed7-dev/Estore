@@ -1,15 +1,16 @@
 let productsContainer = document.querySelector(".products-container .cart-items-container");
-let favEmpty = document.querySelector(".empty");
-let mainSectionContainer = document.querySelector(".main-wrapper .container");
+
 
 function displayFavourites(allFav = []){
     let favItemsFromLS = JSON.parse(localStorage.getItem("fav")) || allFav;
-    handleEmptyFav(favItemsFromLS);
+    handleEmptyPage(favItemsFromLS);
+    
     productsContainer.innerHTML = "";
+    
     favItemsFromLS.map((product) => {
         productsContainer.innerHTML += `
         <div class="product-card">
-        <div class="info-wrapper">
+        <div class="info-wrapper" onclick="addProductID(${product.id})">
             <div class="image-container">
                 <img src="${product.image}" alt="">
             </div>
@@ -48,11 +49,3 @@ function removeFromFav(id){
     }
 }
 
-
-//function to handle the visibility of empty cart div when the cart is empty
-function handleEmptyFav(arr){
-    if(arr.length === 0){
-        favEmpty.classList.add("active");
-        mainSectionContainer.style.display = "none";
-    }
-}

@@ -6,15 +6,33 @@ section.main-wrapper{
     flex-direction: column;
     justify-content: flex-start;
 }
+
 .main-wrapper .container{
+    width:85%;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    position: relative;
+    margin-top: var(--common-margin);
+    margin-bottom: var(--common-margin);
 }
-.items-count span{
+
+.container .header{
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--minor-margin);
+    padding:5px;
+    width: 100%;
+} 
+
+.header h2{
     color:var(--text-color);
-    font-size: 1rem;
-    text-transform: capitalize;
+    font-size: 1.5rem;
+    text-transform: capitalize;    
 }
+
 .products-wrapper .products-container {
+    max-width: 800px;
     width: 100%;
     border-radius: 10px;
     display: flex;
@@ -27,7 +45,6 @@ section.main-wrapper{
 }
 
 .products-container .heading{
-    text-align: right;
     color:var(--text-color);
     padding:10px;
     display: flex;
@@ -35,7 +52,14 @@ section.main-wrapper{
     align-items: center;
 }
 
+.items-count span{
+    color:var(--text-color);
+    font-size: 1rem;
+    text-transform: capitalize;
+}
+
 .products-container .cart-items-container{
+    width: 100%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -43,6 +67,7 @@ section.main-wrapper{
 }
 
 .cart-items-container .product-card{
+    max-width: 800px;
     width: 100%;
     min-height:140px;
     height: 100%;
@@ -182,15 +207,14 @@ section.main-wrapper{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap:20px;
 }
 
-.start-shopping i{
-    color:var(--main-color);
-    font-size: 9rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.start-shopping img{
+    max-width: 300px;
+    width: 100%;
+    object-fit: contain;
 }
 
 .start-shopping div {
@@ -208,14 +232,42 @@ section.main-wrapper{
     font-size: 1.2rem;
 }
 
-.start-shopping div a{
-    text-decoration: none;
-    color:var(--text-color);
-    border:1px solid var(--main-color);
-    border-radius: 15px;
-    padding:10px;
-}
+
 
 .start-shopping div a:hover{
     text-decoration: underline;
+}
+
+.start-shopping div button,
+.start-shopping div a{
+    text-decoration: none;
+    width: fit-content;
+    padding:10px;
+    background-color: var(--main-color);
+    border-radius: 10px;
+    color:#fff;
+    border:none;
+    outline: none;
+    font-weight: bold;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+
+.start-shopping div .improve-search{
+    background-color: #fff;
+    padding:10px;
+    border-radius: 10px;
+    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    font-size: 0.9rem;
+    list-style: circle;
+    list-style-position: inside;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+
+.start-shopping div button:hover + ul{
+    opacity: 1;
+    pointer-events: auto;
 }

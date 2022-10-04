@@ -20,11 +20,16 @@ section.mobile-vertical{
     display: none;
 }
 
+header.header-mobile{
+    display: none;
+}
+
 body{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 
 /* main header that contains header and navbar  */
@@ -34,8 +39,6 @@ header.main-header{
     height:100%;
     display: flex;
     flex-direction: column;
-    position: relative;
-    z-index: 5;
 }
 
 .main-header section.header{
@@ -140,7 +143,7 @@ a span{
 }
 
 .item .desc span.category{
-    color:var(--secondary-color);
+    color:var(--main-color);
 }
 
 .header-fill .search-fill{
@@ -214,6 +217,7 @@ a span{
     min-height: 7vh;
     height:100%;
     position: relative;
+    z-index: 10000;
 }
 
 .header-right .not-signed{
@@ -305,7 +309,7 @@ a span{
     pointer-events: none;
     transition: 0.2s ease;
     border-top: 3px solid var(--secondary-color);
-    z-index: 1000;
+    z-index: 10000;
 }
 
 .select-lang .select-content{
@@ -434,7 +438,7 @@ header.main-header section.navbar{
 }
 
 .nav-address-item i{
-    color:var(--secondary-color);
+    color:var(--main-color);
     margin-right: 10px;
 }
 
@@ -445,10 +449,10 @@ header.main-header section.navbar{
     cursor: pointer;
 }
 
-
 .shipping-header i:last-child{
     margin-left:10px;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
+    transition: 0.5s ease;
 }
 
 .shipping-mode-picking .shipping-mode-details{
@@ -465,6 +469,7 @@ header.main-header section.navbar{
     position: absolute;
     top:100%;
     left:0;
+    z-index: 10;
     opacity: 0;
     pointer-events: none;
     transition: 0.2s ease-in-out;
@@ -604,7 +609,6 @@ section.main-wrapper{
     align-items: center;
     background-color: var(--main-section-bkg);
     position: relative;
-    z-index: 3;
 }
 
 .main-wrapper .container{
@@ -642,7 +646,7 @@ section.main-wrapper{
     bottom:0;
     right:0;
     left:0;
-    z-index: 4;
+    z-index: 20;
     background-color: rgba(0, 0, 0, 0.644);
     transition: 0.2s ease;
 }

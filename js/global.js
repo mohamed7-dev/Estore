@@ -6,11 +6,12 @@ let cartHeader = document.querySelector(".cart-icon");
 let headerRTSection =Array.from(document.querySelectorAll(".container .header-right > div"));
 let mainWrapperOverlay = document.querySelector(".main-wrapper .overlay");
 let navbarOverlay = document.querySelector(".navbar .overlay");
+
 function dropdownToggle (){
     if(this.parentElement.classList.contains("active")){
         this.parentElement.classList.remove("active");
-        mainWrapperOverlay.classList.remove("active");
         navbarOverlay.classList.remove("active");
+        mainWrapperOverlay.classList.remove("active");
         this.classList.remove("active");
         //enable scrolling after removing active
         function enableScroll() {
@@ -22,9 +23,9 @@ function dropdownToggle (){
             div.classList.remove("active");
             div.children[0].classList.remove("active");
         })
-        this.parentElement.classList.add("active");
-        mainWrapperOverlay.classList.add("active");
         navbarOverlay.classList.add("active");
+        mainWrapperOverlay.classList.add("active");
+        this.parentElement.classList.add("active");
         this.classList.add("active");
         //disable scrolling after adding active
         window.onscroll = () => { window.scroll(0, 0); };
@@ -38,19 +39,33 @@ notSigneduserHeader.addEventListener("click" , dropdownToggle);
 cartHeader.addEventListener("click",dropdownToggle);
 
 
-//toggle visibility of the side bar in the small screens
-let toggleIcon = document.querySelector("#vert-bar-icon");
-let verticalHeader = document.querySelector("#mobile-vertical-header");
-let verticalHeaderCloseBtn = document.querySelector("#close-btn i");
+//vertical nav in mobile phone
+const linkItems = document.querySelectorAll(".link-item");
 
-toggleIcon.addEventListener("click" , () => {
-    verticalHeader.style.left = "0";
+linkItems.forEach((linkItem, index) => {
+    linkItem.addEventListener("click", () => {
+        document.querySelector(".active").classList.remove("active");
+        linkItem.classList.add("active");
+
+        const indicator = document.querySelector(".indicator");
+
+        indicator.style.left = `${index * 85 + 43}px`;
+    })
 })
 
-verticalHeaderCloseBtn.addEventListener("click" , () => {
-    verticalHeader.style.left = "-100%";
+let sideNav = document.querySelector("#side-nav");
+let sideNavClose = document.querySelector("#close-btn");
+let bars = document.querySelector("#bars-icon");
+
+bars.addEventListener("click" , () => {
+    sideNav.style.left = "0";
+    sideNavClose.style.right = "20px"; 
 })
 
+sideNavClose.addEventListener("click" , ()=> {
+    sideNav.style.left = "-100%";
+    sideNavClose.style.right = "-100%"; 
+})
 
 
 
@@ -158,19 +173,19 @@ function handleAddressInNav(){
 handleAddressInNav();
 
 //function to check if the user is existen in the data base or not and based on that add to cart or not 
-function userAddToCartAbility (index){
+function userAddToCartAbility (id){
     let CartItemsArray = localStorage.getItem("cart")? JSON.parse(localStorage.getItem("cart")) : []; 
     let Data =JSON.parse(localStorage.getItem("productDB")); 
     let cartItemsContainer = document.querySelector(".cart-content .items-container"); 
     let numberBadge = document.querySelector(".badge");
 
     if(localStorage.getItem("signupUser")){
-        let filtered = Data.find((item , i , Arr) => Arr.indexOf(item) == index);
-        let isRepeatedItem = CartItemsArray.some((item , i , Arr) => item.title == filtered.title); //returns true if repeated        
+        let filtered = Data.find((item , i , Arr) => item.id == id);
+        let isRepeatedItem = CartItemsArray.some((item , i , Arr) => item.id == filtered.id); //returns true if repeated        
         if(isRepeatedItem){
             
             CartItemsArray.map((item, i , Arr) => {
-                if(item.title == filtered.title){
+                if(item.id == filtered.id){
                     item.quantity += 1;
                 }else{
                     return item;
@@ -203,16 +218,20 @@ function userAddToCartAbility (index){
 }
 
 //function to add to favourite
-function userAddToFavouriteAbility (index){
+function userAddToFavouriteAbility (id){
     let favItemsArray = localStorage.getItem("fav")? JSON.parse(localStorage.getItem("fav")) : [];
     let Data =JSON.parse(localStorage.getItem("productDB")); 
-
+    let favIcons = document.querySelectorAll(`.fav-icon-${id}`);
+    console.log(favIcons)
     if(localStorage.getItem("signupUser")){
-        let filtered = Data.find((item , i , Arr) => Arr.indexOf(item) == index);
-        let isRepeatedItem = favItemsArray.some((item , i , Arr) => item.title == filtered.title); //returns true if repeated
-        if(isRepeatedItem){   
+        let filtered = Data.find((item , i , Arr) => item.id == id);
+        let isRepeatedItem = favItemsArray.some((item , i , Arr) => item.id == filtered.id); //returns true if repeated
+        if(isRepeatedItem){ 
+            favIcons.forEach((icon) => {
+                icon.style.cssText = "font-weight:normal"
+            })  
             favItemsArray.map((item , index , arr) => {
-                if(item.title == filtered.title){
+                if(item.id == filtered.id){
                     arr.splice(index , 1);
             }else{
                 return item;
@@ -221,13 +240,16 @@ function userAddToFavouriteAbility (index){
 
         }else{
             filtered.like = true;
+            favIcons.forEach((icon) => {
+                icon.style.cssText = "font-weight:bold"
+            })
             favItemsArray.push(filtered);
         }
         //add item to local storage
         window.localStorage.setItem("fav" , JSON.stringify(favItemsArray));
         Data.map((item) => {
             if(isRepeatedItem){
-                if(item.title == filtered.title){
+                if(item.id == filtered.id){
                     delete item.like;
                 }else{
                     return item;
@@ -238,7 +260,7 @@ function userAddToFavouriteAbility (index){
 
         })
         localStorage.setItem("productDB" , JSON.stringify(Data))
-        displayProducts(Data)
+        // displayProducts(Data)
     }else{
         window.location = "signinup.html"
     }
@@ -257,3 +279,23 @@ function handleClickingOnCat(){
 }
 
 handleClickingOnCat()
+
+
+//function to add product id to local storage and redirect to the product page
+function addProductID(id){
+    window.localStorage.removeItem("productIndex");
+    window,localStorage.setItem("productId" , JSON.stringify(id));
+    window,location = "product.html";
+}
+
+//handle empty pages
+function handleEmptyPage(products){
+    let pageEmpty = document.querySelector(".empty");
+    let mainSectionContainer = document.querySelector(".main-wrapper .container");
+    let itemsCount = document.querySelector(`.items-count span:last-child`);
+    itemsCount.innerHTML = `(${products.length} items)`;
+    if(products.length === 0){
+        pageEmpty.classList.add("active");
+        mainSectionContainer.style.display = "none";
+    }
+}

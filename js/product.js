@@ -1,20 +1,25 @@
 
 function previewProduct(){
     let LSproductsDB = JSON.parse(localStorage.getItem("productDB"));
-    let LSProductID = JSON.parse(localStorage.getItem("productID"));
-    let clickedItem = LSproductsDB.find((item) => item.id == LSProductID);
-    displayProductDetails(clickedItem);
+    let LSProductId = JSON.parse(localStorage.getItem("productId"));
+    let clickedItem = LSproductsDB.find((item,index,Arr) => item.id == LSProductId);
+    displayProductDetails(clickedItem,LSProductId);
 }
 
 previewProduct();
 
-function displayProductDetails(product){
+function displayProductDetails(product,id){
+    let user = JSON.parse(localStorage.getItem("signupUser"));
     let productParent = document.querySelector(".main-wrapper .container");
     productParent.innerHTML = `
     <div class="left-side">
         <div class="image-container">
             <div class="thumb-container"></div>
-            <img src="${product.image}" alt="" id="mainImage">
+            <img src="${product.image}" class="main-img" alt="" id="mainImage">
+            <div class="modal">
+                <span class="close">&times;</span>
+                <img class="modal-content" src="" id="img01">
+            </div>
         </div>
         <div class="product-describtion">
             <h2>about this product</h2>
@@ -30,7 +35,7 @@ function displayProductDetails(product){
     <div class="right-side">
         <div class="product-fav">
             <span class="p-cat">${product.category}</span>
-            <i class="fa-regular fa-heart fav-icon" style="font-weight:${product.like == true? "bold" : "normal"}" onclick="AddToFavourite(${product.id})"></i>
+            <i class="fa-regular fa-heart fav-icon-${id}" style="font-weight:${product.like == true? "bold" : "normal"}" onclick="userAddToFavouriteAbility(${id})"></i>
         </div>
         <div class="product-title">
             <span class="p-title">${product.title}</span>
@@ -43,7 +48,27 @@ function displayProductDetails(product){
                 <i class="fa-regular fa-star"></i>
             </span>
             <span class="p-price">${product.price}</span>
-            <button onclick="userAddToCartAbility(${product.id})">add to cart</button>
+            <button class="action-btn" onclick="userAddToCartAbility(${id})">add to cart</button>
+        </div>
+        <div class="product-address">
+            <div class="address-details">
+                <i class="fa-solid fa-truck-arrow-right"></i>
+                <span>${user[2].shippingWay}</span>
+                <span>arrives to ${user[1].city}</span>
+            </div>
+            <div class="seller-details">
+                <span><i class="fa-solid fa-store"></i> <span>sold by : </span>${product.seller}</span>
+                <span><i class="fa-solid fa-truck-ramp-box"></i><span>shipped by : </span>E store</span>
+            </div>
+            <div class="update-address">
+                <button class="action-btn">
+                    <a href="settings.html">update address information</a>
+                </button>
+            </div>
+        </div>
+        <div class="add-to-fav">
+            <i class="fa-regular fa-heart fav-icon-${id}" style="font-weight:${product.like == true? "bold" : "normal"}" onclick="userAddToFavouriteAbility(${id})"></i>
+            <a href="" onclick="AddToFavourite(${product.id}">add to favourites</a>
         </div>
     </div>
     `
@@ -91,41 +116,26 @@ function handleImageSrc(product){
     })
 }
 
-function AddToFavourite(id){
-    if(localStorage.getItem("signupUser")){
-        let filtered = resultsFromLS.find(element => element.id == id);
-        let isRepeatedItem = favItemsArray.some(item => item.id == filtered.id); //returns true if repeated
-        console.log(isRepeatedItem)
-        if(isRepeatedItem){   
-            favItemsArray.map((item , index , arr) => {
-                if(item.id == filtered.id){
-                    arr.splice(index , 1);
-            }else{
-                return item;
-            }
-            });
 
-        }else{
-            filtered.like = true;
-            favItemsArray.push(filtered);
-        }
-        //add item to local storage
-        window.localStorage.setItem("fav" , JSON.stringify(favItemsArray));
+// handle modal image 
+// Get the modal
+let modal = document.querySelector(".modal");
+let modalImg = document.querySelector("#img01");
+let mainImg = document.querySelector("#mainImage");
+let span = document.querySelector("span.close");
 
-            if(isRepeatedItem){
-                resultsFromLS.map((item) => {
-                    if(item.id == filtered.id){
-                        delete item.like;
-                    }else{
-                        return item;
-                    }
-                })   
-            }else{
-                filtered.like = true;
-            }
-        localStorage.setItem("productDB" , JSON.stringify(resultsFromLS));
-        displayProductDetails(filtered)
-    }else{
-        window.location = "signinup.html"
+mainImg.onclick = function handleModal(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+}
+
+document.onclick = function (e){
+    if(e.target.className != "modal-content" && e.target.className != "main-img"){
+        modal.style.display = "none";
     }
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+    modal.style.display = "none";
 }

@@ -1,42 +1,32 @@
-let container = document.querySelector(".cart-items-container");
-let searchDataFromLS = JSON.parse(localStorage.getItem("search"));
-let searchEmpty = document.querySelector(".cart-empty");
-let mainSection = document.querySelector(".main-section-container");
-
-
+let productsContainer = document.querySelector(".products-container .cart-items-container");
 
 function displaySearchItemsInPage(){
-    handleEmptySearch();
-    container.innerHTML = "";
-    searchDataFromLS.map((item,index,Arr) => {
-        container.innerHTML += `
-            <div class="product-card">
-            <div class="image-container">
-                <img src="${item.image}" alt="">
-            </div>
-            <div class="describtion-container">
+    let searchDataFromLS = JSON.parse(localStorage.getItem("search")) || [];
+    handleEmptyPage(searchDataFromLS);
+    
+    productsContainer.innerHTML = "";
+    searchDataFromLS.map((product , index , arr) => {
+        productsContainer.innerHTML += `
+        <div class="product-card">
+            <div class="info-wrapper" onclick="addProductID(${product.id})">
+                <div class="image-container">
+                    <img src="${product.image}" alt="">
+                </div>
                 <div class="describtion-product-info">
-                    <span class="product p-name">${item.title}</span>
-                    <span class="product p-category">${item.category}</span>
-                    <span class="product p-quantity">qunatity: ${item.quantity}</span>
-                    <button class="add-to-cart" onclick="userAddToCartAbility(${index})">add to cart</button>
-                </div>
-                <div class="describtion-product-price">
-                    <span class="product p-price">${item.price}</span>
-                </div>
+                    <span class="product p-name">${product.title}</span>
+                    <span class="product p-category">${product.category}</span>
+                    <span class="product p-quantity">qunatity: ${product.quantity}</span>
+                </div> 
+            </div>           
+            <div class="describtion-product-price">
+                <span class="product p-price">${product.price}</span>
+                <button class="action-btn" onclick="removeFromCart(${product.id})">remove from cart</button>
             </div>
         </div> 
-            `
+        `   
     })
 
     localStorage.removeItem("search");
 }
 
 displaySearchItemsInPage();
-
-function handleEmptySearch(){
-    if(searchDataFromLS.length === 0){
-        searchEmpty.classList.add("active");
-        mainSection.style.display = "none";
-    }
-}

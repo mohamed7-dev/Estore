@@ -14,7 +14,6 @@ let imageValue;
 editButtons.forEach((item) => {
     item.addEventListener("click" , (e) => {
         e.preventDefault();
-        // console.log(item.previousElementSibling.children[1].removeAttribute("disabled"))
             item.previousElementSibling.children[1].disabled = false;
             item.previousElementSibling.children[1].focus();
             item.style.cssText = "background-color:var(--secondary-color); color:var(--text-color)";
@@ -23,7 +22,6 @@ editButtons.forEach((item) => {
 
 //get data from local storage
 let user =JSON.parse(localStorage.getItem("signupUser"))
-console.log(user)
 function handleInputs(){
     uName.value = user[0].username;
     uPasswd.value = user[0].password;
