@@ -141,7 +141,6 @@ if(bigScreenNav.matches){
 }
 
 function handleClickingOnCat(navCats){
-    console.log(navCats)
     navCats.forEach((item) => {
         item.addEventListener("click" , () => {
             let clickedCat = item.dataset.cat;

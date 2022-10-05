@@ -120,6 +120,13 @@ let mobileScreenNav = window.matchMedia("(max-width:995px)");
             sideNavClose.style.right = "-100%"; 
         })
 
+        document.addEventListener("click" , (e) => {
+            if(e.target.tagName !== "I"){
+                sideNav.style.left = "-100%";
+                sideNavClose.style.right = "-100%"; 
+            }
+        })
+
         //lower header address bar
         let address = document.querySelector(".lower-header .address-details");
         let addressFromLS = JSON.parse(localStorage.getItem("signupUser"))
