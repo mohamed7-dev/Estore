@@ -127,7 +127,6 @@ function userAddToFavouriteAbility (id){
 }
 
 //handle clicking on nav categories links
-let navCategories = document.querySelectorAll(".nav-cat-menu .cat-item");
 
 let mobileScreenNavMatch = window.matchMedia("(max-width:995px)");
 if(mobileScreenNavMatch.matches){
@@ -135,7 +134,14 @@ if(mobileScreenNavMatch.matches){
     handleClickingOnCat(navCategoriesMobile);
 }
 
+let bigScreenNav = window.matchMedia("(min-width:995px)");
+if(bigScreenNav.matches){
+    let navCategories = document.querySelectorAll(".nav-cat-menu .cat-item");
+    handleClickingOnCat(navCategories)
+}
+
 function handleClickingOnCat(navCats){
+    console.log(navCats)
     navCats.forEach((item) => {
         item.addEventListener("click" , () => {
             let clickedCat = item.dataset.cat;
@@ -143,8 +149,6 @@ function handleClickingOnCat(navCats){
         })
     })
 }
-
-handleClickingOnCat(navCategories)
 
 
 //function to add product id to local storage and redirect to the product page

@@ -53,8 +53,8 @@ function displayProductDetails(product,id){
         <div class="product-address">
             <div class="address-details">
                 <i class="fa-solid fa-truck-arrow-right"></i>
-                <span>${user.length > 1? user[2].shippingWay : "delivery"}</span>
-                <span>arrives to ${user.length > 1? user[1].city : "cairo"}</span>
+                <span>${user[2] == undefined? "delivery" : user[2].shippingWay }</span>
+                <span>arrives to ${user[1] == undefined? "cairo" : user[1].city}</span>
             </div>
             <div class="seller-details">
                 <span><i class="fa-solid fa-store"></i> <span>sold by : </span>${product.seller}</span>
