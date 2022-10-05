@@ -312,11 +312,13 @@ function deleteProduct(id){
 
 //function to handle the visibility of empty product div when the div is empty
 function handleEmptyCart(products){
-    if(products.length == 0 || []){
+    if(products.length == 0){
         cartEmpty.classList.add("active");
         mainContainer.style.display = "none";
     }
 }
+
+// handleEmptyCart();
 
 //onclick on signout button go back to the sign in page
 let signoutBtn = document.querySelector("#signout");

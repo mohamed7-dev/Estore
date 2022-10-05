@@ -129,8 +129,14 @@ function userAddToFavouriteAbility (id){
 //handle clicking on nav categories links
 let navCategories = document.querySelectorAll(".nav-cat-menu .cat-item");
 
-function handleClickingOnCat(){
-    navCategories.forEach((item) => {
+let mobileScreenNavMatch = window.matchMedia("(max-width:995px)");
+if(mobileScreenNavMatch.matches){
+    let navCategoriesMobile = document.querySelectorAll(".cat-target");
+    handleClickingOnCat(navCategoriesMobile);
+}
+
+function handleClickingOnCat(navCats){
+    navCats.forEach((item) => {
         item.addEventListener("click" , () => {
             let clickedCat = item.dataset.cat;
             localStorage.setItem("clickedCat" , JSON.stringify(clickedCat));
@@ -138,7 +144,7 @@ function handleClickingOnCat(){
     })
 }
 
-handleClickingOnCat()
+handleClickingOnCat(navCategories)
 
 
 //function to add product id to local storage and redirect to the product page

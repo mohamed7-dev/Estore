@@ -56,35 +56,11 @@ function handleShippingWay(){
         })
     })
 }
-
-handleShippingWay();
-
-
-function handleAddressInNav(){
-    let userAuth = JSON.parse(localStorage.getItem("signupUser"));
-    choosedAddressInfo.innerHTML = `
-    <div class="choosed-address">
-        <i class="fa-solid fa-house-user"></i>
-        <span>${userAuth[1].city}<span>
-    </div>
-    <div class="choosed-shipping">
-        <span>${userAuth[2].shippingWay}</span>
-    </div>
-    `
-
-    locationInNav.innerHTML = `
-        <span><i class="fa-solid fa-location-dot"></i>${userAuth[1].city}</span>
-    `
-
-    addressInNav.innerHTML = `
-        <span><i class="fa-solid fa-house-user"></i>${userAuth[1].aprt} , ${userAuth[1].street}</span>
-    `
+if(JSON.parse(localStorage.getItem("signupUser")) > 1){
+    handleShippingWay();
 }
 
-handleAddressInNav();
 
-
-//header bar 
 
 //get elemsnts to control show and hido of dropdown menus
 let langHeader = document.querySelector(".selected-lang");
@@ -150,8 +126,8 @@ let mobileScreenNav = window.matchMedia("(max-width:995px)");
         address.innerHTML = "";
         address.innerHTML = `
         <div class="address-info">
-            <span>${addressFromLS[1].city} ,</span>
-            <span>${addressFromLS[1].street}</span>
+            <span>${addressFromLS.length>1? addressFromLS[1].city : "cairo"} ,</span>
+            <span>${addressFromLS.length>1? addressFromLS[1].street : "NA"}</span>
         </div>
         <button><a href="settings.html">update address<a></button>
         `
@@ -168,8 +144,6 @@ let mobileScreenNav = window.matchMedia("(max-width:995px)");
             i.classList.add("active");
         };
         });
-
-
 } 
 
 // console.log(retrieve)
@@ -188,3 +162,25 @@ if(dataFromLS){
     signedUserAccount.style.display = "none";
     notSignedUserAccount.style.display = "flex";
 }
+
+function handleAddressInNav(){
+    let userAuth = JSON.parse(localStorage.getItem("signupUser"));
+    choosedAddressInfo.innerHTML = `
+    <div class="choosed-address">
+        <i class="fa-solid fa-house-user"></i>
+        <span>${userAuth[1] == undefined? "cairo" : userAuth[1].city}<span>
+    </div>
+    <div class="choosed-shipping">
+        <span>${userAuth[2] == undefined? "delivery" : userAuth[2].shippingWay }</span>
+    </div>
+    `
+
+    locationInNav.innerHTML = `
+        <span><i class="fa-solid fa-location-dot"></i>${userAuth[1] == undefined? "cairo" : userAuth[1].city}</span>
+    `
+
+    addressInNav.innerHTML = `
+        <span><i class="fa-solid fa-house-user"></i>${userAuth[1] == undefined? "NA" : userAuth[1].aprt} , ${userAuth[1] == undefined? "NA" : userAuth[1].street}</span>
+    `
+}
+handleAddressInNav();

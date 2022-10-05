@@ -9,7 +9,7 @@ function previewProduct(){
 previewProduct();
 
 function displayProductDetails(product,id){
-    let user = JSON.parse(localStorage.getItem("signupUser"));
+    let user = JSON.parse(localStorage.getItem("signupUser")) || [];
     let productParent = document.querySelector(".main-wrapper .container");
     productParent.innerHTML = `
     <div class="left-side">
@@ -53,8 +53,8 @@ function displayProductDetails(product,id){
         <div class="product-address">
             <div class="address-details">
                 <i class="fa-solid fa-truck-arrow-right"></i>
-                <span>${user[2].shippingWay}</span>
-                <span>arrives to ${user[1].city}</span>
+                <span>${user.length > 1? user[2].shippingWay : "delivery"}</span>
+                <span>arrives to ${user.length > 1? user[1].city : "cairo"}</span>
             </div>
             <div class="seller-details">
                 <span><i class="fa-solid fa-store"></i> <span>sold by : </span>${product.seller}</span>

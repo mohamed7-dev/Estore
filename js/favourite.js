@@ -34,6 +34,7 @@ displayFavourites()
 //remove items from favourites
 function removeFromFav(id){
     if(window.localStorage.getItem("fav")){
+        let resultsFromLS = JSON.parse(localStorage.getItem("productDB"));
         let LSfavItems = JSON.parse(localStorage.getItem("fav"));
         let filteredItems = LSfavItems.filter(item => item.id !== id);
         window.localStorage.setItem("fav" , JSON.stringify(filteredItems));

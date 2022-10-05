@@ -10,19 +10,23 @@ let uAvatarInput = document.querySelector("#img");
 let imageValue;
 
 
-
-editButtons.forEach((item) => {
-    item.addEventListener("click" , (e) => {
-        e.preventDefault();
-            item.previousElementSibling.children[1].disabled = false;
-            item.previousElementSibling.children[1].focus();
-            item.style.cssText = "background-color:var(--secondary-color); color:var(--text-color)";
+if(localStorage.getItem("signupUser")){
+    editButtons.forEach((item) => {
+        item.addEventListener("click" , (e) => {
+            e.preventDefault();
+                item.previousElementSibling.children[1].disabled = false;
+                item.previousElementSibling.children[1].focus();
+                item.style.cssText = "background-color:var(--secondary-color); color:var(--text-color)";
+        })
     })
-})
+}else{
+    window.location = "signinup.html";
+}
+
 
 //get data from local storage
-let user =JSON.parse(localStorage.getItem("signupUser"))
 function handleInputs(){
+let user =JSON.parse(localStorage.getItem("signupUser"))
     uName.value = user[0].username;
     uPasswd.value = user[0].password;
     uEmail.value = user[0].email;
@@ -62,7 +66,7 @@ form.addEventListener("submit" , (e) => {
         password : uPasswd.value,
         avatar : imageValue
     }
-
+let user =JSON.parse(localStorage.getItem("signupUser"));
     user.splice(0,1,userObj);
     localStorage.setItem("signupUser" , JSON.stringify(user));
 
@@ -100,8 +104,36 @@ let phone = document.querySelector("#phone");
 let addressForm = document.querySelector("form.address");
 let submitAddressBtn = document.querySelector("#submit-address-btn");
 
+
+//onsubmit change address info in local storage
+addressForm.addEventListener("submit" , (e) => {
+    let user =JSON.parse(localStorage.getItem("signupUser"));
+    e.preventDefault();
+    let addressObj = {
+        userName : user[0].username,
+        email : user[0].email,
+        fName :   fName.value,
+        lName :   lName.value,
+        city :   city.value,
+        street :  street.value,
+        aprt :  aprt.value,
+        phone : phone.value,
+    }
+
+    user[1] = addressObj;
+    localStorage.setItem("signupUser" , JSON.stringify(user));
+
+    editButtons.forEach((item) => {
+        item.style.cssText = "background-color:#fff; color:var(--main-color)";
+    })
+
+    location.reload();
+    handleAddressInNav();
+} )
+
 //show address info when reloading 
 function retrieveAddressInfo(){
+let user =JSON.parse(localStorage.getItem("signupUser"))
     fName.value = user[1].fName;
     lName.value = user[1].lName;
     city.value = user[1].city;
@@ -111,27 +143,3 @@ function retrieveAddressInfo(){
 }
 
 retrieveAddressInfo();
-
-//onsubmit change address info in local storage
-addressForm.addEventListener("submit" , (e) => {
-    e.preventDefault();
-    let addressObj = {
-        userName : user[0].username,
-        email : user[0].email,
-        fName : fName.value,
-        lName : lName.value,
-        city : city.value,
-        street : street.value,
-        aprt : aprt.value,
-        phone : phone.value
-    }
-
-    user.push(addressObj);
-    localStorage.setItem("signupUser" , JSON.stringify(user));
-
-    editButtons.forEach((item) => {
-        item.style.cssText = "background-color:#fff; color:var(--main-color)";
-    })
-
-    location.reload();
-} )
