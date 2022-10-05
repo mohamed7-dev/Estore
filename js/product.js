@@ -129,11 +129,11 @@ mainImg.onclick = function handleModal(){
     modalImg.src = this.src;
 }
 
-document.onclick = function (e){
-    if(e.target.className != "modal-content" && e.target.className != "main-img"){
+document.addEventListener("click" , (e) => {
+    if(e.target.className != "modal-content" && e.target.tagName != "IMG"){
         modal.style.display = "none";
     }
-}
+})
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() { 
