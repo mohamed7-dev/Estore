@@ -45,8 +45,8 @@ function displayProducts(allData , parent ,mode){
 }
 
 //function to filter cats and sidplay them
-let AllDataFromLS = JSON.parse(localStorage.getItem("productDB"));
 function DisplayElectroCat(){
+    let AllDataFromLS = JSON.parse(localStorage.getItem("productDB"));
     let filtered = AllDataFromLS.filter((item) => {
         return item.mainCategory == "electronics";
     })
@@ -54,10 +54,13 @@ function DisplayElectroCat(){
     let mode = "electro";
     displayProducts(filtered , electroParent ,mode); 
 }
+
+//display elecrtro cat after running the display function 
 DisplayElectroCat();
 
 
 function displayClothesCat(){
+    let AllDataFromLS = JSON.parse(localStorage.getItem("productDB"));
     let filteredClothes = AllDataFromLS.filter((item) => {
         return item.mainCategory == "clothes";
     })
@@ -65,6 +68,8 @@ function displayClothesCat(){
     let mode = "clothes";
     displayProducts(filteredClothes, clothesParent,mode);
 }
+
+//display clothes cat after running the display electro cat 
 displayClothesCat();
 
 

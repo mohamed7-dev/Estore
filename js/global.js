@@ -1,21 +1,10 @@
-//onclick on signout button go back to the sign in page
-let signoutBtn = document.querySelector("#signout");
-signoutBtn.addEventListener("click" , () => {
-    localStorage.clear();
-    setTimeout(() => {
-        window.location = "signinup.html";
-    },500);
-})
-
-
-
 // get elements to add to cart
 let cartItemsContainer = document.querySelector(".cart-content .items-container"); 
 let numberBadge = document.querySelector(".badge");
 
 function handleCartHeader (){
-    let Data  = JSON.parse(localStorage.getItem("cart")) || [];
-    if(Data != []){
+    let Data  = JSON.parse(localStorage.getItem("cart"));
+    if(Data != null){
         cartItemsContainer.innerHTML = "";
         Data.map((item) => {
             cartItemsContainer.innerHTML += `
@@ -29,8 +18,19 @@ function handleCartHeader (){
         numberBadge.innerHTML = Data.length;
     }
 }
-
 handleCartHeader();
+
+
+//get user data from ls
+function getCurrentUserSettings(){
+    let users =JSON.parse(localStorage.getItem("signupUser"))
+    if(users != null){
+        let currentUserID = JSON.parse(localStorage.getItem("currentUserID"));
+        let filtered = users.find((user) => user.id == currentUserID);
+        return filtered;
+    }
+}
+let userInfo = getCurrentUserSettings();
 
 //function to check if the user is existen in the data base or not and based on that add to cart or not 
 function userAddToCartAbility (id){
@@ -39,7 +39,7 @@ function userAddToCartAbility (id){
     let cartItemsContainer = document.querySelector(".cart-content .items-container"); 
     let numberBadge = document.querySelector(".badge");
 
-    if(localStorage.getItem("signupUser")){
+    if(Data != null && userInfo.sign == "in"){
         let filtered = Data.find((item , i , Arr) => item.id == id);
         let isRepeatedItem = CartItemsArray.some((item , i , Arr) => item.id == filtered.id); //returns true if repeated        
         if(isRepeatedItem){
@@ -82,8 +82,7 @@ function userAddToFavouriteAbility (id){
     let favItemsArray = localStorage.getItem("fav")? JSON.parse(localStorage.getItem("fav")) : [];
     let Data =JSON.parse(localStorage.getItem("productDB")); 
     let favIcons = document.querySelectorAll(`.fav-icon-${id}`);
-    console.log(favIcons)
-    if(localStorage.getItem("signupUser")){
+    if(Data != null && userInfo.sign == "in"){
         let filtered = Data.find((item , i , Arr) => item.id == id);
         let isRepeatedItem = favItemsArray.some((item , i , Arr) => item.id == filtered.id); //returns true if repeated
         if(isRepeatedItem){ 
@@ -120,7 +119,6 @@ function userAddToFavouriteAbility (id){
 
         })
         localStorage.setItem("productDB" , JSON.stringify(Data))
-        // displayProducts(Data)
     }else{
         window.location = "signinup.html"
     }

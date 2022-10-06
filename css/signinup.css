@@ -198,7 +198,7 @@ form .error-msg.show-error{
 }
 
 /* style buttons  */
-.input-field input[type="button"]{
+.input-field input[type="submit"]{
     background-color: var(--main-color);
     border: none;
     color:var(--btn-color);
@@ -208,7 +208,7 @@ form .error-msg.show-error{
     cursor: pointer;
 }
 
-.input-field input[type="button"]:hover{
+.input-field input[type="submit"]:hover{
     background-color: var(--btn-hover-bkg);
     letter-spacing: 1px;
 }

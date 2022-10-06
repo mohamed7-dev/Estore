@@ -1,4 +1,4 @@
-//toggle the active class on the pickup order header in the home page 
+//toggle the active class on the pickup order nav in the home page 
 let pickupOrderHeader = document.querySelector(".shipping .shipping-header");
 let pickupOrderDetails = document.querySelector(".shipping-mode-picking .shipping-mode-details");
 let cartIcon = document.querySelector(".caret-icon");
@@ -22,45 +22,18 @@ pickupOrderHeader.addEventListener("click" , () => {
 
 //rmove active onclick on window
 document.addEventListener("click" , (e) => {
-    if(e.target.className != "shipping-header" 
-    && e.target.tagName != "SPAN" && e.target.tagName != "I" 
-    && e.target.className !== "shipping-mode-details"
-    && e.target.className !== "show-user-info active"
-    && e.target.className !== "cart-icon active"
-    && e.target.className !== "selected-lang active"){
-        pickupOrderDetails.classList.remove("active");
-        mainWrapperOverlay.classList.remove("active");
+    if(pickupOrderDetails.classList.contains("active")){
+        if(e.target.className != "shipping-header" 
+        && e.target.tagName != "SPAN" && e.target.tagName != "I" 
+        && e.target.className !== "shipping-mode-details"
+        && e.target.className !== "show-user-info active"
+        && e.target.className !== "cart-icon active"
+        && e.target.className !== "selected-lang active"){
+            pickupOrderDetails.classList.remove("active");
+            mainWrapperOverlay.classList.remove("active");
+        }
     }
-})
-
-
-//handle address in navbar 
-let choosedAddressInfo = document.querySelector(".show-choosed-info");
-let shippingWay = document.querySelectorAll(".shipping-way");
-let locationInNav = document.querySelector(".nav-address-item.location-in-nav");
-let addressInNav = document.querySelector(".nav-address-item.address-in-nav");
-
-function handleShippingWay(){
-    let userInfoFromLS = JSON.parse(localStorage.getItem("signupUser"));
-    shippingWay.forEach((item) => {
-        item.addEventListener("click" , () => {
-            let pickedWay = {
-                userName : userInfoFromLS[0].username,
-                email : userInfoFromLS[0].email,
-                shippingWay : item.dataset.way
-            }
-            userInfoFromLS.splice(2,1,pickedWay);
-            localStorage.setItem("signupUser" , JSON.stringify(userInfoFromLS));
-
-            handleAddressInNav();
-        })
-    })
-}
-if(JSON.parse(localStorage.getItem("signupUser")) > 1){
-    handleShippingWay();
-}
-
-
+})    
 
 //get elemsnts to control show and hido of dropdown menus
 let langHeader = document.querySelector(".selected-lang");
@@ -96,11 +69,97 @@ function dropdownToggle (){
     }
 }
 
-
 langHeader.addEventListener("click",dropdownToggle);
 signedUserHeader.addEventListener("click",dropdownToggle);
 notSigneduserHeader.addEventListener("click" , dropdownToggle);
 cartHeader.addEventListener("click",dropdownToggle);
+
+
+//constrol the user settings menu in the header of the home page
+let signedUserAccount = document.querySelector(".header-right .signed");
+let notSignedUserAccount = document.querySelector(".header-right .not-signed");
+let homeUserName = document.querySelector("#signed-user-name");
+let userImage = document.querySelector("#user-image");
+let dataFromLS = JSON.parse(localStorage.getItem("signupUser"));
+
+//function to handle user info in the header bar
+function handleUserInfo(){
+    //get current user id
+    let currentUserID = JSON.parse(localStorage.getItem("currentUserID"));
+
+    //filter users by id
+    let filtered = dataFromLS.find((user) => {
+        return user.id == currentUserID;
+    })
+
+    if(dataFromLS){
+        homeUserName.innerHTML = filtered.username;
+        userImage.src = filtered.avatar;
+    }else{
+        signedUserAccount.style.display = "none";
+        notSignedUserAccount.style.display = "flex";
+    }
+
+    let signoutBtn = document.querySelector("#signout");
+    handleSignOut(signoutBtn,filtered);
+}
+handleUserInfo();
+
+//get user data from ls
+function getCurrentUserInfo(){
+    let users =JSON.parse(localStorage.getItem("signupUser"))
+    if(users != null){
+        let currentUserID = JSON.parse(localStorage.getItem("currentUserID"));
+        let filtered = users.find((user) => user.id == currentUserID);
+        return filtered;
+    }
+}
+
+//onclick on signout button go back to the sign in page
+function handleSignOut(target,currentUser){
+    let userIndex = dataFromLS.indexOf(currentUser);
+    target.addEventListener("click" , () => {
+        console.log(target , currentUser)
+        currentUser["sign"] = "out";
+        dataFromLS.splice(userIndex,1,currentUser);
+        localStorage.setItem("signupUser" , JSON.stringify(dataFromLS));
+        setTimeout(() => {
+            window.location = "signinup.html#login";
+        },500);
+    })
+}
+
+
+//function to handle address in navbar
+let choosedAddressInfo = document.querySelector(".show-choosed-info");
+let locationInNav = document.querySelector(".nav-address-item.location-in-nav");
+let addressInNav = document.querySelector(".nav-address-item.address-in-nav");
+
+function handleAddressInNav(){
+    //get user info
+    let user = getCurrentUserInfo();
+    if(user != undefined){
+        choosedAddressInfo.innerHTML = `
+        <div class="choosed-address">
+            <i class="fa-solid fa-house-user"></i>
+            <span>${user.city || "cairo"}<span>
+        </div>
+        <div class="choosed-shipping">
+            <span>${user.shippingWay || "delivery"}</span>
+        </div>
+        `
+    
+        locationInNav.innerHTML = `
+            <span><i class="fa-solid fa-location-dot"></i>${user.city || "cairo"}</span>
+        `
+    
+        addressInNav.innerHTML = `
+            <span><i class="fa-solid fa-house-user"></i>${user.aprt || "NA"} , ${user.street || "NA"}</span>
+        `
+    }
+
+}
+handleAddressInNav();
 
 //navbar in mobile phones
 let mobileScreenNav = window.matchMedia("(max-width:995px)");
@@ -129,18 +188,24 @@ let mobileScreenNav = window.matchMedia("(max-width:995px)");
 
         //lower header address bar
         let address = document.querySelector(".lower-header .address-details");
-        let addressFromLS = JSON.parse(localStorage.getItem("signupUser"))
-        address.innerHTML = "";
-        address.innerHTML = `
-        <div class="address-info">
-            <span>${addressFromLS.length>1? addressFromLS[1].city : "cairo"} ,</span>
-            <span>${addressFromLS.length>1? addressFromLS[1].street : "NA"}</span>
-        </div>
-        <button><a href="settings.html">update address<a></button>
-        `
+        let userInfo = getCurrentUserInfo();
+        if(userInfo != undefined){
+            address.innerHTML = "";
+            address.innerHTML = `
+            <div class="address-info">
+                <span>${userInfo.city || "cairo"} ,</span>
+                <span>${userInfo.street || "NA"}</span>
+            </div>
+            <button><a href="settings.html">update address<a></button>
+            `
+        }
 
+        let signOutMobile = document.querySelector("#logout-mobile");
+        console.log(signOutMobile)
+        handleSignOut(signOutMobile,userInfo)
         //lower nav bar
         const items = document.querySelectorAll(".mobile-nav li");
+
 
         items.forEach((i) => {
         i.onclick = function (e) {
@@ -153,41 +218,26 @@ let mobileScreenNav = window.matchMedia("(max-width:995px)");
         });
 } 
 
-// console.log(retrieve)
-
-//constrol the user settings menu in the nav of the home page
-let signedUserAccount = document.querySelector(".header-right .signed");
-let notSignedUserAccount = document.querySelector(".header-right .not-signed");
-let homeUserName = document.querySelector("#signed-user-name");
-let userImage = document.querySelector("#user-image");
-
-let dataFromLS = JSON.parse(localStorage.getItem("signupUser"));
-if(dataFromLS){
-    homeUserName.innerHTML = dataFromLS[0].username;
-    userImage.src = dataFromLS[0].avatar;
-}else{
-    signedUserAccount.style.display = "none";
-    notSignedUserAccount.style.display = "flex";
+//handle shipping in way navbar 
+let shippingWay = document.querySelectorAll(".shipping-way");
+function handleShippingWay(){
+    let userInfo = getCurrentUserInfo();
+    if(userInfo != undefined){
+        shippingWay.forEach((item) => {
+            item.addEventListener("click" , () => {
+                let pickedWay = {
+                    shippingWay : item.dataset.way
+                }
+                //upadte info in ls
+                let user =JSON.parse(localStorage.getItem("signupUser"));
+                let userIndex = user.indexOf(userInfo);
+                let newUserObj = Object.assign(userInfo , pickedWay);
+                user.splice(userIndex,1,newUserObj);
+                localStorage.setItem("signupUser" , JSON.stringify(user));
+    
+                handleAddressInNav();
+            })
+        })
+    }
 }
-
-function handleAddressInNav(){
-    let userAuth = JSON.parse(localStorage.getItem("signupUser"));
-    choosedAddressInfo.innerHTML = `
-    <div class="choosed-address">
-        <i class="fa-solid fa-house-user"></i>
-        <span>${userAuth[1] == undefined? "cairo" : userAuth[1].city}<span>
-    </div>
-    <div class="choosed-shipping">
-        <span>${userAuth[2] == undefined? "delivery" : userAuth[2].shippingWay }</span>
-    </div>
-    `
-
-    locationInNav.innerHTML = `
-        <span><i class="fa-solid fa-location-dot"></i>${userAuth[1] == undefined? "cairo" : userAuth[1].city}</span>
-    `
-
-    addressInNav.innerHTML = `
-        <span><i class="fa-solid fa-house-user"></i>${userAuth[1] == undefined? "NA" : userAuth[1].aprt} , ${userAuth[1] == undefined? "NA" : userAuth[1].street}</span>
-    `
-}
-handleAddressInNav();
+handleShippingWay();

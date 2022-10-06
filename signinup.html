@@ -18,7 +18,7 @@
     <section class="container">
         <div class="form-mode">
             <!-- login mode  -->
-            <main class="form login">
+            <main class="form login" id="login">
                 <div class="title">
                     <span>login</span>
                 </div>
@@ -36,13 +36,13 @@
                     <span class="error-msg" id="passwd-err"><em>!</em> password is incorrect</span>
                     <div class="forget-password">
                         <div class="checkbox-container">
-                            <input type="checkbox" id="checkbox">
-                            <label for="checkbox">remember me</label>
+                            <input type="checkbox" id="checkbox-login">
+                            <label for="checkbox-login">remember me</label>
                         </div>
                         <a href="#">forget password?</a>
                     </div>
                     <div class="input-field">
-                        <input type="button" value="sign in" id="signin">
+                        <input type="submit" value="sign in" id="signin">
                     </div>
                 </form>
 
@@ -54,7 +54,7 @@
             </main>
 
             <!-- signup mode  -->
-            <main class="form signup">
+            <main class="form signup" id="signup">
                 <div class="title">
                     <span>registration</span>
                 </div>
@@ -90,13 +90,13 @@
                     
                     <div class="forget-password">
                         <div class="checkbox-container">
-                            <input type="checkbox" id="checkbox1">
-                            <label for="checkbox1">remember me</label>
+                            <input type="checkbox" id="checkbox-signup">
+                            <label for="checkbox-signup">remember me</label>
                         </div>
                         <a href="#">forget password?</a>
                     </div>
                     <div class="input-field">
-                        <input type="button" value="sign up" id="signup">
+                        <input type="submit" value="sign up" id="signup">
                     </div>
                 </form>
 

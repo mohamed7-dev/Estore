@@ -1,4 +1,4 @@
-//get elements to manipulate the settings
+//get elements to manipulate the personal settings
 let editButtons =Array.from(document.querySelectorAll(".field-container button"));
 let submitBtn = document.querySelector("#submit-btn");
 let form = document.querySelector("#settings-form");
@@ -9,32 +9,60 @@ let uAvatarImage = document.querySelector("#avatar");
 let uAvatarInput = document.querySelector("#img");
 let imageValue;
 
+//switch between settings modes
+let settingsTypes = document.querySelectorAll(".settings-item");
+let settingsForms = document.querySelectorAll("form.settings");
 
-if(localStorage.getItem("signupUser")){
-    editButtons.forEach((item) => {
-        item.addEventListener("click" , (e) => {
-            e.preventDefault();
-                item.previousElementSibling.children[1].disabled = false;
-                item.previousElementSibling.children[1].focus();
-                item.style.cssText = "background-color:var(--secondary-color); color:var(--text-color)";
+settingsTypes.forEach((item) => {
+    
+    item.addEventListener("click" , (e) =>{
+        settingsTypes.forEach((item) => item.style.cssText = "background-color: var(--secondary-color);");
+        settingsForms.forEach((item) => {
+            item.style.display = "none";
         })
+        document.querySelector(`.${e.target.dataset.type}`).style.display = "block";
+        item.style.cssText = "background-color: #fff;";
     })
-}else{
-    window.location = "signinup.html";
+})
+
+//onclick on edit button
+editButtons.forEach((item) => {
+    item.addEventListener("click" , (e) => {
+        e.preventDefault();
+        if(localStorage.getItem("signupUser")){
+            item.previousElementSibling.children[1].disabled = false;
+            item.previousElementSibling.children[1].focus();
+            if(item.previousElementSibling.children[1].type == "file"){
+                item.previousElementSibling.children[1].click();
+            }
+            item.style.cssText = "background-color:var(--secondary-color); color:var(--text-color)";
+        }else{
+            window.location = "signinup.html";
+        }
+    })
+})
+
+//get user data from ls
+function getCurrentUserData(){
+    let users =JSON.parse(localStorage.getItem("signupUser"))
+    if(users != null){
+        let currentUserID = JSON.parse(localStorage.getItem("currentUserID"));
+        let filtered = users.find((user) => user.id == currentUserID);
+        return filtered;
+    }
 }
 
-
-//get data from local storage
+//fill inputs with user data from ls
 function handleInputs(){
-let user =JSON.parse(localStorage.getItem("signupUser"))
-    uName.value = user[0].username;
-    uPasswd.value = user[0].password;
-    uEmail.value = user[0].email;
-    uAvatarImage.src = user[0].avatar;
+    let userInfo = getCurrentUserData();
+    uName.value = userInfo.username;
+    uPasswd.value = userInfo.password;
+    uEmail.value = userInfo.email;
+    uAvatarImage.src = userInfo.avatar;
 }
 handleInputs()
 
-
+//change avatar
 uAvatarInput.addEventListener("change" , changeAvatar) 
 function changeAvatar(){
     let image = this.files[0];
@@ -55,21 +83,25 @@ function changeAvatar(){
         imageValue = imageReader.result;
         uAvatarImage.src = imageValue;
     }
-
 }
 
+//submit personal settings from
 form.addEventListener("submit" , (e) => {
     e.preventDefault();
-    let userObj = {
-        username : uName.value,
-        email : uEmail.value,
-        password : uPasswd.value,
-        avatar : imageValue
+    //run function to get user info 
+    let currentUserInfo = getCurrentUserInfo();
+    //add user avatar
+    let userAvatar = {
+        avatar : imageValue || currentUserInfo.avatar
     }
-let user =JSON.parse(localStorage.getItem("signupUser"));
-    user.splice(0,1,userObj);
+    //assign user avatar to the user info in local storage
+    let user =JSON.parse(localStorage.getItem("signupUser"));
+    let userIndex = user.indexOf(currentUserInfo);
+    let newUserObj = Object.assign(currentUserInfo , userAvatar);
+    user.splice(userIndex,1,newUserObj);
     localStorage.setItem("signupUser" , JSON.stringify(user));
 
+    //on click on edit button
     editButtons.forEach((item) => {
         item.style.cssText = "background-color:#fff; color:var(--main-color)";
     })
@@ -77,22 +109,6 @@ let user =JSON.parse(localStorage.getItem("signupUser"));
     location.reload();
 } )
 
-
-//switch between settings
-let settingsTypes = document.querySelectorAll(".settings-item");
-let settingsForms = document.querySelectorAll("form.settings");
-
-settingsTypes.forEach((item) => {
-    
-    item.addEventListener("click" , (e) =>{
-        settingsTypes.forEach((item) => item.style.cssText = "background-color: var(--secondary-color);");
-        settingsForms.forEach((item) => {
-            item.style.display = "none";
-        })
-        document.querySelector(`.${e.target.dataset.type}`).style.display = "block";
-        item.style.cssText = "background-color: #fff;";
-    })
-})
 
 //get elements to control address form
 let fName = document.querySelector("#f-name");
@@ -107,39 +123,42 @@ let submitAddressBtn = document.querySelector("#submit-address-btn");
 
 //onsubmit change address info in local storage
 addressForm.addEventListener("submit" , (e) => {
-    let user =JSON.parse(localStorage.getItem("signupUser"));
     e.preventDefault();
-    let addressObj = {
-        userName : user[0].username,
-        email : user[0].email,
-        fName :   fName.value,
-        lName :   lName.value,
-        city :   city.value,
-        street :  street.value,
-        aprt :  aprt.value,
-        phone : phone.value,
+    let currentUserInfo = getCurrentUserData();
+    if(getCurrentUserData != undefined){
+        let addressObj = {
+            userName : currentUserInfo.username,
+            email : currentUserInfo.email,
+            fName :   fName.value || "",
+            lName :   lName.value || "",
+            city :   city.value || "cairo",
+            street :  street.value || "NA",
+            aprt :  aprt.value || "NA",
+            phone : phone.value || "NA",
+        }
+    
+        //upadte info in ls
+        let user =JSON.parse(localStorage.getItem("signupUser"));
+        let userIndex = user.indexOf(currentUserInfo);
+        let newUserObj = Object.assign(currentUserInfo , addressObj);
+        user.splice(userIndex,1,newUserObj);
+        localStorage.setItem("signupUser" , JSON.stringify(user));
+    
+        editButtons.forEach((item) => {
+            item.style.cssText = "background-color:#fff; color:var(--main-color)";
+        })
+        location.reload();
     }
+})
 
-    user[1] = addressObj;
-    localStorage.setItem("signupUser" , JSON.stringify(user));
-
-    editButtons.forEach((item) => {
-        item.style.cssText = "background-color:#fff; color:var(--main-color)";
-    })
-
-    location.reload();
-    handleAddressInNav();
-} )
-
-//show address info when reloading 
+// show address info when reloading 
 function retrieveAddressInfo(){
-let user =JSON.parse(localStorage.getItem("signupUser"))
-    fName.value = user[1].fName;
-    lName.value = user[1].lName;
-    city.value = user[1].city;
-    street.value = user[1].street;
-    aprt.value = user[1].aprt;
-    phone.value = user[1].phone;
+    let userinfo = getCurrentUserData();
+    fName.value = userinfo.fName;
+    lName.value = userinfo.lName;
+    city.value = userinfo.city;
+    street.value = userinfo.street;
+    aprt.value = userinfo.aprt;
+    phone.value = userinfo.phone;
 }
-
 retrieveAddressInfo();
