@@ -45,8 +45,9 @@
             <!-- lower-header -->
             <section class="lower-header">
                 <div class="container">
-                    <i class="fa-solid fa-location-dot"></i>
                     <div class="address-details">
+                    </div>
+                    <div class="nav-actions">
                     </div>
                 </div>
             </section>
@@ -246,58 +247,58 @@
     </footer>
     <!-- end footer  -->
 
-        <!-- start vertical header on mobile devices  -->
-        <section class="mobile-nav">
-            <ul>
-                <li class="active">
-                    <a href="index.html">
-                        <span class="icon">
-                            <i class="fa-solid fa-house"></i>
-                        </span>
-                        <span class="text">Home</span>
-                    </a>
-                </li>
-    
-                <li>
-                    <a href="cart.html">
-                        <span class="icon">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                        </span>
-                        <span class="text">cart</span>
-                    </a>
-                </li>
-    
-                <li>
-                    <a href="favourites.html">
-                        <span class="icon">
-                            <i class="fa-solid fa-heart"></i>
-                        </span>
-                        <span class="text">favourites</span>
-                    </a>
-                </li>
-    
-                <li>
-                    <a href="settings.html">
-                        <span class="icon">
-                            <i class="fa-solid fa-gear"></i>
-                        </span>
-                        <span class="text">settings</span>
-                    </a>
-                </li>
-    
-                <li>
-                    <a href="addproduct.html">
-                        <span class="icon">
-                            <i class="fa-solid fa-briefcase"></i>
-                        </span>
-                        <span class="text">seller</span>
-                    </a>
-                </li>
-    
-                <div class="indicator"></div>
-            </ul>
-        </section>
-        <!-- end vertical header on mobile devices  -->
+    <!-- start vertical header on mobile devices  -->
+    <section class="mobile-nav">
+        <ul>
+            <li class="active index" data-target="index">
+                <a href="#">
+                    <span class="icon">
+                        <i class="fa-solid fa-house"></i>
+                    </span>
+                    <span class="text">Home</span>
+                </a>
+            </li>
+
+            <li class="cart" data-target="cart">
+                <a href="#">
+                    <span class="icon">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </span>
+                    <span class="text">cart</span>
+                </a>
+            </li>
+
+            <li class="favourites" data-target="favourites">
+                <a href="#">
+                    <span class="icon">
+                        <i class="fa-solid fa-heart"></i>
+                    </span>
+                    <span class="text">favourites</span>
+                </a>
+            </li>
+
+            <li class="settings" data-target="settings">
+                <a href="#">
+                    <span class="icon">
+                        <i class="fa-solid fa-gear"></i>
+                    </span>
+                    <span class="text">settings</span>
+                </a>
+            </li>
+
+            <li class="addproduct" data-target="addproduct">
+                <a href="#">
+                    <span class="icon">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </span>
+                    <span class="text">seller</span>
+                </a>
+            </li>
+
+            <div class="indicator"></div>
+        </ul>
+    </section>
+    <!-- end vertical header on mobile devices  -->
 
     <script src="js/global.js"></script>
     <script src="./js/navbar.js"></script>

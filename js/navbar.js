@@ -88,20 +88,22 @@ function handleUserInfo(){
     let currentUserID = JSON.parse(localStorage.getItem("currentUserID"));
 
     //filter users by id
-    let filtered = dataFromLS.find((user) => {
-        return user.id == currentUserID;
-    })
+    if(dataFromLS != null && currentUserID != null){
+        let filtered = dataFromLS.find((user) => {
+            return user.id == currentUserID;
+        })
 
-    if(dataFromLS){
-        homeUserName.innerHTML = filtered.username;
-        userImage.src = filtered.avatar;
-    }else{
-        signedUserAccount.style.display = "none";
-        notSignedUserAccount.style.display = "flex";
+        if(dataFromLS){
+            homeUserName.innerHTML = filtered.username;
+            userImage.src = filtered.avatar;
+        }else{
+            signedUserAccount.style.display = "none";
+            notSignedUserAccount.style.display = "flex";
+        }
+
+        let signoutBtn = document.querySelector("#signout");
+        handleSignOut(signoutBtn,filtered);
     }
-
-    let signoutBtn = document.querySelector("#signout");
-    handleSignOut(signoutBtn,filtered);
 }
 handleUserInfo();
 
@@ -118,15 +120,17 @@ function getCurrentUserInfo(){
 //onclick on signout button go back to the sign in page
 function handleSignOut(target,currentUser){
     let userIndex = dataFromLS.indexOf(currentUser);
-    target.addEventListener("click" , () => {
-        console.log(target , currentUser)
-        currentUser["sign"] = "out";
-        dataFromLS.splice(userIndex,1,currentUser);
-        localStorage.setItem("signupUser" , JSON.stringify(dataFromLS));
-        setTimeout(() => {
-            window.location = "signinup.html#login";
-        },500);
-    })
+    if(target != null){
+        target.addEventListener("click" , () => {
+            console.log(target , currentUser)
+            currentUser["sign"] = "out";
+            dataFromLS.splice(userIndex,1,currentUser);
+            localStorage.setItem("signupUser" , JSON.stringify(dataFromLS));
+            setTimeout(() => {
+                window.location = "signinup.html#login";
+            },500);
+        })
+    }
 }
 
 
@@ -188,31 +192,49 @@ let mobileScreenNav = window.matchMedia("(max-width:995px)");
 
         //lower header address bar
         let address = document.querySelector(".lower-header .address-details");
+        let actions = document.querySelector(".nav-actions");
         let userInfo = getCurrentUserInfo();
         if(userInfo != undefined){
             address.innerHTML = "";
             address.innerHTML = `
-            <div class="address-info">
+                <i class="fa-solid fa-location-dot"></i>
                 <span>${userInfo.city || "cairo"} ,</span>
                 <span>${userInfo.street || "NA"}</span>
-            </div>
-            <button><a href="settings.html">update address<a></button>
+            `
+
+            actions.innerHTML += `
+                <button><a href="settings.html">update address<a></button>
             `
         }
 
         let signOutMobile = document.querySelector("#logout-mobile");
-        console.log(signOutMobile)
         handleSignOut(signOutMobile,userInfo)
+        
         //lower nav bar
         const items = document.querySelectorAll(".mobile-nav li");
 
+        //targets in html
+        let routes = {
+            index:"index.html",
+            cart: "cart.html",
+            favourites :"favourites.html",
+            settings :"settings.html",
+            addproduct:"addproduct.html",
+        }
 
         items.forEach((i) => {
         i.onclick = function (e) {
             items.forEach((i) => {
                 i.classList.remove("active");
             });
-
+            let currentTabTarget = i.dataset.target;
+            console.log(i.dataset.target) 
+            localStorage.setItem("currentTarget" , JSON.stringify(currentTabTarget));
+            let pageTarget = JSON.parse(localStorage.getItem("currentTarget"));
+            console.log(pageTarget)
+            setTimeout(() => {
+                window.location = routes[pageTarget];
+            },1000)
             i.classList.add("active");
         };
         });

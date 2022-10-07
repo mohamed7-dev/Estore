@@ -1,4 +1,3 @@
-
 let getStartedButn = document.querySelector("#get-started");
 let formSection = document.querySelector(".add-product");
 
@@ -318,16 +317,35 @@ function handleEmptyCart(products){
     }
 }
 
-// handleEmptyCart();
+
+//get user data from ls
+let dataFromLS = JSON.parse(localStorage.getItem("signupUser"));
+
+function getCurrentUserInfo(){
+    let users =JSON.parse(localStorage.getItem("signupUser"))
+    if(users != null){
+        let currentUserID = JSON.parse(localStorage.getItem("currentUserID"));
+        let filtered = users.find((user) => user.id == currentUserID);
+        return filtered;
+    }
+}
 
 //onclick on signout button go back to the sign in page
-let signoutBtn = document.querySelector("#signout");
-signoutBtn.addEventListener("click" , () => {
-    localStorage.clear();
-    setTimeout(() => {
-        window.location = "signinup.html";
-    },500);
-})
+function handleSignOut(){
+    let signOutBtn = document.querySelector("#signout")
+    let userInfo = getCurrentUserInfo();
+    let userIndex = dataFromLS.indexOf(userInfo);
+    signOutBtn.addEventListener("click" , () => {
+        userInfo["sign"] = "out";
+        dataFromLS.splice(userIndex,1,userInfo);
+        localStorage.setItem("signupUser" , JSON.stringify(dataFromLS));
+        setTimeout(() => {
+            window.location = "signinup.html#login";
+        },500);
+    })
+}
+
+handleSignOut();
 
 //constrol the user settings menu in the nav of the home page
 let signedUserAccount = document.querySelector(".header-right .signed");
@@ -335,11 +353,51 @@ let notSignedUserAccount = document.querySelector(".header-right .not-signed");
 let homeUserName = document.querySelector("#signed-user-name");
 let userImage = document.querySelector("#user-image");
 
-let dataFromLS = JSON.parse(localStorage.getItem("signupUser"));
-if(dataFromLS){
-    homeUserName.innerHTML = dataFromLS[0].username;
-    userImage.src = dataFromLS[0].avatar;
-}else{
-    signedUserAccount.style.display = "none";
-    notSignedUserAccount.style.display = "flex";
+//function to handle user info in the header bar
+function handleUserInfo(){
+    //get current user info
+    let userInfo = getCurrentUserInfo();
+    if(userInfo != undefined){
+        homeUserName.innerHTML = userInfo.username;
+        userImage.src = userInfo.avatar;
+    }else{
+        signedUserAccount.style.display = "none";
+        notSignedUserAccount.style.display = "flex";
+    }
 }
+handleUserInfo();
+
+//handle the nav in the mobile screens
+let targetFromLS = JSON.parse(localStorage.getItem("currentTarget"));
+console.log(targetFromLS)
+document.querySelectorAll(".mobile-nav li").forEach((item) => item.classList.remove("active"));
+document.querySelector(`li.${targetFromLS}`).classList.add("active");
+
+//lower nav bar
+const items = document.querySelectorAll(".mobile-nav li");
+
+//targets in html
+let routes = {
+    index:"index.html",
+    cart: "cart.html",
+    favourites :"favourites.html",
+    settings :"settings.html",
+    addproduct:"addproduct.html",
+}
+
+items.forEach((i) => {
+i.onclick = function (e) {
+    items.forEach((i) => {
+        i.classList.remove("active");
+    });
+    let currentTabTarget = i.dataset.target;
+    console.log(i.dataset.target) 
+    localStorage.setItem("currentTarget" , JSON.stringify(currentTabTarget));
+    let pageTarget = JSON.parse(localStorage.getItem("currentTarget"));
+    console.log(pageTarget)
+    setTimeout(() => {
+        window.location = routes[pageTarget];
+    },1000)
+    i.classList.add("active");
+};
+});

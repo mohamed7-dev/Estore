@@ -25,32 +25,38 @@ settingsTypes.forEach((item) => {
     })
 })
 
-//onclick on edit button
-editButtons.forEach((item) => {
-    item.addEventListener("click" , (e) => {
-        e.preventDefault();
-        if(localStorage.getItem("signupUser")){
-            item.previousElementSibling.children[1].disabled = false;
-            item.previousElementSibling.children[1].focus();
-            if(item.previousElementSibling.children[1].type == "file"){
-                item.previousElementSibling.children[1].click();
-            }
-            item.style.cssText = "background-color:var(--secondary-color); color:var(--text-color)";
-        }else{
-            window.location = "signinup.html";
-        }
-    })
-})
-
 //get user data from ls
+let users =JSON.parse(localStorage.getItem("signupUser"))
 function getCurrentUserData(){
-    let users =JSON.parse(localStorage.getItem("signupUser"))
     if(users != null){
         let currentUserID = JSON.parse(localStorage.getItem("currentUserID"));
         let filtered = users.find((user) => user.id == currentUserID);
         return filtered;
     }
 }
+
+//onclick on edit button
+function handleEditBtn(){
+    let userInfo = getCurrentUserData();
+    editButtons.forEach((item) => {
+        item.addEventListener("click" , (e) => {
+            e.preventDefault();
+            if(userInfo.sign == "in" && users != null){
+                item.previousElementSibling.children[1].disabled = false;
+                item.previousElementSibling.children[1].focus();
+                if(item.previousElementSibling.children[1].type == "file"){
+                    item.previousElementSibling.children[1].click();
+                }
+                item.style.cssText = "background-color:var(--secondary-color); color:var(--text-color)";
+            }else{
+                window.location = "signinup.html";
+            }
+        })
+    })   
+}
+
+handleEditBtn();
+
 
 //fill inputs with user data from ls
 function handleInputs(){
@@ -154,11 +160,11 @@ addressForm.addEventListener("submit" , (e) => {
 // show address info when reloading 
 function retrieveAddressInfo(){
     let userinfo = getCurrentUserData();
-    fName.value = userinfo.fName;
-    lName.value = userinfo.lName;
-    city.value = userinfo.city;
-    street.value = userinfo.street;
-    aprt.value = userinfo.aprt;
-    phone.value = userinfo.phone;
+    fName.value = userinfo.fName || "";
+    lName.value = userinfo.lName || "";
+    city.value = userinfo.city || "cairo";
+    street.value = userinfo.street || "NA";
+    aprt.value = userinfo.aprt || "NA";
+    phone.value = userinfo.phone || "NA";
 }
 retrieveAddressInfo();

@@ -197,6 +197,8 @@
         border-radius: 5px;
     }
 
+
+
     .search-input .search-results-mobile{
         position: absolute;
         top:110%;
@@ -271,6 +273,11 @@
         caret-color: var(--main-color);
     }
 
+    .search-input input::placeholder{
+        font-size: 0.9rem;
+        text-transform: capitalize;
+    }
+
     .search-input input:focus{
         border:1px solid var(--secondary-color);
     }
@@ -296,46 +303,51 @@
     .lower-header .container{
         display: flex;
         align-items: center;
+        justify-content: space-between;
         gap:20px;
         padding: 10px;
     }
 
     .lower-header .container i{
         color: var(--main-color);
-        font-size: 5vw;
+        font-size: 2rem;
     }
     .container .address-details{
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        width: 100%;
         gap:10px;
     }
 
-    .address-details .address-info{
-        width:50%;
-    }
-
-    .address-info span{
+    .address-details span{
         font-size: 0.8rem;
     }
 
-    .container .address-details button{
+    .container .nav-actions{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+    .container .nav-actions button{
         background-color: var(--main-color);
-        height: 100%;
-        padding: 10px;
-        width: 50%;
+        height: 50%;
+        padding: 5px;
+        width: fit-content;
         cursor: pointer;
         border: none;
         outline: none;
-        border-radius: 10px;
+        border-radius: 5px;
+        order: 1;
     }
 
-    .address-details button a{
+    .nav-actions button a{
         text-decoration: none;
         color:#fff;
-        font-size: 1rem;
-        font-weight: bold;
+        font-size: 0.9rem;
+    }
+
+    .container .nav-actions a{
+        order: 2;
     }
 
     section.side-nav{
@@ -350,7 +362,8 @@
         background: #9CECFB;  /* fallback for old browsers */
         background: -webkit-linear-gradient(to bottom, #0052D4, #65C7F7, #9CECFB);
         background: linear-gradient(to bottom, #0052D4, #65C7F7, #9CECFB); 
-        transition: 0.5s ease-in-out;
+        transition: 0.3s ease-in-out;
+        -webkit-transition: 0.3s ease-in-out;
     }
 
     .side-nav .container{
@@ -402,7 +415,8 @@
         color:#fff;
         font-weight: bold;
         cursor: pointer;
-        transition: 0.7s ease-in-out;
+        transition: 0.5s ease-in-out;
+        -webkit-transition: 0.5s ease-in-out;
     }
 
     .container .close-btn:hover{

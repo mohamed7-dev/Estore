@@ -30,7 +30,10 @@ function getCurrentUserSettings(){
         return filtered;
     }
 }
+
+//get current user info
 let userInfo = getCurrentUserSettings();
+let Allusers = JSON.parse(localStorage.getItem("signupUser"));
 
 //function to check if the user is existen in the data base or not and based on that add to cart or not 
 function userAddToCartAbility (id){
@@ -39,7 +42,7 @@ function userAddToCartAbility (id){
     let cartItemsContainer = document.querySelector(".cart-content .items-container"); 
     let numberBadge = document.querySelector(".badge");
 
-    if(Data != null && userInfo.sign == "in"){
+    if(Data != null && userInfo.sign == "in" && Allusers != null){
         let filtered = Data.find((item , i , Arr) => item.id == id);
         let isRepeatedItem = CartItemsArray.some((item , i , Arr) => item.id == filtered.id); //returns true if repeated        
         if(isRepeatedItem){
@@ -82,7 +85,7 @@ function userAddToFavouriteAbility (id){
     let favItemsArray = localStorage.getItem("fav")? JSON.parse(localStorage.getItem("fav")) : [];
     let Data =JSON.parse(localStorage.getItem("productDB")); 
     let favIcons = document.querySelectorAll(`.fav-icon-${id}`);
-    if(Data != null && userInfo.sign == "in"){
+    if(Data != null && userInfo.sign == "in" && Allusers != null){
         let filtered = Data.find((item , i , Arr) => item.id == id);
         let isRepeatedItem = favItemsArray.some((item , i , Arr) => item.id == filtered.id); //returns true if repeated
         if(isRepeatedItem){ 
@@ -166,3 +169,9 @@ function handleEmptyPage(products){
         mainSectionContainer.style.display = "none";
     }
 }
+
+//handle the nav in the mobile screens
+let targetFromLS = JSON.parse(localStorage.getItem("currentTarget"));
+console.log(targetFromLS)
+document.querySelectorAll(".mobile-nav li").forEach((item) => item.classList.remove("active"));
+document.querySelector(`li.${targetFromLS}`).classList.add("active");
