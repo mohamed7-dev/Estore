@@ -86,24 +86,21 @@ let dataFromLS = JSON.parse(localStorage.getItem("signupUser"));
 function handleUserInfo(){
     //get current user id
     let currentUserID = JSON.parse(localStorage.getItem("currentUserID"));
-
     //filter users by id
-    if(dataFromLS != null && currentUserID != null){
-        let filtered = dataFromLS.find((user) => {
-            return user.id == currentUserID;
-        })
-
         if(dataFromLS){
+            let filtered = dataFromLS.find((user) => {
+                return user.id == currentUserID;
+            })
             homeUserName.innerHTML = filtered.username;
             userImage.src = filtered.avatar;
+
+            //signout in big screens
+            let signoutBtn = document.querySelector("#signout");
+            handleSignOut(signoutBtn,filtered);
         }else{
             signedUserAccount.style.display = "none";
             notSignedUserAccount.style.display = "flex";
         }
-
-        let signoutBtn = document.querySelector("#signout");
-        handleSignOut(signoutBtn,filtered);
-    }
 }
 handleUserInfo();
 
@@ -119,18 +116,19 @@ function getCurrentUserInfo(){
 
 //onclick on signout button go back to the sign in page
 function handleSignOut(target,currentUser){
-    let userIndex = dataFromLS.indexOf(currentUser);
-    if(target != null){
-        target.addEventListener("click" , () => {
-            console.log(target , currentUser)
+    target.addEventListener("click" , () => {
+        if(dataFromLS != null){
+            let userIndex = dataFromLS.indexOf(currentUser);
             currentUser["sign"] = "out";
             dataFromLS.splice(userIndex,1,currentUser);
             localStorage.setItem("signupUser" , JSON.stringify(dataFromLS));
             setTimeout(() => {
                 window.location = "signinup.html#login";
             },500);
-        })
-    }
+        }else{
+            window.location = "signinup.html"
+        }
+    })
 }
 
 
@@ -142,26 +140,23 @@ let addressInNav = document.querySelector(".nav-address-item.address-in-nav");
 function handleAddressInNav(){
     //get user info
     let user = getCurrentUserInfo();
-    if(user != undefined){
-        choosedAddressInfo.innerHTML = `
-        <div class="choosed-address">
-            <i class="fa-solid fa-house-user"></i>
-            <span>${user.city || "cairo"}<span>
-        </div>
-        <div class="choosed-shipping">
-            <span>${user.shippingWay || "delivery"}</span>
-        </div>
-        `
-    
-        locationInNav.innerHTML = `
-            <span><i class="fa-solid fa-location-dot"></i>${user.city || "cairo"}</span>
-        `
-    
-        addressInNav.innerHTML = `
-            <span><i class="fa-solid fa-house-user"></i>${user.aprt || "NA"} , ${user.street || "NA"}</span>
-        `
-    }
+    choosedAddressInfo.innerHTML = `
+    <div class="choosed-address">
+        <i class="fa-solid fa-house-user"></i>
+        <span>${user != undefined? user.city || "cairo" : "cairo"}<span>
+    </div>
+    <div class="choosed-shipping">
+        <span>${user != undefined? user.shippingWay || "delivery" : "delivery"}</span>
+    </div>
+    `
 
+    locationInNav.innerHTML = `
+        <span><i class="fa-solid fa-location-dot"></i>${user!=undefined? user.city || "cairo" : "cairo"}</span>
+    `
+
+    addressInNav.innerHTML = `
+        <span><i class="fa-solid fa-house-user"></i>${user != undefined?  user.aprt || "NA" : "NA"} , ${user != undefined? user.street || "NA" : "NA"}</span>
+    `
 }
 handleAddressInNav();
 
@@ -194,22 +189,18 @@ let mobileScreenNav = window.matchMedia("(max-width:995px)");
         let address = document.querySelector(".lower-header .address-details");
         let actions = document.querySelector(".nav-actions");
         let userInfo = getCurrentUserInfo();
-        if(userInfo != undefined){
-            address.innerHTML = "";
-            address.innerHTML = `
-                <i class="fa-solid fa-location-dot"></i>
-                <span>${userInfo.city || "cairo"} ,</span>
-                <span>${userInfo.street || "NA"}</span>
-            `
 
-            actions.innerHTML += `
-                <button><a href="settings.html">update address<a></button>
-            `
-        }
+        address.innerHTML = "";
+        address.innerHTML = `
+            <i class="fa-solid fa-location-dot"></i>
+            <span>${userInfo != undefined? userInfo.city || "cairo" : "cairo"} ,</span>
+            <span>${userInfo != undefined? userInfo.street || "NA" : "NA"}</span>
+        `
 
-        let signOutMobile = document.querySelector("#logout-mobile");
-        handleSignOut(signOutMobile,userInfo)
-        
+        actions.innerHTML += `
+            <button><a href="settings.html">update address<a></button>
+        `
+
         //lower nav bar
         const items = document.querySelectorAll(".mobile-nav li");
 
@@ -234,19 +225,27 @@ let mobileScreenNav = window.matchMedia("(max-width:995px)");
             console.log(pageTarget)
             setTimeout(() => {
                 window.location = routes[pageTarget];
-            },1000)
+            },500)
             i.classList.add("active");
         };
         });
+
+        //handle the nav in the mobile screens
+        let targetFromLS = JSON.parse(localStorage.getItem("currentTarget"));
+        console.log(targetFromLS)
+        if(targetFromLS != null){
+            document.querySelectorAll(".mobile-nav li").forEach((item) => item.classList.remove("active"));
+            document.querySelector(`li.${targetFromLS}`).classList.add("active");
+        }
 } 
 
 //handle shipping in way navbar 
 let shippingWay = document.querySelectorAll(".shipping-way");
 function handleShippingWay(){
     let userInfo = getCurrentUserInfo();
-    if(userInfo != undefined){
-        shippingWay.forEach((item) => {
-            item.addEventListener("click" , () => {
+    shippingWay.forEach((item) => {
+        item.addEventListener("click" , () => {
+            if(users != null){
                 let pickedWay = {
                     shippingWay : item.dataset.way
                 }
@@ -258,8 +257,10 @@ function handleShippingWay(){
                 localStorage.setItem("signupUser" , JSON.stringify(user));
     
                 handleAddressInNav();
-            })
+            }else{
+                window.location = "signinup.html"
+            }
         })
-    }
+    })
 }
 handleShippingWay();

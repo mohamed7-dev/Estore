@@ -17,9 +17,29 @@ function handleCartHeader (){
     
         numberBadge.innerHTML = Data.length;
     }
+
+    let mobileNav = window.matchMedia("(max-width:995px)");
+    if(mobileNav.matches){
+        let cartBadge = document.querySelector(".icon .cart-badge");
+        let Data  = JSON.parse(localStorage.getItem("cart")) || [];
+        cartBadge.innerHTML = Data.length;
+    }
 }
 handleCartHeader();
 
+//handle fav icon badge in mobile 
+function handleFavBadge(){
+    //get fav from LS
+    let favItemsArray = localStorage.getItem("fav")? JSON.parse(localStorage.getItem("fav")) : [];
+    //fav badge in mobile nav
+    let mobileNav = window.matchMedia("(max-width:995px)");
+    if(mobileNav.matches){
+        let favBadge = document.querySelector(".icon .fav-badge");
+        favBadge.innerHTML = favItemsArray.length;
+    }
+}
+
+handleFavBadge();
 
 //get user data from ls
 function getCurrentUserSettings(){
@@ -33,7 +53,6 @@ function getCurrentUserSettings(){
 
 //get current user info
 let userInfo = getCurrentUserSettings();
-let Allusers = JSON.parse(localStorage.getItem("signupUser"));
 
 //function to check if the user is existen in the data base or not and based on that add to cart or not 
 function userAddToCartAbility (id){
@@ -41,39 +60,51 @@ function userAddToCartAbility (id){
     let Data =JSON.parse(localStorage.getItem("productDB")); 
     let cartItemsContainer = document.querySelector(".cart-content .items-container"); 
     let numberBadge = document.querySelector(".badge");
+    let Allusers = JSON.parse(localStorage.getItem("signupUser"));
 
-    if(Data != null && userInfo.sign == "in" && Allusers != null){
-        let filtered = Data.find((item , i , Arr) => item.id == id);
-        let isRepeatedItem = CartItemsArray.some((item , i , Arr) => item.id == filtered.id); //returns true if repeated        
-        if(isRepeatedItem){
+    if(Allusers){
+        if(userInfo.sign == "in"){
+            let filtered = Data.find((item , i , Arr) => item.id == id);
+            let isRepeatedItem = CartItemsArray.some((item , i , Arr) => item.id == filtered.id); //returns true if repeated        
+            if(isRepeatedItem){
+                
+                CartItemsArray.map((item, i , Arr) => {
+                    if(item.id == filtered.id){
+                        item.quantity += 1;
+                    }else{
+                        return item;
+                    }
+                })
+    
+            }else{
+                CartItemsArray.push(filtered);
+            }
             
-            CartItemsArray.map((item, i , Arr) => {
-                if(item.id == filtered.id){
-                    item.quantity += 1;
-                }else{
-                    return item;
-                }
+            cartItemsContainer.innerHTML = "";
+            CartItemsArray.forEach((item) => {
+                cartItemsContainer.innerHTML += `
+                    <li class="cart-item">
+                    <span class="item-title">${item.title}</span>
+                    <span class="item-qty">${item.quantity}</span>
+                    </li>
+                `
             })
-
+            //add item to local storage
+            window.localStorage.setItem("cart" , JSON.stringify(CartItemsArray));
+    
+            //get all items in the cart to add number to the badge
+            let ElementsInsideCart = document.querySelectorAll(".cart-content li");
+            numberBadge.innerHTML = ElementsInsideCart.length;
+    
+            let mobileNav = window.matchMedia("(max-width:995px)");
+            if(mobileNav.matches){
+                let cartBadge = document.querySelector(".icon .cart-badge");
+                cartBadge.innerHTML = ElementsInsideCart.length;
+            }
         }else{
-            CartItemsArray.push(filtered);
+            window.location = "signinup.html"
         }
-        
-        cartItemsContainer.innerHTML = "";
-        CartItemsArray.forEach((item) => {
-            cartItemsContainer.innerHTML += `
-                <li class="cart-item">
-                <span class="item-title">${item.title}</span>
-                <span class="item-qty">${item.quantity}</span>
-                </li>
-            `
-        })
-        //add item to local storage
-        window.localStorage.setItem("cart" , JSON.stringify(CartItemsArray));
 
-        //get all items in the cart to add number to the badge
-        let ElementsInsideCart = document.querySelectorAll(".cart-content li");
-        numberBadge.innerHTML = ElementsInsideCart.length;
 
     }else{
         window.location = "signinup.html"
@@ -85,43 +116,56 @@ function userAddToFavouriteAbility (id){
     let favItemsArray = localStorage.getItem("fav")? JSON.parse(localStorage.getItem("fav")) : [];
     let Data =JSON.parse(localStorage.getItem("productDB")); 
     let favIcons = document.querySelectorAll(`.fav-icon-${id}`);
-    if(Data != null && userInfo.sign == "in" && Allusers != null){
-        let filtered = Data.find((item , i , Arr) => item.id == id);
-        let isRepeatedItem = favItemsArray.some((item , i , Arr) => item.id == filtered.id); //returns true if repeated
-        if(isRepeatedItem){ 
-            favIcons.forEach((icon) => {
-                icon.style.cssText = "font-weight:normal"
-            })  
-            favItemsArray.map((item , index , arr) => {
-                if(item.id == filtered.id){
-                    arr.splice(index , 1);
-            }else{
-                return item;
-            }
-            });
+    let Allusers = JSON.parse(localStorage.getItem("signupUser"));
 
-        }else{
-            filtered.like = true;
-            favIcons.forEach((icon) => {
-                icon.style.cssText = "font-weight:bold"
-            })
-            favItemsArray.push(filtered);
-        }
-        //add item to local storage
-        window.localStorage.setItem("fav" , JSON.stringify(favItemsArray));
-        Data.map((item) => {
-            if(isRepeatedItem){
-                if(item.id == filtered.id){
-                    delete item.like;
+    if(Allusers){
+        if(userInfo.sign == "in"){
+            let filtered = Data.find((item , i , Arr) => item.id == id);
+            let isRepeatedItem = favItemsArray.some((item , i , Arr) => item.id == filtered.id); //returns true if repeated
+            if(isRepeatedItem){ 
+                favIcons.forEach((icon) => {
+                    icon.style.cssText = "font-weight:normal"
+                })  
+                favItemsArray.map((item , index , arr) => {
+                    if(item.id == filtered.id){
+                        arr.splice(index , 1);
                 }else{
                     return item;
                 }
+                });
+    
             }else{
                 filtered.like = true;
+                favIcons.forEach((icon) => {
+                    icon.style.cssText = "font-weight:bold"
+                })
+                favItemsArray.push(filtered);
             }
+            //add item to local storage
+            window.localStorage.setItem("fav" , JSON.stringify(favItemsArray));
+            Data.map((item) => {
+                if(isRepeatedItem){
+                    if(item.id == filtered.id){
+                        delete item.like;
+                    }else{
+                        return item;
+                    }
+                }else{
+                    filtered.like = true;
+                }
+    
+            })
+            localStorage.setItem("productDB" , JSON.stringify(Data))
+            //fav badge in mobile nav
+            let mobileNav = window.matchMedia("(max-width:995px)");
+            if(mobileNav.matches){
+                let favBadge = document.querySelector(".icon .fav-badge");
+                favBadge.innerHTML = favItemsArray.length;
+            }
+        }else{
+            window.location = "signinup.html"
+        }
 
-        })
-        localStorage.setItem("productDB" , JSON.stringify(Data))
     }else{
         window.location = "signinup.html"
     }
@@ -153,10 +197,10 @@ function handleClickingOnCat(navCats){
 
 //function to add product id to local storage and redirect to the product page
 function addProductID(id){
-    window.localStorage.removeItem("productIndex");
     window,localStorage.setItem("productId" , JSON.stringify(id));
     window,location = "product.html";
 }
+
 
 //handle empty pages
 function handleEmptyPage(products){
@@ -170,8 +214,4 @@ function handleEmptyPage(products){
     }
 }
 
-//handle the nav in the mobile screens
-let targetFromLS = JSON.parse(localStorage.getItem("currentTarget"));
-console.log(targetFromLS)
-document.querySelectorAll(".mobile-nav li").forEach((item) => item.classList.remove("active"));
-document.querySelector(`li.${targetFromLS}`).classList.add("active");
+

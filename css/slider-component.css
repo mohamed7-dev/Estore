@@ -144,7 +144,9 @@
     cursor: pointer;
     border-radius: 5px;
 }
-
+button.add-to-cart.clicked{
+    background-color: var(--secondary-color);
+}
 /* style swiper  */
 .swiper-nav-btn{
     color:var(--main-color);

@@ -125,8 +125,10 @@ function addThumbs(){
     }
 }
 
+//submit form
 pForm.addEventListener("submit" , addNewProduct)
 function addNewProduct(e){
+    e.preventDefault();
     //get all products from ls
     let productsFromLS = JSON.parse(localStorage.getItem("productDB"));
     //get the highest value of id to add upon
@@ -138,10 +140,10 @@ function addNewProduct(e){
 
     //get all thumbs in one object
     let thumbsObj = Object.assign({} , thumbsObject );
-    if(localStorage.getItem("signupUser")){
-        e.preventDefault();
-        console.log(filtered)
 
+    //get users from LS
+    let Allusers = JSON.parse(localStorage.getItem("signupUser"));
+    if(Allusers != null){
         let pObject = {
             id:filtered + 1,
             title: pTitle.value,
@@ -200,7 +202,6 @@ function addNewProduct(e){
             let dataFromLS = JSON.parse(localStorage.getItem("productDB"));
             getCreatedProducts(dataFromLS);
         }
-
     }else{
         window.location = "signinup.html"
     }
@@ -333,16 +334,18 @@ function getCurrentUserInfo(){
 //onclick on signout button go back to the sign in page
 function handleSignOut(){
     let signOutBtn = document.querySelector("#signout")
-    let userInfo = getCurrentUserInfo();
-    let userIndex = dataFromLS.indexOf(userInfo);
-    signOutBtn.addEventListener("click" , () => {
-        userInfo["sign"] = "out";
-        dataFromLS.splice(userIndex,1,userInfo);
-        localStorage.setItem("signupUser" , JSON.stringify(dataFromLS));
-        setTimeout(() => {
-            window.location = "signinup.html#login";
-        },500);
-    })
+    if(dataFromLS){
+        let userInfo = getCurrentUserInfo();
+        let userIndex = dataFromLS.indexOf(userInfo);
+        signOutBtn.addEventListener("click" , () => {
+            userInfo["sign"] = "out";
+            dataFromLS.splice(userIndex,1,userInfo);
+            localStorage.setItem("signupUser" , JSON.stringify(dataFromLS));
+            setTimeout(() => {
+                window.location = "signinup.html#login";
+            },500);
+        })
+    }
 }
 
 handleSignOut();
@@ -357,7 +360,7 @@ let userImage = document.querySelector("#user-image");
 function handleUserInfo(){
     //get current user info
     let userInfo = getCurrentUserInfo();
-    if(userInfo != undefined){
+    if(dataFromLS){
         homeUserName.innerHTML = userInfo.username;
         userImage.src = userInfo.avatar;
     }else{
@@ -369,9 +372,11 @@ handleUserInfo();
 
 //handle the nav in the mobile screens
 let targetFromLS = JSON.parse(localStorage.getItem("currentTarget"));
-console.log(targetFromLS)
-document.querySelectorAll(".mobile-nav li").forEach((item) => item.classList.remove("active"));
-document.querySelector(`li.${targetFromLS}`).classList.add("active");
+if(targetFromLS){
+    document.querySelectorAll(".mobile-nav li").forEach((item) => item.classList.remove("active"));
+    document.querySelector(`li.${targetFromLS}`).classList.add("active");
+}
+
 
 //lower nav bar
 const items = document.querySelectorAll(".mobile-nav li");

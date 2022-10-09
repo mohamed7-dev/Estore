@@ -13,6 +13,10 @@ async function fetchData(url) {
         retrieveDataFromLS = JSON.parse(localStorage.getItem("productDB"));
     }
     displayProducts(retrieveDataFromLS);
+    //display elecrtro cat after running the display function 
+    DisplayElectroCat();
+    //display clothes cat after running the display electro cat 
+    displayClothesCat();
     return retrieveDataFromLS;
 }
 fetchData(url);
@@ -55,8 +59,7 @@ function DisplayElectroCat(){
     displayProducts(filtered , electroParent ,mode); 
 }
 
-//display elecrtro cat after running the display function 
-DisplayElectroCat();
+
 
 
 function displayClothesCat(){
@@ -69,8 +72,7 @@ function displayClothesCat(){
     displayProducts(filteredClothes, clothesParent,mode);
 }
 
-//display clothes cat after running the display electro cat 
-displayClothesCat();
+
 
 
 

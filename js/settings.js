@@ -14,7 +14,6 @@ let settingsTypes = document.querySelectorAll(".settings-item");
 let settingsForms = document.querySelectorAll("form.settings");
 
 settingsTypes.forEach((item) => {
-    
     item.addEventListener("click" , (e) =>{
         settingsTypes.forEach((item) => item.style.cssText = "background-color: var(--secondary-color);");
         settingsForms.forEach((item) => {
@@ -41,13 +40,17 @@ function handleEditBtn(){
     editButtons.forEach((item) => {
         item.addEventListener("click" , (e) => {
             e.preventDefault();
-            if(userInfo.sign == "in" && users != null){
-                item.previousElementSibling.children[1].disabled = false;
-                item.previousElementSibling.children[1].focus();
-                if(item.previousElementSibling.children[1].type == "file"){
-                    item.previousElementSibling.children[1].click();
+            if(users != null){
+                if(userInfo.sign == "in"){
+                    item.previousElementSibling.children[1].disabled = false;
+                    item.previousElementSibling.children[1].focus();
+                    if(item.previousElementSibling.children[1].type == "file"){
+                        item.previousElementSibling.children[1].click();
+                    }
+                    item.style.cssText = "background-color:var(--secondary-color); color:var(--text-color)";
+                }else{
+                    window.location = "signinup.html";
                 }
-                item.style.cssText = "background-color:var(--secondary-color); color:var(--text-color)";
             }else{
                 window.location = "signinup.html";
             }
@@ -61,10 +64,10 @@ handleEditBtn();
 //fill inputs with user data from ls
 function handleInputs(){
     let userInfo = getCurrentUserData();
-    uName.value = userInfo.username;
-    uPasswd.value = userInfo.password;
-    uEmail.value = userInfo.email;
-    uAvatarImage.src = userInfo.avatar;
+        uName.value =userInfo != undefined? userInfo.username : "";
+        uPasswd.value =userInfo != undefined? userInfo.password : "";
+        uEmail.value =userInfo != undefined? userInfo.email : "";
+        uAvatarImage.src =userInfo != undefined? userInfo.avatar : "./images/default-avatar.png";
 }
 handleInputs()
 
@@ -94,25 +97,30 @@ function changeAvatar(){
 //submit personal settings from
 form.addEventListener("submit" , (e) => {
     e.preventDefault();
-    //run function to get user info 
-    let currentUserInfo = getCurrentUserInfo();
-    //add user avatar
-    let userAvatar = {
-        avatar : imageValue || currentUserInfo.avatar
+    if(users != null){
+        //run function to get user info 
+        let currentUserInfo = getCurrentUserInfo();
+        //add user avatar
+        let userAvatar = {
+            avatar : imageValue || currentUserInfo.avatar
+        }
+        //assign user avatar to the user info in local storage
+        let user =JSON.parse(localStorage.getItem("signupUser"));
+        let userIndex = user.indexOf(currentUserInfo);
+        let newUserObj = Object.assign(currentUserInfo , userAvatar);
+        user.splice(userIndex,1,newUserObj);
+        localStorage.setItem("signupUser" , JSON.stringify(user));
+    
+        //on click on edit button
+        editButtons.forEach((item) => {
+            item.style.cssText = "background-color:#fff; color:var(--main-color)";
+        })
+    
+        location.reload();
+    }else{
+        window.location = "signinup.html";
     }
-    //assign user avatar to the user info in local storage
-    let user =JSON.parse(localStorage.getItem("signupUser"));
-    let userIndex = user.indexOf(currentUserInfo);
-    let newUserObj = Object.assign(currentUserInfo , userAvatar);
-    user.splice(userIndex,1,newUserObj);
-    localStorage.setItem("signupUser" , JSON.stringify(user));
 
-    //on click on edit button
-    editButtons.forEach((item) => {
-        item.style.cssText = "background-color:#fff; color:var(--main-color)";
-    })
-
-    location.reload();
 } )
 
 
@@ -131,7 +139,8 @@ let submitAddressBtn = document.querySelector("#submit-address-btn");
 addressForm.addEventListener("submit" , (e) => {
     e.preventDefault();
     let currentUserInfo = getCurrentUserData();
-    if(getCurrentUserData != undefined){
+
+    if(users != null){
         let addressObj = {
             userName : currentUserInfo.username,
             email : currentUserInfo.email,
@@ -154,17 +163,28 @@ addressForm.addEventListener("submit" , (e) => {
             item.style.cssText = "background-color:#fff; color:var(--main-color)";
         })
         location.reload();
+    }else{
+        window.location = "signinup.html"
     }
 })
 
 // show address info when reloading 
 function retrieveAddressInfo(){
     let userinfo = getCurrentUserData();
-    fName.value = userinfo.fName || "";
-    lName.value = userinfo.lName || "";
-    city.value = userinfo.city || "cairo";
-    street.value = userinfo.street || "NA";
-    aprt.value = userinfo.aprt || "NA";
-    phone.value = userinfo.phone || "NA";
+    console.log(userinfo)
+        fName.value = userinfo !=undefined? userinfo.fName || "" : "";
+        lName.value =userinfo !=undefined? userinfo.lName || "" : "";
+        city.value =userinfo !=undefined? userinfo.city || "cairo" : "cairo";
+        street.value =userinfo !=undefined? userinfo.street || "NA" : "NA";
+        aprt.value =userinfo !=undefined? userinfo.aprt || "NA" : "NA";
+        phone.value =userinfo !=undefined? userinfo.phone || "NA" : "NA";
 }
 retrieveAddressInfo();
+
+
+//call signout function
+let mobileMediaNav = window.matchMedia("(max-width:995px)");
+if(mobileMediaNav.matches){
+    let signOutMobile = document.querySelector("#logout-mobile");
+    handleSignOut(signOutMobile,userInfo)
+}
