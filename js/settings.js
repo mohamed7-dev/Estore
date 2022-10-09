@@ -27,6 +27,7 @@ settingsTypes.forEach((item) => {
 //get user data from ls
 let users =JSON.parse(localStorage.getItem("signupUser"))
 function getCurrentUserData(){
+    let users =JSON.parse(localStorage.getItem("signupUser"))
     if(users != null){
         let currentUserID = JSON.parse(localStorage.getItem("currentUserID"));
         let filtered = users.find((user) => user.id == currentUserID);
@@ -47,6 +48,16 @@ function handleEditBtn(){
                     if(item.previousElementSibling.children[1].type == "file"){
                         item.previousElementSibling.children[1].click();
                     }
+
+                    //get shipping mode 
+                    let shippingModes = document.querySelectorAll(".shipping-field .shipping-mode");
+                    shippingModes.forEach((mode) => {
+                        mode.style.cssText = "pointer-events:auto;";
+                    })
+
+                    if(item.previousElementSibling.children[1].classList.contains("shipping-mode")){
+                        item.previousElementSibling.children[1]
+                    }
                     item.style.cssText = "background-color:var(--secondary-color); color:var(--text-color)";
                 }else{
                     window.location = "signinup.html";
@@ -63,11 +74,11 @@ handleEditBtn();
 
 //fill inputs with user data from ls
 function handleInputs(){
-    let userInfo = getCurrentUserData();
-        uName.value =userInfo != undefined? userInfo.username : "";
-        uPasswd.value =userInfo != undefined? userInfo.password : "";
-        uEmail.value =userInfo != undefined? userInfo.email : "";
-        uAvatarImage.src =userInfo != undefined? userInfo.avatar : "./images/default-avatar.png";
+    let userinfo = getCurrentUserData();
+        uName.value =userinfo == undefined? "" : userinfo.sign == "out"? ""  : userinfo.username || "";
+        uPasswd.value =userinfo == undefined? "" : userinfo.sign == "out"? ""  : userinfo.password || "";
+        uEmail.value =userinfo == undefined? "" : userinfo.sign == "out"? ""  : userinfo.email || "";
+        uAvatarImage.src = userinfo == undefined? "" : userinfo.sign == "out"? ""  : userInfo.avatar || "./images/default-avatar.png";
 }
 handleInputs()
 
@@ -139,7 +150,7 @@ let submitAddressBtn = document.querySelector("#submit-address-btn");
 addressForm.addEventListener("submit" , (e) => {
     e.preventDefault();
     let currentUserInfo = getCurrentUserData();
-
+    console.log(currentUserInfo)
     if(users != null){
         let addressObj = {
             userName : currentUserInfo.username,
@@ -162,22 +173,22 @@ addressForm.addEventListener("submit" , (e) => {
         editButtons.forEach((item) => {
             item.style.cssText = "background-color:#fff; color:var(--main-color)";
         })
-        location.reload();
+        // location.reload();
     }else{
         window.location = "signinup.html"
     }
 })
 
+
 // show address info when reloading 
 function retrieveAddressInfo(){
     let userinfo = getCurrentUserData();
-    console.log(userinfo)
-        fName.value = userinfo !=undefined? userinfo.fName || "" : "";
-        lName.value =userinfo !=undefined? userinfo.lName || "" : "";
-        city.value =userinfo !=undefined? userinfo.city || "cairo" : "cairo";
-        street.value =userinfo !=undefined? userinfo.street || "NA" : "NA";
-        aprt.value =userinfo !=undefined? userinfo.aprt || "NA" : "NA";
-        phone.value =userinfo !=undefined? userinfo.phone || "NA" : "NA";
+        fName.value = userinfo == undefined? "" : userinfo.sign == "out"? ""  : userinfo.fName || "";
+        lName.value =userinfo == undefined? "" : userinfo.sign == "out"? ""  : userinfo.lName || "";
+        city.value =userinfo == undefined? "cairo" : userinfo.sign == "out"? "cairo"  : userinfo.city || "cairo";
+        street.value =userinfo == undefined? "NA" : userinfo.sign == "out"? "NA"  : userinfo.street || "NA";
+        aprt.value =userinfo == undefined? "NA" : userinfo.sign == "out"? "NA"  : userinfo.aprt || "NA";
+        phone.value =userinfo == undefined? "NA" : userinfo.sign == "out"? "NA"  : userinfo.phone || "NA";
 }
 retrieveAddressInfo();
 

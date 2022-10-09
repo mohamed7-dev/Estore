@@ -31,6 +31,11 @@ document.addEventListener("click" , (e) => {
         && e.target.className !== "selected-lang active"){
             pickupOrderDetails.classList.remove("active");
             mainWrapperOverlay.classList.remove("active");
+            //enable scrolling after removing active
+            function enableScroll() {
+                window.onscroll = function() {};
+            }
+            enableScroll();
         }
     }
 })    
@@ -85,22 +90,23 @@ let dataFromLS = JSON.parse(localStorage.getItem("signupUser"));
 //function to handle user info in the header bar
 function handleUserInfo(){
     //get current user id
-    let currentUserID = JSON.parse(localStorage.getItem("currentUserID"));
-    //filter users by id
-        if(dataFromLS){
-            let filtered = dataFromLS.find((user) => {
-                return user.id == currentUserID;
-            })
-            homeUserName.innerHTML = filtered.username;
-            userImage.src = filtered.avatar;
+    let currentUserInfo = getCurrentUserInfo();
 
-            //signout in big screens
-            let signoutBtn = document.querySelector("#signout");
-            handleSignOut(signoutBtn,filtered);
+    if(currentUserInfo != undefined){
+        if(currentUserInfo.sign == "in"){
+            homeUserName.innerHTML = currentUserInfo.username;
+            userImage.src = currentUserInfo.avatar;
         }else{
             signedUserAccount.style.display = "none";
             notSignedUserAccount.style.display = "flex";
         }
+        //signout in big screens
+        let signoutBtn = document.querySelector("#signout");
+        handleSignOut(signoutBtn,currentUserInfo);
+    }else{
+        signedUserAccount.style.display = "none";
+        notSignedUserAccount.style.display = "flex";
+    }
 }
 handleUserInfo();
 
@@ -143,19 +149,19 @@ function handleAddressInNav(){
     choosedAddressInfo.innerHTML = `
     <div class="choosed-address">
         <i class="fa-solid fa-house-user"></i>
-        <span>${user != undefined? user.city || "cairo" : "cairo"}<span>
+        <span>${user == undefined? "cairo" : user.sign == "out"? "cairo" : user.city || "cairo"}<span>
     </div>
     <div class="choosed-shipping">
-        <span>${user != undefined? user.shippingWay || "delivery" : "delivery"}</span>
+        <span>${user == undefined? "delivery" : user.sign == "out"? "delivery" : user.shippingWay || "delivery"}</span>
     </div>
     `
 
     locationInNav.innerHTML = `
-        <span><i class="fa-solid fa-location-dot"></i>${user!=undefined? user.city || "cairo" : "cairo"}</span>
+        <span><i class="fa-solid fa-location-dot"></i>${user == undefined? "cairo" : user.sign == "out"? "cairo" : user.city || "cairo"}</span>
     `
 
     addressInNav.innerHTML = `
-        <span><i class="fa-solid fa-house-user"></i>${user != undefined?  user.aprt || "NA" : "NA"} , ${user != undefined? user.street || "NA" : "NA"}</span>
+        <span><i class="fa-solid fa-house-user"></i>${user == undefined? "NA" : user.sign == "out"? "NA" : user.aprt || "NA"} , ${user == undefined? "NA" : user.sign == "out"? "NA" : user.street || "NA"}</span>
     `
 }
 handleAddressInNav();
@@ -193,8 +199,8 @@ let mobileScreenNav = window.matchMedia("(max-width:995px)");
         address.innerHTML = "";
         address.innerHTML = `
             <i class="fa-solid fa-location-dot"></i>
-            <span>${userInfo != undefined? userInfo.city || "cairo" : "cairo"} ,</span>
-            <span>${userInfo != undefined? userInfo.street || "NA" : "NA"}</span>
+            <span>${userInfo == undefined? "cairo" : userInfo.sign == "out"? "cairo" : userInfo.city || "cairo"} | </span>
+            <span>${userInfo == undefined? "NA" : userInfo.sign == "out"? "NA" : userInfo.street || "NA"}</span>
         `
 
         actions.innerHTML += `
@@ -245,7 +251,16 @@ function handleShippingWay(){
     let userInfo = getCurrentUserInfo();
     shippingWay.forEach((item) => {
         item.addEventListener("click" , () => {
-            if(users != null){
+            if(dataFromLS != null){
+                shippingWay.forEach((way) => {
+                    way.style.cssText = "background-color:var(--main-color);"
+                    way.children[0].style.cssText = "color:var(--secondary-color)"
+                    way.children[1].style.cssText = "color:#fff"
+                })
+                item.style.cssText = "background-color:var(--secondary-color); padding:5px; align-items:center;border-radius:5px"
+                item.children[0].style.cssText = "color:#fff"
+                item.children[1].style.cssText = "color:#fff"
+                
                 let pickedWay = {
                     shippingWay : item.dataset.way
                 }

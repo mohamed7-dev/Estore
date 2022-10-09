@@ -68,8 +68,6 @@
         border-radius: 5px;
     }
 
-
-
     .search-input .search-results-mobile{
         position: absolute;
         top:110%;
@@ -182,7 +180,7 @@
 
     .lower-header .container i{
         color: var(--main-color);
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
     .container .address-details{
         display: flex;
@@ -191,7 +189,7 @@
     }
 
     .address-details span{
-        font-size: 0.8rem;
+        font-size: 2vw;
     }
 
     .container .nav-actions{
@@ -210,6 +208,7 @@
         outline: none;
         border-radius: 5px;
         order: 1;
+        font-size: 2vw;
     }
 
     .nav-actions button a{
