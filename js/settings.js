@@ -173,7 +173,7 @@ addressForm.addEventListener("submit" , (e) => {
         editButtons.forEach((item) => {
             item.style.cssText = "background-color:#fff; color:var(--main-color)";
         })
-        // location.reload();
+         location.reload();
     }else{
         window.location = "signinup.html"
     }
