@@ -1,3 +1,43 @@
+//get elemsnts to control show and hido of dropdown menus in header bar
+let langHeader = document.querySelector(".selected-lang");
+let signedUserHeader = document.querySelector(".signed .show-user-info");
+let notSigneduserHeader = document.querySelector(".not-signed .show-user-info");
+let cartHeader = document.querySelector(".cart-icon");
+let headerRTSection =Array.from(document.querySelectorAll(".container .header-right > div"));
+//overlay elemnts
+let mainWrapperOverlay = document.querySelector(".main-wrapper .overlay");
+let navbarOverlay = document.querySelector(".navbar .overlay");
+
+function dropdownToggle (){
+    if(this.parentElement.classList.contains("active")){
+        this.parentElement.classList.remove("active");
+        navbarOverlay.classList.remove("active");
+        mainWrapperOverlay.classList.remove("active");
+        this.classList.remove("active");
+        //enable scrolling after removing active
+        function enableScroll() {
+            window.onscroll = function() {};
+        }
+        enableScroll();
+    }else{
+        headerRTSection.forEach((div) => {
+            div.classList.remove("active");
+            div.children[0].classList.remove("active");
+        })
+        navbarOverlay.classList.add("active");
+        mainWrapperOverlay.classList.add("active");
+        this.parentElement.classList.add("active");
+        this.classList.add("active");
+        //disable scrolling after adding active
+        window.onscroll = () => { window.scroll(0, 0); };
+    }
+}
+
+langHeader.addEventListener("click",dropdownToggle);
+signedUserHeader.addEventListener("click",dropdownToggle);
+notSigneduserHeader.addEventListener("click" , dropdownToggle);
+cartHeader.addEventListener("click",dropdownToggle);
+
 //toggle the active class on the pickup order nav in the home page 
 let pickupOrderHeader = document.querySelector(".shipping .shipping-header");
 let pickupOrderDetails = document.querySelector(".shipping-mode-picking .shipping-mode-details");
@@ -40,44 +80,6 @@ document.addEventListener("click" , (e) => {
     }
 })    
 
-//get elemsnts to control show and hido of dropdown menus
-let langHeader = document.querySelector(".selected-lang");
-let signedUserHeader = document.querySelector(".signed .show-user-info");
-let notSigneduserHeader = document.querySelector(".not-signed .show-user-info");
-let cartHeader = document.querySelector(".cart-icon");
-let headerRTSection =Array.from(document.querySelectorAll(".container .header-right > div"));
-let mainWrapperOverlay = document.querySelector(".main-wrapper .overlay");
-let navbarOverlay = document.querySelector(".navbar .overlay");
-
-function dropdownToggle (){
-    if(this.parentElement.classList.contains("active")){
-        this.parentElement.classList.remove("active");
-        navbarOverlay.classList.remove("active");
-        mainWrapperOverlay.classList.remove("active");
-        this.classList.remove("active");
-        //enable scrolling after removing active
-        function enableScroll() {
-            window.onscroll = function() {};
-        }
-        enableScroll();
-    }else{
-        headerRTSection.forEach((div) => {
-            div.classList.remove("active");
-            div.children[0].classList.remove("active");
-        })
-        navbarOverlay.classList.add("active");
-        mainWrapperOverlay.classList.add("active");
-        this.parentElement.classList.add("active");
-        this.classList.add("active");
-        //disable scrolling after adding active
-        window.onscroll = () => { window.scroll(0, 0); };
-    }
-}
-
-langHeader.addEventListener("click",dropdownToggle);
-signedUserHeader.addEventListener("click",dropdownToggle);
-notSigneduserHeader.addEventListener("click" , dropdownToggle);
-cartHeader.addEventListener("click",dropdownToggle);
 
 
 //constrol the user settings menu in the header of the home page
@@ -87,28 +89,6 @@ let homeUserName = document.querySelector("#signed-user-name");
 let userImage = document.querySelector("#user-image");
 let dataFromLS = JSON.parse(localStorage.getItem("signupUser"));
 
-//function to handle user info in the header bar
-function handleUserInfo(){
-    //get current user id
-    let currentUserInfo = getCurrentUserInfo();
-
-    if(currentUserInfo != undefined){
-        if(currentUserInfo.sign == "in"){
-            homeUserName.innerHTML = currentUserInfo.username;
-            userImage.src = currentUserInfo.avatar;
-        }else{
-            signedUserAccount.style.display = "none";
-            notSignedUserAccount.style.display = "flex";
-        }
-        //signout in big screens
-        let signoutBtn = document.querySelector("#signout");
-        handleSignOut(signoutBtn,currentUserInfo);
-    }else{
-        signedUserAccount.style.display = "none";
-        notSignedUserAccount.style.display = "flex";
-    }
-}
-handleUserInfo();
 
 //get user data from ls
 function getCurrentUserInfo(){
@@ -119,6 +99,29 @@ function getCurrentUserInfo(){
         return filtered;
     }
 }
+
+let userInfoFromLS = getCurrentUserInfo();
+
+//function to handle user info in the header bar
+function handleUserInfo(){
+    if(userInfoFromLS != undefined){
+        if(userInfoFromLS.sign == "in"){
+            homeUserName.innerHTML = userInfoFromLS.username;
+            userImage.src = userInfoFromLS.avatar;
+        }else{
+            signedUserAccount.style.display = "none";
+            notSignedUserAccount.style.display = "flex";
+        }
+        //signout in big screens
+        let signoutBtn = document.querySelector("#signout");
+        handleSignOut(signoutBtn,userInfoFromLS);
+    }else{
+        signedUserAccount.style.display = "none";
+        notSignedUserAccount.style.display = "flex";
+    }
+}
+handleUserInfo();
+
 
 //onclick on signout button go back to the sign in page
 function handleSignOut(target,currentUser){
@@ -145,7 +148,7 @@ let addressInNav = document.querySelector(".nav-address-item.address-in-nav");
 
 function handleAddressInNav(){
     //get user info
-    let user = getCurrentUserInfo();
+    let user = userInfoFromLS;
     choosedAddressInfo.innerHTML = `
     <div class="choosed-address">
         <i class="fa-solid fa-house-user"></i>
@@ -174,27 +177,29 @@ let mobileScreenNav = window.matchMedia("(max-width:995px)");
         let sideNavClose = document.querySelector("#close-btn");
         let bars = document.querySelector("#bars-icon");
 
-        bars.addEventListener("click" , () => {
-            sideNav.style.left = "0";
-            sideNavClose.style.right = "20px"; 
-        })
-        
-        sideNavClose.addEventListener("click" , ()=> {
-            sideNav.style.left = "-100%";
-            sideNavClose.style.right = "-100%"; 
-        })
-
-        document.addEventListener("click" , (e) => {
-            if(e.target.tagName !== "I"){
+        window.onload = function (){
+            bars.addEventListener("click" , () => {
+                sideNav.style.left = "0";
+                sideNavClose.style.right = "20px"; 
+            })
+            
+            sideNavClose.addEventListener("click" , ()=> {
                 sideNav.style.left = "-100%";
                 sideNavClose.style.right = "-100%"; 
-            }
-        })
+            })
+    
+            document.addEventListener("click" , (e) => {
+                if(e.target.tagName !== "I"){
+                    sideNav.style.left = "-100%";
+                    sideNavClose.style.right = "-100%"; 
+                }
+            })
+        }
 
         //lower header address bar
         let address = document.querySelector(".lower-header .address-details");
         let actions = document.querySelector(".nav-actions");
-        let userInfo = getCurrentUserInfo();
+        let userInfo = userInfoFromLS;
 
         address.innerHTML = "";
         address.innerHTML = `
@@ -206,49 +211,12 @@ let mobileScreenNav = window.matchMedia("(max-width:995px)");
         actions.innerHTML += `
             <button><a href="settings.html">update address<a></button>
         `
-
-        //lower nav bar
-        const items = document.querySelectorAll(".mobile-nav li");
-
-        //targets in html
-        let routes = {
-            index:"index.html",
-            cart: "cart.html",
-            favourites :"favourites.html",
-            settings :"settings.html",
-            addproduct:"addproduct.html",
-        }
-
-        items.forEach((i) => {
-        i.onclick = function (e) {
-            items.forEach((i) => {
-                i.classList.remove("active");
-            });
-            let currentTabTarget = i.dataset.target;
-            console.log(i.dataset.target) 
-            localStorage.setItem("currentTarget" , JSON.stringify(currentTabTarget));
-            let pageTarget = JSON.parse(localStorage.getItem("currentTarget"));
-            console.log(pageTarget)
-            setTimeout(() => {
-                window.location = routes[pageTarget];
-            },500)
-            i.classList.add("active");
-        };
-        });
-
-        //handle the nav in the mobile screens
-        let targetFromLS = JSON.parse(localStorage.getItem("currentTarget"));
-        console.log(targetFromLS)
-        if(targetFromLS != null){
-            document.querySelectorAll(".mobile-nav li").forEach((item) => item.classList.remove("active"));
-            document.querySelector(`li.${targetFromLS}`).classList.add("active");
-        }
 } 
 
 //handle shipping in way navbar 
 let shippingWay = document.querySelectorAll(".shipping-way");
 function handleShippingWay(){
-    let userInfo = getCurrentUserInfo();
+    let userInfo = userInfoFromLS;
     shippingWay.forEach((item) => {
         item.addEventListener("click" , () => {
             if(dataFromLS != null){

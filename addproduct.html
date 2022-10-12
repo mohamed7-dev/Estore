@@ -43,7 +43,7 @@
                             hello,
                             <span id="signed-user-name"></span>
                             <div class="image-container">
-                                <img src="./images/avataaars.png" alt="" id="user-image">
+                                <img src="" alt="" id="user-image">
                             </div>
                         </div>
                         <div class="user-settings">
@@ -114,14 +114,13 @@
                         <div class="input-field upload-image">
                             <input type="file"  id="img">
                             <label for="img">select product image</label>
-                            <img src="" alt="">
                         </div>
-                        <div class="input-field upload-thumbs">
+                        <div class="input-field product-main-image"></div>
+                        <div class="input-field">
                             <input type="file"  id="thumb">
                             <label for="thumb">select product thumbnails</label>
-                            <div>
-                            </div>
                         </div>
+                        <div class="input-field thumbs-container"></div>
                         <div class="select-menu">
                             <select name="" id="main-cat">
                                 <option value="" hidden>select main category</option>
@@ -258,6 +257,9 @@
         </ul>
     </section>
     <!-- end vertical header on mobile devices  -->
+    <!-- scroll to top button  -->
+    <button class="to-top" id="top"><i class="fa-solid fa-arrow-up"></i></button>
     <script src="./js/addproduct.js"></script>
+    <script src="./js/mobile-nav.js"></script>
 </body>
 </html>

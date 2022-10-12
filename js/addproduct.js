@@ -1,3 +1,4 @@
+//click on get strted button
 let getStartedButn = document.querySelector("#get-started");
 let formSection = document.querySelector(".add-product");
 
@@ -13,6 +14,7 @@ let langHeader = document.querySelector(".selected-lang");
 let signedUserHeader = document.querySelector(".signed .show-user-info");
 let notSigneduserHeader = document.querySelector(".not-signed .show-user-info");
 let headerRTSection =Array.from(document.querySelectorAll(".container .header-right > div"));
+//overlay
 let landingOverlay = document.querySelector(".landing .overlay");
 
 function dropdownToggle (){
@@ -53,24 +55,24 @@ let container = document.querySelector(".cart-items-container");
 let mainContainer = document.querySelector(".main-wrapper .container");
 let cartEmpty = document.querySelector(".empty");
 let itemsCount = document.querySelector(".items-count span");
-let previewImage = document.querySelector(".upload-image img");
-let label = document.querySelector(".upload-image label");
-let previewThumbs = document.querySelector(".upload-thumbs div");
+let previewImage = document.querySelector(".product-main-image img");
+let mainImageContainer = document.querySelector(".product-main-image");
+let previewThumbs = document.querySelector(".input-field.thumbs-container");
 let labelOfThumbs = document.querySelector(".upload-thumbs label");
 
 let catValue;
 let mainCatValue;
 let imageValue;
-let thumbsObject = {};
-let mode = "add";
-let tmp;
+let mode = "add"; //change mode of the button
+let tmp;  //to carrry value of the id when clicking update
 
-//get cat from select menu
+//get cat from select menu  (sub category)
 pSubCatSelect.addEventListener("change" , getProductCat)
 function getProductCat(e){
     catValue = e.target.value;
 }
 
+//get cat from select menu  (main category)
 pMainCatSelect.addEventListener("change" , getMainProductCat)
 function getMainProductCat(e){
     mainCatValue = e.target.value;
@@ -96,34 +98,40 @@ function addImage(){
     imageReader.readAsDataURL(image);
     imageReader.onload = function () {
         imageValue = imageReader.result;
-        previewImage.src = imageValue;
-        previewImage.style.cssText = "opacity:1; pointer-events:auto;"
+        mainImageContainer.style.display = "flex";
+        mainImageContainer.innerHTML = `
+            <img src="${imageValue}">
+        `
     }
 }
 
 //get thumbs of the product
 pThumb.addEventListener("change" , addThumbs)
-let thumbsImages = [];
+let thumbsImages = [];  //each image will be added here
+let thumbsObj = {};    //to hold the url of each image
 function addThumbs(){
     let image = this.files[0];
     thumbsImages.push(image);
-    console.log(thumbsImages)
+    // console.log(thumbsImages)
     thumbsImages.forEach((img,index,Arr) => {
         let imageReader = new FileReader();
         imageReader.readAsDataURL(img);
         imageReader.onload = function () {
-            thumbUrl = imageReader.result;
-            thumbsObject[`thumb-${index + 1}`] = thumbUrl;
+            let thumbUrl = imageReader.result;
+            thumbsObj[`thumb-${index + 1}`] = thumbUrl;
         }
     })
 
+    //display thumbs
+    previewThumbs.style.display = "flex";
     previewThumbs.innerHTML = "";
-    for(let item in thumbsObject){
+    for(let thumb in thumbsObj){
         previewThumbs.innerHTML += `
-            <img src="${thumbsObject[item]}">
+            <img src="${thumbsObj[thumb]}">
         `
     }
 }
+
 
 //submit form
 pForm.addEventListener("submit" , addNewProduct)
@@ -132,14 +140,11 @@ function addNewProduct(e){
     //get all products from ls
     let productsFromLS = JSON.parse(localStorage.getItem("productDB"));
     //get the highest value of id to add upon
-    let filtered = productsFromLS.map((item , i , Arr) => {
+    let filtered = productsFromLS.map((item) => {
         return item.id;
     }).reduce((acc , current) => {
         return acc > current? acc : current;
     })
-
-    //get all thumbs in one object
-    let thumbsObj = Object.assign({} , thumbsObject );
 
     //get users from LS
     let Allusers = JSON.parse(localStorage.getItem("signupUser"));
@@ -166,20 +171,16 @@ function addNewProduct(e){
                 mainContainer.style.display = "flex";
                 let AllProducts = [...productsFromLS , pObject];
                 localStorage.setItem("productDB" , JSON.stringify(AllProducts));
-                clearInputs()
 
-                //scroll to bottom
-                scrollTo({
-                    top:1800,
-                    behavior:"smooth"
-                })
+                //clear inputs
+                clearInputs()
+                //show products
                 getCreatedProducts(AllProducts);
             }else{
                 alert("all fields should be filled correctly");
             }
         }else{
             let filtered = productsFromLS.find((item) => item.id == tmp);
-            console.log(tmp , filtered)
             pObject.id = filtered.id;
             pObject.image = imageValue || filtered.image;
             pObject.category = pObject.category != undefined? catValue : filtered.category;
@@ -192,40 +193,47 @@ function addNewProduct(e){
             localStorage.setItem("productDB" , JSON.stringify(AllProducts));
             //reset innerhtml of createbtn
             pSubmit.value = "add product";
+            //clear inputs
             clearInputs();
-            //scroll to bottom
-            scrollTo({
-                top:1800,
-                behavior:"smooth"
-            })
+
             //recall display function to update ui in realtime
             let dataFromLS = JSON.parse(localStorage.getItem("productDB"));
+            //redisplay the products
             getCreatedProducts(dataFromLS);
         }
+        //reload the page to empty the thumbObject
+        location.reload();
     }else{
         window.location = "signinup.html"
     }
 }
 
+//scroll to bottom after reloading the page when adding new product or updating new one
+scrollTo({
+    top:1800,
+    behavior:"smooth"
+})
+
+//clear inputs
 function clearInputs(){
     pTitle.value = "";
     pBrand.value = "";
     pPrice.value = "";
     pSeller.value = "";
     imageValue = "";
-    previewImage.style.cssText = "opacity:0; pointer-events:none;"
-    previewThumbs.innerHTML = "";
-    thumbsObject = "";
+    mainImageContainer.style.display = "none";
+    previewThumbs.style.display = "none";
     pDescArea.value = "";
     pQty.value = "";
     pSubCatSelect.value = "";
     pMainCatSelect.value = "";
 }
 
+//clear all inputs after reloading the page
 window.onload = function (){
-    //clear all inputs after reloading the page
     clearInputs()
 }
+
 //add products that created by you to the sell on estore page
 let AllProductsFromLS = JSON.parse(localStorage.getItem("productDB"));
 function getCreatedProducts(allProducts){    
@@ -238,9 +246,9 @@ function getCreatedProducts(allProducts){
 
 getCreatedProducts(AllProductsFromLS);
 
-
+//display prodcuts
 function displayMyProducts(products){
-    handleEmptyCart(products);
+    handleEmpty(products);
     itemsCount.innerHTML = `your products (${products.length} items)`;
     container.innerHTML = "";
     products.map((product , index , arr) => {
@@ -266,7 +274,9 @@ function displayMyProducts(products){
 })
 }
 
+//update products
 function updateProduct(id){
+    //scroll to from section
     scrollTo({
         top:900,
         behavior:"smooth"
@@ -274,20 +284,36 @@ function updateProduct(id){
 
     let data = JSON.parse(localStorage.getItem("productDB"));
 
+    //filter products by id
     let filtered = data.find((item) => item.id == id);
 
-    // console.log(filtered , filtered+index)
+    //refill inputs
     pTitle.value = filtered.title;
     pBrand.value = filtered.brand;
-    pPrice.value = filtered.price;
+    let priceNumeric = parseInt(filtered.price);
+    pPrice.value = priceNumeric;
     pSeller.value = filtered.seller;
     pDescArea.value = filtered.describtion;
     pQty.value = filtered.quantity;
     pSubCatSelect.value = filtered.category;
     pMainCatSelect.value = filtered.mainCategory;
-    pImage.src = filtered.image;
-    previewImage.style.cssText = "opacity:1; pointer-events:auto;left:30px;";
-    previewImage.src = filtered.image;
+
+    //display main image
+    mainImageContainer.style.display = "flex";
+    mainImageContainer.innerHTML = `
+        <img src="${filtered.image}">
+    `
+
+    //loop in thumbs object
+    previewThumbs.style.display = "flex";
+    previewThumbs.innerHTML = "";
+    for (let thumb in filtered.thumbs){
+        //display thumbs
+        previewThumbs.innerHTML += `
+            <img src="${filtered.thumbs[thumb]}">
+        `
+    }
+
     //change innerhtml of createbtn
     pSubmit.value = "update product";
     //change mode to update 
@@ -299,19 +325,21 @@ function updateProduct(id){
 //function to delete product
 function deleteProduct(id){
     let data = JSON.parse(localStorage.getItem("productDB"));
+    //filter product by id
     let filtered = data.find((item , i , Arr) => {
         return item.id == id;
     })
 
+    //remove product from array
     let indexOfFiltered = data.indexOf(filtered);
-
     data.splice(indexOfFiltered , 1);
+    //save changes to local storage
     localStorage.setItem("productDB" , JSON.stringify(data));
     getCreatedProducts(data);
 }
 
 //function to handle the visibility of empty product div when the div is empty
-function handleEmptyCart(products){
+function handleEmpty(products){
     if(products.length == 0){
         cartEmpty.classList.add("active");
         mainContainer.style.display = "none";
@@ -347,7 +375,6 @@ function handleSignOut(){
         })
     }
 }
-
 handleSignOut();
 
 //constrol the user settings menu in the nav of the home page
@@ -370,39 +397,20 @@ function handleUserInfo(){
 }
 handleUserInfo();
 
-//handle the nav in the mobile screens
-let targetFromLS = JSON.parse(localStorage.getItem("currentTarget"));
-if(targetFromLS){
-    document.querySelectorAll(".mobile-nav li").forEach((item) => item.classList.remove("active"));
-    document.querySelector(`li.${targetFromLS}`).classList.add("active");
+//go to top button
+let toTopBtn = document.querySelector("#top");
+window.onscroll = function () {
+    if(scrollY >= 150){
+        toTopBtn.style.right = "20px";
+        // toTopBtn.addEventListener("click" , )
+    }else{
+        toTopBtn.style.right = "-100%";
+    }
 }
 
-
-//lower nav bar
-const items = document.querySelectorAll(".mobile-nav li");
-
-//targets in html
-let routes = {
-    index:"index.html",
-    cart: "cart.html",
-    favourites :"favourites.html",
-    settings :"settings.html",
-    addproduct:"addproduct.html",
+toTopBtn.onclick = function(){
+    window.scrollTo({
+        top:100,
+        behavior:"smooth"
+    })
 }
-
-items.forEach((i) => {
-i.onclick = function (e) {
-    items.forEach((i) => {
-        i.classList.remove("active");
-    });
-    let currentTabTarget = i.dataset.target;
-    console.log(i.dataset.target) 
-    localStorage.setItem("currentTarget" , JSON.stringify(currentTabTarget));
-    let pageTarget = JSON.parse(localStorage.getItem("currentTarget"));
-    console.log(pageTarget)
-    setTimeout(() => {
-        window.location = routes[pageTarget];
-    },1000)
-    i.classList.add("active");
-};
-});

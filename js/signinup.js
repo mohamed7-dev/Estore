@@ -48,19 +48,19 @@ let signupPasswd = document.querySelector("#signup-passwd");
 let signupPasswdConfirm = document.querySelector("#signup-passwd-confirm");
 let rememberMeSignup = document.querySelector("#checkbox-signup");
 
-//retrieve data from local storage
-let signupArray = localStorage.getItem("signupUser") != null? JSON.parse(localStorage.getItem("signupUser")) : [];
-
-//add to local storage when click on signup button
 signupForm.addEventListener("submit" , (e) => {
     //prevent submit on click
     e.preventDefault();
+    
+    //users data from ls
+    let signupArray = localStorage.getItem("signupUser") != null? JSON.parse(localStorage.getItem("signupUser")) : [];
 
     //regular expressions to match username , email and password
     let passwdRegex =/[A-Z][A-Za-z0-9]{7,}/; 
     let usernameRegex = /[A-Za-z0-9@_]{3,}/;
     let emailRegex = /[A-Za-z0-9]{1,}@[A-Za-z]{1,}.[A-Za-z]{1,}/;
-            
+    
+    //save info to an object
     let signupObj = {
         id: signupArray.length,
         rememberMe:rememberMeSignup.checked == true? "true" : "false",
@@ -72,9 +72,11 @@ signupForm.addEventListener("submit" , (e) => {
             return signupPasswd.value == signupPasswdConfirm.value && signupPasswdConfirm.value != ""? "true" : "false";
         }
     }
-        
+
+    //call function to handle errors on sign up
     signuphandleErrors(signupObj);
 
+    //if every thing is correct submit user info
     if(signupObj.username != "false" && signupObj.email != "false" && signupObj.password != "false" && signupObj.passwordMatch() != "false"){
         //push object to array and add array to local storage
         signupArray.push(signupObj);
@@ -104,9 +106,12 @@ let signinEmail = document.querySelector("#signin-email");
 let signinPasswd= document.querySelector("#signin-passwd");
 let rememberMeLogin = document.querySelector("#checkbox-login");
 
+
 //handle auto fill the inputs after reload if user has remeber me key
 function handleFillInputs(){
+    //users data from ls
     let userInfoFromLS = JSON.parse(localStorage.getItem("signupUser")) || [];
+    //current id added when signed up
     let userCurrentID = JSON.parse(localStorage.getItem("currentUserID"));
     if(userInfoFromLS != []){
         let filteredUser = userInfoFromLS.find((user) => {
@@ -124,8 +129,10 @@ function handleFillInputs(){
 handleFillInputs()
 
 
+//function to check for the remember me check box
 function remeberMeCheck(id){
     let userInfoFromLS = JSON.parse(localStorage.getItem("signupUser")) || [];
+
     if(userInfoFromLS != []){
         let filtered = userInfoFromLS.find((user) => {
             return user.id == id;
@@ -142,9 +149,12 @@ function remeberMeCheck(id){
 signinForm.addEventListener("submit" , (e) => {
     //prevent default 
     e.preventDefault();
-    
+
     //get user from LS
     let userInfoFromLS = JSON.parse(localStorage.getItem("signupUser"));
+
+    //handle errors
+    loginhandleErrors(userInfoFromLS);
 
     //filter user from the ls
     if(userInfoFromLS != null){
@@ -165,9 +175,6 @@ signinForm.addEventListener("submit" , (e) => {
         if(localStorage.getItem("signupUser") !== null && filtered != undefined){
             localStorage.setItem("currentUserID" , JSON.stringify(filtered.id));
             window.location = "./index.html";
-        }else{
-            //call handle error function
-            loginhandleErrors(userInfoFromLS);
         }
     }
 })
@@ -206,10 +213,9 @@ function handleFocus(){
     this.parentElement.nextElementSibling.value = "";
 }
 
-
 //function to handle error of login form
 function loginhandleErrors(users){
-    if(users.length > 0){
+    if(users != null){
         users.forEach(element => {
             if(element.email !== signinEmail.value){
                 emailError.classList.add("show-error");

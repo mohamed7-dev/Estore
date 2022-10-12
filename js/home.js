@@ -1,6 +1,7 @@
 //fetch data from the json file
 let url = "./js/productsDB.json";
 
+//fetch  data from the url
 async function fetchData(url) {
     let resolved = await fetch(url);
     let data = await resolved.json();
@@ -12,6 +13,7 @@ async function fetchData(url) {
         localStorage.setItem("productDB" , JSON.stringify(data));
         retrieveDataFromLS = JSON.parse(localStorage.getItem("productDB"));
     }
+    //display recently added products
     displayProducts(retrieveDataFromLS);
     //display elecrtro cat after running the display function 
     DisplayElectroCat();
@@ -26,7 +28,7 @@ function displayProducts(allData , parent ,mode){
     parent = parent != undefined? parent : document.querySelector(".products-container.recently-added");
     mode = mode != undefined? mode : "recent";
     parent.innerHTML = "";
-    allData.map((item , index) => {
+    allData.map((item) => {
         parent.innerHTML += `
         <div class="product-card ${mode} swiper-slide">
             <div class="image-container" onclick="addProductID(${item.id})">
@@ -58,8 +60,6 @@ function DisplayElectroCat(){
     let mode = "electro";
     displayProducts(filtered , electroParent ,mode); 
 }
-
-
 
 
 function displayClothesCat(){

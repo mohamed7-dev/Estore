@@ -1,4 +1,4 @@
-// get elements to add to cart
+// get elements to handle cart header
 let cartItemsContainer = document.querySelector(".cart-content .items-container"); 
 let numberBadge = document.querySelector(".badge");
 
@@ -18,6 +18,7 @@ function handleCartHeader (){
         numberBadge.innerHTML = Data.length;
     }
 
+    //cart header in mobile phones
     let mobileNav = window.matchMedia("(max-width:995px)");
     if(mobileNav.matches){
         let cartBadge = document.querySelector(".icon .cart-badge");
@@ -26,6 +27,7 @@ function handleCartHeader (){
     }
 }
 handleCartHeader();
+
 
 //handle fav icon badge in mobile 
 function handleFavBadge(){
@@ -38,8 +40,8 @@ function handleFavBadge(){
         favBadge.innerHTML = favItemsArray.length;
     }
 }
-
 handleFavBadge();
+
 
 //get user data from ls
 function getCurrentUserSettings(){
@@ -171,8 +173,8 @@ function userAddToFavouriteAbility (id){
     }
 }
 
-//handle clicking on nav categories links
 
+//handle clicking on nav categories links in side bar
 let mobileScreenNavMatch = window.matchMedia("(max-width:995px)");
 if(mobileScreenNavMatch.matches){
     let navCategoriesMobile = document.querySelectorAll(".cat-target");
