@@ -185,6 +185,7 @@ let mobileScreenNav = window.matchMedia("(max-width:995px)");
             })
             
             sideNavClose.addEventListener("click" , ()=> {
+                sideNav.style.cssText ="transition:left 0.3s ease";
                 sideNav.style.left = "-100%";
                 sideNavClose.style.right = "-100%"; 
             })
