@@ -179,6 +179,7 @@ let mobileScreenNav = window.matchMedia("(max-width:995px)");
 
         window.onload = function (){
             bars.addEventListener("click" , () => {
+                sideNav.style.cssText ="transition:left 0.3s ease";
                 sideNav.style.left = "0";
                 sideNavClose.style.right = "20px"; 
             })
