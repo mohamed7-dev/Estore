@@ -38,6 +38,14 @@ section.container{
     overflow: hidden;
 }
 
+/* change width of the form in the sm screen media  */
+@media (max-width:500px){
+    section.container{
+        max-width: 90%;
+        width: 100%;
+    }
+}
+
 .container .form-mode{
     width:200%;
     height:500px;
